@@ -1,13 +1,19 @@
-from aguaclara.core.units import unit_registry as u
+```python
+
+  from math import*
+  from aguaclara.core.units import unit_registry as u
   import numpy as np
   import matplotlib.pyplot as plt
   import pandas as pd
   from scipy import stats
   #The data file path is the raw data url on github. Happily python can read directly from a web page.
-  data_file_path = "https://raw.githubusercontent.com/monroews/CEE4530/master/linear_regression.tsv"
+
+ 'C:/Users/Felix/github/CEE4530/images/linear'
+  data_file_path2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/tutorial/concvstime.txt"
 
   #Now we create a pandas dataframe with the data in the file
-  df = pd.read_csv(data_file_path,delimiter='\t')
+  df = pd.read_csv(data_file_path2,delimiter='\t')
+
   #if you want to see what is in the dataframe you can print it!
   print(df)
   # The column headers can be access by using the list command
@@ -34,9 +40,11 @@ from aguaclara.core.units import unit_registry as u
 
   #We can add the units to intercept by giving it the same units as the y values.
   intercept = intercept * y.units
+  intercept
   # Note that slope is dimensionless for this case, but not in general!
   # For the general case we can attach the correct units to slope.
   slope = slope * y.units/x.units
+  slope
 
   # Now create a figure and plot the data and the line from the linear regression.
   fig, ax = plt.subplots()
@@ -53,5 +61,14 @@ from aguaclara.core.units import unit_registry as u
   ax.grid(True)
   # Here I save the file to my local harddrive. You will need to change this to work on your computer.
   # We don't need the file type (png) here.
-  plt.savefig('C:/Users/mw24/github/CEE4530/images/linear')
+  plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/tutorial/images/')
   plt.show()
+
+
+  ANCo=(.00005+.001*(1-exp(-3)))/(exp(-3))
+  print(ANCo)
+  ANCo*84*4
+
+
+  ```
+  ##y=4.824x+0.2667
