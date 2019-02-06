@@ -1,0 +1,10 @@
+Stock is 10 g/L red dye # 40	stock volume	Volts	absorbance	concentration
+reverse osmosis blank	0	3.53902	#DIV/0!	0
+1 mg/L red dye #40	0.01	2.87891	#DIV/0!	1
+2 mg/L red dye #40	0.02	2.30739	#DIV/0!	2
+5 mg/L red dye #40	0.05	0.877687	#DIV/0!	5
+10 mg/L red dye #40	0.1	0.357523	#DIV/0!	10
+20 mg/L red dye #40	0.2	-1.2026	#DIV/0!	20
+50 mg/L red dye #40	0.5	-1.29494	#DIV/0!	50
+100 mg/L red dye #40	1			100
+200 mg/L red dye #40	2			200
