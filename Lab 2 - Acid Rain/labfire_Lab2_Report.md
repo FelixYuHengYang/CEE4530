@@ -12,12 +12,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import stats
 from math import*
+
+
+
+data_file_path2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/tutorial/concvstime.txt"
 ```
 Full lab reports (+)
 Write the laboratory report as if the experiment were your idea. Imagine that you are working for a consulting firm or in a research laboratory and that you needed to do laboratory research to investigate options for areal world project. You can use the Lab Manual as an example of a well formatted WORD document. The Atom reports should have similar formatting with the required python code. Full laboratory reports should include the following sections:
 
 #Introduction and Objectives
-In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate acid rains. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by using the addition of ANC. This also provides the first opportunity to code pH, ANC equations, and reactors equations as shown below.  
+In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate acid rains. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by using the addition of ANC. This also provides the first opportunity to code pH, ANC equations, and reactors equations as shown below.  
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
@@ -73,6 +77,18 @@ Compare theoretical expectations with your results and discuss reasons for any o
 
 Make sure that responses to specific questions and data analysis requested in the lab manual are included in this section. But don't answer the questions in a list format. Instead, include your answers as part of the narrative that is designed to meet your objectives.
 
+1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
+2. Assuming that the lake can be modeled as a completely mixed flow reactor and that ANC is a conservative parameter, equation (25) can be used to calculate the expected ANC in the lake effluent as the experiment proceeds. Graph the expected ANC in the lake effluent versus the hydraulic residence time (t/θ) based on the completely mixed flow reactor equation with the plot labeled (in the legend) as conservative ANC.
+3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
+4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
+5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
+
+###Constants
+
+
+
 
 #Conclusions
 The conclusions section should not include any new observation. It is the place to summarize the results in a few sentences. Make sure you connect your conclusions to your objectives for doing the research.
+
+```
