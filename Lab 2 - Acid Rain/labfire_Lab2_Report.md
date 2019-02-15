@@ -219,48 +219,6 @@ plt.show()
 
 
 
-#Time from start of experiment
-#time_bicarb = df_sodium_bicarb.iloc[:,4].values
-#time_carb = df_calcium_carb.iloc[:,4].values
-#time_bicarb
-#The iloc method is simple and efficient, so I'll use that to get the y values.
-#pH_bicarb = df_sodium_bicarb.iloc[:,1].values
-#pH_carb=df_calcium_carb.iloc[:,1].values
-#Exp_ANC_bicarb=df_sodium_bicarb.iloc[:,5].values
-#ANC_bicarb_closed=df_sodium_bicarb.iloc[:,6].values
-#ANC_bicarb_open=df_sodium_bicarb.iloc[:,10].values
-
-# We will use the stats package to do the linear regression.
-# It is important to note that the units are stripped from the x and y arrays when processed by the stats package.
-#slope_bicarb_1, intercept_bicarb_1, r_value_bicarb_1, p_value_bicarb_1, std_err_bicarb_1 = stats.linregress(time_bicarb,pH_bicarb) #ph vs time
-
-#slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,ANC_bicarb_open) #expected ANC vs time
-
-#intercept
-# Note that slope is dimensionless for this case, but not in general!
-# For the general case we can attach the correct units to slope.
-#slope
-
-# Now create a figure and plot the data and the line from the linear regression.
-#fig, ax = plt.subplots()
-
-# plot the data as red circles
-#ax.plot(time_bicarb, ANC_bicarb_open, 'ro', )
-
-#plot the linear regression as a black line
-#ax.plot(time_bicarb, slope * time_bicarb + intercept, 'k-', )
-
-# Add axis labels using the column labels from the dataframe
-#ax.set(xlabel='Dimensionless Hydraulic Residence Time')
-#ax.set(ylabel='ANC (eq/L)')
-#ax.legend(['Calculated as open system'])
-#ax.grid(True)
-
-# Here I save the file to my local harddrive. You will need to change this to work on your computer.
-# We don't need the file type (png) here.
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot_ANC_Open_System')
-#plt.show()
-
 ```
 1.854*u.mmole/u.L*100.0869*u.mg/u.mmol*4*u.L
 
