@@ -12,12 +12,65 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import stats
 from math import*
+
+
+
+data_file_path = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Sodium%20Bicarbonate.txt"
+
+data_file_path_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Calcium%20Carbonate.txt"
+
+#Now we create a pandas dataframe with the data in the file
+df_sodium_bicarb = pd.read_csv(data_file_path,delimiter='\t')
+df_calcium_carb= pd.read_csv(data_file_path_2,delimiter='\t')
+
+#if you want to see what is in the dataframe you can print it!
+print(df_sodium_bicarb)
+print(df_calcium_carb)
+# The column headers can be access by using the list command
+list(df_sodium_bicarb)
+columns = df_sodium_bicarb.columns
+print(columns)
+
+# 3) We can use the iloc command and select all of the rows in column 0.
+time_bicarb = df_sodium_bicarb.iloc[:,4].values
+time_bicarb
+#The iloc method is simple and efficient, so I'll use that to get the y values.
+pH_bicarb = df_sodium_bicarb.iloc[:,1].values
+
+# We will use the stats package to do the linear regression.
+# It is important to note that the units are stripped from the x and y arrays when processed by the stats package.
+slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,pH_bicarb)
+
+intercept
+# Note that slope is dimensionless for this case, but not in general!
+# For the general case we can attach the correct units to slope.
+slope
+
+# Now create a figure and plot the data and the line from the linear regression.
+fig, ax = plt.subplots()
+# plot the data as red circles
+ax.plot(time_bicarb, pH_bicarb, 'ro', )
+
+#plot the linear regression as a black line
+#ax.plot(time_bicarb, slope * time_bicarb + intercept, 'k-', )
+
+# Add axis labels using the column labels from the dataframe
+#ax.set(xlabel=list(df_sodium_bicarb)[4])
+ax.set(xlabel='Dimensionless Hydraulic Residence Time')
+ax.set(ylabel=list(df_sodium_bicarb)[1])
+ax.legend(['Measured'])
+ax.grid(True)
+# Here I save the file to my local harddrive. You will need to change this to work on your computer.
+# We don't need the file type (png) here.
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot')
+plt.show()
+
 ```
 Full lab reports (+)
 Write the laboratory report as if the experiment were your idea. Imagine that you are working for a consulting firm or in a research laboratory and that you needed to do laboratory research to investigate options for areal world project. You can use the Lab Manual as an example of a well formatted WORD document. The Atom reports should have similar formatting with the required python code. Full laboratory reports should include the following sections:
 
 #Introduction and Objectives
-In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate acid rains. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by using the addition of ANC. This also provides the first opportunity to code pH, ANC equations, and reactors equations as shown below.  
+In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate acid rains. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by using the addition of ANC. This also provides the first opportunity to code pH, ANC equations, and reactors equations as shown below.  
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
@@ -73,6 +126,25 @@ Compare theoretical expectations with your results and discuss reasons for any o
 
 Make sure that responses to specific questions and data analysis requested in the lab manual are included in this section. But don't answer the questions in a list format. Instead, include your answers as part of the narrative that is designed to meet your objectives.
 
+1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
+2. Assuming that the lake can be modeled as a completely mixed flow reactor and that ANC is a conservative parameter, equation (25) can be used to calculate the expected ANC in the lake effluent as the experiment proceeds. Graph the expected ANC in the lake effluent versus the hydraulic residence time (t/θ) based on the completely mixed flow reactor equation with the plot labeled (in the legend) as conservative ANC.
+
+$$.075L/15s=0.005L/s$$
+$$4L/0.005L/s=800s$$
+$$800s = 13.33min$$
+$$13.33 min = .2222 hours$$
+
+
+3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
+4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
+5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
+
+###Constants
+
+
+
 
 #Conclusions
 The conclusions section should not include any new observation. It is the place to summarize the results in a few sentences. Make sure you connect your conclusions to your objectives for doing the research.
+
+```
