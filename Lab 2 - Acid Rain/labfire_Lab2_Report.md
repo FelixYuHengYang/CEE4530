@@ -20,10 +20,13 @@ density = 997*u.g/u.L
 volume = (mass_combined-mass_tub)/density
 flow_rate = (75*10**-3*u.L)/(15*u.s)
 residence_time = (volume/flow_rate).magnitude
+ANC_in = -0.001*u.equivalent/u.L
 MW_sodium_bicarb = 84*u.g/u.mole
 mass_sodium_bicarb = 0.623*u.g
-ANC_in = -0.001*u.equivalent/u.L
 ANC_0_sodium_bicarb = mass_sodium_bicarb/(MW_sodium_bicarb*volume)
+MW_calcium_carb = 100*u.g/u.mole
+mass_calcium_carb = 0.742*u.g
+ANC_0_calcium_carb = mass_calcium_carb/(MW_calcium_carb*volume)
 K_1 = 10**(-6.3)
 K_2 = 10**(-10.3)
 K_H = 10**(-1.5)*u.mol/(u.L*u.atm)
@@ -31,20 +34,20 @@ P_CO2 = 10**(-3.5)*u.atm
 K_w = 10**(-14)
 
 
-#File paths for the excel files containing the experimental measurements
+#Sodium Bicarbonate
+
+#File path for the excel file containing the experimental measurements
 data_file_path = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid_Rain_Sodium_Bicarbonate_v3.txt"
 
-data_file_path_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Calcium%20Carbonate.txt"
 
 #Pandas dataframe with the data in the file
 df_sodium_bicarb = pd.read_csv(data_file_path,delimiter='\t')
-df_calcium_carb= pd.read_csv(data_file_path_2,delimiter='\t')
 
-# The column headers can be access by using the list command
+#Column headers
 list(df_sodium_bicarb)
-list(df_calcium_carb)
 
-# Use the epa.notes function to find what you've commented in the data file.
+
+#Comments in the data file.
 lakepHnotes = epa.notes(data_file_path)
 lakepHnotes
 
@@ -54,79 +57,167 @@ start=8
 #The pH data is in column 1
 column=1
 
-lakepH=epa.column_of_data(data_file_path,start,column)
+#Question 1
+
+lakepH_1=epa.column_of_data(data_file_path,start,column)
 
 #extract the corresponding time data and convert to seconds
-time = epa.column_of_time(data_file_path,start).to(u.s).magnitude
-time
-dimensionless_residence_time = time / residence_time
-dimensionless_residence_time
+time_1 = epa.column_of_time(data_file_path,start).to(u.s).magnitude
+dimensionless_residence_time_1 = time_1 / residence_time
 
 #Now plot the graph
 fig, ax = plt.subplots()
-ax.plot(dimensionless_residence_time,lakepH,'r')
+ax.plot(dimensionless_residence_time_1,lakepH_1,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('pH')
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_1')
-#plt.show()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_1')
+plt.show()
 
 
+#Question 2
+ANC_out_sodium_bicarb = ANC_in*(1-e**(-dimensionless_residence_time_1))+ANC_0_sodium_bicarb*e**(-dimensionless_residence_time_1)
 
-
-ANC_out_sodium_bicarb = ANC_in*(1-e**(-dimensionless_residence_time))+ANC_0_sodium_bicarb*e**(-dimensionless_residence_time)
 
 #Now plot the graph
-fig, ax = plt.subplots()
-ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb,'r')
+#fig, ax = plt.subplots()
+#ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('Conservative ANC (eq/L)')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
+plt.show()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
-#plt.show()
+#Question 3
 
+alpha_1_sodium_bicarb = 1/((10**(-lakepH_1)/K_1)+1+(K_2/10**(-lakepH_1)))
+alpha_2_sodium_bicarb = 1/((10**(-2*lakepH_1)/(K_1*K_2))+(10**(-lakepH_1)/K_2)+1)
+C_t_closed_sodium_bicarb = ANC_0_sodium_bicarb * e**(-dimensionless_residence_time_1)
 
-alpha_1_sodium_bicarb = 1/((10**(-lakepH)/K_1)+1+(K_2/10**(-lakepH)))
-alpha_2_sodium_bicarb = 1/((10**(-2*lakepH)/(K_1*K_2))+(10**(-lakepH)/K_2)+1)
-C_t_closed = ANC_0_sodium_bicarb * e**(-dimensionless_residence_time)
-
-ANC_out_sodium_bicarb_closed = C_t_closed * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH))*u.mole/u.L - 10**(-lakepH)*u.mole/u.L
+ANC_out_sodium_bicarb_closed = C_t_closed_sodium_bicarb * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH_1))*u.mole/u.L - 10**(-lakepH_1)*u.mole/u.L
 
 #Now plot the graph
-fig, ax = plt.subplots()
-ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb_closed,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
-
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
 plt.show()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
 
 
-alpha_0_sodium_bicarb = 1/(1+(K_1/10**(-lakepH))+((K_1*K_2)/10**(-2*lakepH)))
-C_t_open = (P_CO2*K_H)/alpha_0_sodium_bicarb
-ANC_out_sodium_bicarb_open = C_t_open * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH))*u.mole/u.L - 10**(-lakepH)*u.mole/u.L
+#Question 4
 
+alpha_0_sodium_bicarb = 1/(1+(K_1/10**(-lakepH_1))+((K_1*K_2)/10**(-2*lakepH_1)))
+C_t_open_sodium_bicarb = (P_CO2*K_H)/alpha_0_sodium_bicarb
+ANC_out_sodium_bicarb_open = C_t_open_sodium_bicarb * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH_1))*u.mole/u.L - 10**(-lakepH_1)*u.mole/u.L
 
 #Now plot the graph
-fig, ax = plt.subplots()
-ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb_open,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
-plt.ylabel('ANC Open System (eq/L)')
+#plt.ylabel('ANC Open System (eq/L)')
+plt.ylabel('ANC (eq/L)')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
 plt.show()
 
 #Now plot the graph
-fig, ax = plt.subplots()
-plt.legend(['ANC_out_sodium_bicarb','ANC_out_sodium_bicarb_open','ANC_out_sodium_bicarb_open'])
-
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare')
 plt.show()
 
 #Calcium Carbonate
+
+#File paths for the excel file containing the experimental measurements
+data_file_path_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Calcium%20Carbonate_v2.txt"
+
+#Pandas dataframe with the data in the file
+df_calcium_carb= pd.read_csv(data_file_path_2,delimiter='\t')
+
+#Column headers
+list(df_calcium_carb)
+
+#Question 5a
+
+#Comments in the data file.
+lakepHnotes = epa.notes(data_file_path_2)
+lakepHnotes
+
+# set the start index of the data file to one past the note indicating the start.
+start=8
+
+#The pH data is in column 1
+column=1
+
+lakepH_2=epa.column_of_data(data_file_path_2,start,column)
+
+#extract the corresponding time data and convert to seconds
+time_2 = epa.column_of_time(data_file_path_2,start).to(u.s).magnitude
+dimensionless_residence_time_2 = time_2 / residence_time
+
+#Now plot the graph
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('pH')
+plt.plot(dimensionless_residence_time_2,lakepH_2,'r')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5a')
+plt.show()
+
+
+#Question 5b
+
+ANC_out_calcium_carb = ANC_in*(1-e**(-dimensionless_residence_time_2))+ANC_0_calcium_carb*e**(-dimensionless_residence_time_2)
+
+#Now plot the graph
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('Conservative ANC (eq/L)')
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb,'r')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5b')
+plt.show()
+
+
+#Question 5c
+
+alpha_1_calcium_carb = 1/((10**(-lakepH_2)/K_1)+1+(K_2/10**(-lakepH_2)))
+alpha_2_calcium_carb = 1/((10**(-2*lakepH_2)/(K_1*K_2))+(10**(-lakepH_2)/K_2)+1)
+C_t_closed_calcium_carb = ANC_0_calcium_carb * e**(-dimensionless_residence_time_2)
+
+ANC_out_calcium_carb_closed = C_t_closed_calcium_carb * (alpha_1_calcium_carb + 2*alpha_2_calcium_carb) + K_w/(10**(-lakepH_2))*u.mole/u.L - 10**(-lakepH_2)*u.mole/u.L
+
+#Now plot the graph
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Closed System (eq/L)')
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c')
+plt.show()
+
+
+#Question 5d
+
+alpha_0_calcium_carb = 1/(1+(K_1/10**(-lakepH_2))+((K_1*K_2)/10**(-2*lakepH_2)))
+C_t_open_calcium_carb = (P_CO2*K_H)/alpha_0_calcium_carb
+ANC_out_calcium_carb_open = C_t_open_calcium_carb * (alpha_1_calcium_carb + 2*alpha_2_calcium_carb) + K_w/(10**(-lakepH_2))*u.mole/u.L - 10**(-lakepH_2)*u.mole/u.L
+
+
+#Now plot the graph
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Open System (eq/L)')
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_open,'y')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d')
+plt.show()
+
+#Now plot the graph
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb,'r')
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
+plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_open,'y')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC (eq/L)')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare')
+plt.show()
+
+
 
 #Time from start of experiment
 #time_bicarb = df_sodium_bicarb.iloc[:,4].values
