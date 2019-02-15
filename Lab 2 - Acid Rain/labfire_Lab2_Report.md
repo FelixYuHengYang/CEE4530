@@ -13,69 +13,166 @@ import pandas as pd
 from scipy import stats
 from math import*
 
-1.854*u.mmole/u.L*100.0869*u.mg/u.mmol*4*u.L
+#Variable Names
+mass_combined = 4645*u.g
+mass_tub = 496*u.g
+density = 997*u.g/u.L
+volume = (mass_combined-mass_tub)/density
+flow_rate = (75*10**-3*u.L)/(15*u.s)
+residence_time = (volume/flow_rate).magnitude
+MW_sodium_bicarb = 84*u.g/u.mole
+mass_sodium_bicarb = 0.623*u.g
+ANC_in = -0.001*u.equivalent/u.L
+ANC_0_sodium_bicarb = mass_sodium_bicarb/(MW_sodium_bicarb*volume)
+K_1 = 10**(-6.3)
+K_2 = 10**(-10.3)
+K_H = 10**(-1.5)*u.mol/(u.L*u.atm)
+P_CO2 = 10**(-3.5)*u.atm
+K_w = 10**(-14)
 
-data_file_path = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Sodium%20Bicarbonate.txt"
+
+#File paths for the excel files containing the experimental measurements
+data_file_path = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid_Rain_Sodium_Bicarbonate_v3.txt"
 
 data_file_path_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Calcium%20Carbonate.txt"
 
-#Now we create a pandas dataframe with the data in the file
+#Pandas dataframe with the data in the file
 df_sodium_bicarb = pd.read_csv(data_file_path,delimiter='\t')
 df_calcium_carb= pd.read_csv(data_file_path_2,delimiter='\t')
 
-#if you want to see what is in the dataframe you can print it!
-#print(df_sodium_bicarb)
-#print(df_calcium_carb)
 # The column headers can be access by using the list command
 list(df_sodium_bicarb)
-columns_bicarb = df_sodium_bicarb.columns
-columns_carb= df_calcium_carb.columns
-print(columns_bicarb)
-print(columns_carb)
+list(df_calcium_carb)
 
-# 3) We can use the iloc command and select all of the rows in column 0.
-time_bicarb = df_sodium_bicarb.iloc[:,4].values
-time_carb = df_calcium_carb.iloc[:,4].values
-time_bicarb
+# Use the epa.notes function to find what you've commented in the data file.
+lakepHnotes = epa.notes(data_file_path)
+lakepHnotes
+
+# set the start index of the data file to one past the note indicating the start.
+start=8
+
+#The pH data is in column 1
+column=1
+
+lakepH=epa.column_of_data(data_file_path,start,column)
+
+#extract the corresponding time data and convert to seconds
+time = epa.column_of_time(data_file_path,start).to(u.s).magnitude
+time
+dimensionless_residence_time = time / residence_time
+dimensionless_residence_time
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(dimensionless_residence_time,lakepH,'r')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('pH')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_1')
+#plt.show()
+
+
+
+
+ANC_out_sodium_bicarb = ANC_in*(1-e**(-dimensionless_residence_time))+ANC_0_sodium_bicarb*e**(-dimensionless_residence_time)
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb,'r')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('Conservative ANC (eq/L)')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
+#plt.show()
+
+
+alpha_1_sodium_bicarb = 1/((10**(-lakepH)/K_1)+1+(K_2/10**(-lakepH)))
+alpha_2_sodium_bicarb = 1/((10**(-2*lakepH)/(K_1*K_2))+(10**(-lakepH)/K_2)+1)
+C_t_closed = ANC_0_sodium_bicarb * e**(-dimensionless_residence_time)
+
+ANC_out_sodium_bicarb_closed = C_t_closed * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH))*u.mole/u.L - 10**(-lakepH)*u.mole/u.L
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb_closed,'r')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Closed System (eq/L)')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
+plt.show()
+
+
+alpha_0_sodium_bicarb = 1/(1+(K_1/10**(-lakepH))+((K_1*K_2)/10**(-2*lakepH)))
+C_t_open = (P_CO2*K_H)/alpha_0_sodium_bicarb
+ANC_out_sodium_bicarb_open = C_t_open * (alpha_1_sodium_bicarb + 2*alpha_2_sodium_bicarb) + K_w/(10**(-lakepH))*u.mole/u.L - 10**(-lakepH)*u.mole/u.L
+
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb_open,'r')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Open System (eq/L)')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
+plt.show()
+
+#Now plot the graph
+fig, ax = plt.subplots()
+plt.legend(['ANC_out_sodium_bicarb','ANC_out_sodium_bicarb_open','ANC_out_sodium_bicarb_open'])
+
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC (eq/L)')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC')
+plt.show()
+
+#Calcium Carbonate
+
+#Time from start of experiment
+#time_bicarb = df_sodium_bicarb.iloc[:,4].values
+#time_carb = df_calcium_carb.iloc[:,4].values
+#time_bicarb
 #The iloc method is simple and efficient, so I'll use that to get the y values.
-pH_bicarb = df_sodium_bicarb.iloc[:,1].values
-pH_carb=df_calcium_carb.iloc[:,1].values
-Exp_ANC_bicarb=df_sodium_bicarb.iloc[:,5].values
-ANC_bicarb_closed=df_sodium_bicarb.iloc[:,6].values
-ANC_bicarb_open=df_sodium_bicarb.iloc[:,10].values
+#pH_bicarb = df_sodium_bicarb.iloc[:,1].values
+#pH_carb=df_calcium_carb.iloc[:,1].values
+#Exp_ANC_bicarb=df_sodium_bicarb.iloc[:,5].values
+#ANC_bicarb_closed=df_sodium_bicarb.iloc[:,6].values
+#ANC_bicarb_open=df_sodium_bicarb.iloc[:,10].values
 
 # We will use the stats package to do the linear regression.
 # It is important to note that the units are stripped from the x and y arrays when processed by the stats package.
 #slope_bicarb_1, intercept_bicarb_1, r_value_bicarb_1, p_value_bicarb_1, std_err_bicarb_1 = stats.linregress(time_bicarb,pH_bicarb) #ph vs time
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,ANC_bicarb_open) #expected ANC vs time
+#slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,ANC_bicarb_open) #expected ANC vs time
 
-intercept
+#intercept
 # Note that slope is dimensionless for this case, but not in general!
 # For the general case we can attach the correct units to slope.
-slope
+#slope
 
 # Now create a figure and plot the data and the line from the linear regression.
-fig, ax = plt.subplots()
+#fig, ax = plt.subplots()
 
 # plot the data as red circles
-ax.plot(time_bicarb, ANC_bicarb_open, 'ro', )
+#ax.plot(time_bicarb, ANC_bicarb_open, 'ro', )
 
 #plot the linear regression as a black line
 #ax.plot(time_bicarb, slope * time_bicarb + intercept, 'k-', )
 
 # Add axis labels using the column labels from the dataframe
-ax.set(xlabel='Dimensionless Hydraulic Residence Time')
-ax.set(ylabel='ANC (eq/L)')
-ax.legend(['Calculated as open system'])
-ax.grid(True)
+#ax.set(xlabel='Dimensionless Hydraulic Residence Time')
+#ax.set(ylabel='ANC (eq/L)')
+#ax.legend(['Calculated as open system'])
+#ax.grid(True)
 
 # Here I save the file to my local harddrive. You will need to change this to work on your computer.
 # We don't need the file type (png) here.
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot_ANC_Open_System')
-plt.show()
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot_ANC_Open_System')
+#plt.show()
 
 ```
+1.854*u.mmole/u.L*100.0869*u.mg/u.mmol*4*u.L
+
 Full lab reports (+)
 Write the laboratory report as if the experiment were your idea. Imagine that you are working for a consulting firm or in a research laboratory and that you needed to do laboratory research to investigate options for areal world project. You can use the Lab Manual as an example of a well formatted WORD document. The Atom reports should have similar formatting with the required python code. Full laboratory reports should include the following sections:
 
