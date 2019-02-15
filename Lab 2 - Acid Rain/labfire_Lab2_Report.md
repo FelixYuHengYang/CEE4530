@@ -13,7 +13,7 @@ import pandas as pd
 from scipy import stats
 from math import*
 
-
+1.854*u.mmole/u.L*100.0869*u.mg/u.mmol*4*u.L
 
 data_file_path = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid%20Rain%20Sodium%20Bicarbonate.txt"
 
@@ -24,22 +24,31 @@ df_sodium_bicarb = pd.read_csv(data_file_path,delimiter='\t')
 df_calcium_carb= pd.read_csv(data_file_path_2,delimiter='\t')
 
 #if you want to see what is in the dataframe you can print it!
-print(df_sodium_bicarb)
-print(df_calcium_carb)
+#print(df_sodium_bicarb)
+#print(df_calcium_carb)
 # The column headers can be access by using the list command
 list(df_sodium_bicarb)
-columns = df_sodium_bicarb.columns
-print(columns)
+columns_bicarb = df_sodium_bicarb.columns
+columns_carb= df_calcium_carb.columns
+print(columns_bicarb)
+print(columns_carb)
 
 # 3) We can use the iloc command and select all of the rows in column 0.
 time_bicarb = df_sodium_bicarb.iloc[:,4].values
+time_carb = df_calcium_carb.iloc[:,4].values
 time_bicarb
 #The iloc method is simple and efficient, so I'll use that to get the y values.
 pH_bicarb = df_sodium_bicarb.iloc[:,1].values
+pH_carb=df_calcium_carb.iloc[:,1].values
+Exp_ANC_bicarb=df_sodium_bicarb.iloc[:,5].values
+ANC_bicarb_closed=df_sodium_bicarb.iloc[:,6].values
+ANC_bicarb_open=df_sodium_bicarb.iloc[:,10].values
 
 # We will use the stats package to do the linear regression.
 # It is important to note that the units are stripped from the x and y arrays when processed by the stats package.
-slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,pH_bicarb)
+#slope_bicarb_1, intercept_bicarb_1, r_value_bicarb_1, p_value_bicarb_1, std_err_bicarb_1 = stats.linregress(time_bicarb,pH_bicarb) #ph vs time
+
+slope, intercept, r_value, p_value, std_err = stats.linregress(time_bicarb,ANC_bicarb_open) #expected ANC vs time
 
 intercept
 # Note that slope is dimensionless for this case, but not in general!
@@ -48,21 +57,22 @@ slope
 
 # Now create a figure and plot the data and the line from the linear regression.
 fig, ax = plt.subplots()
+
 # plot the data as red circles
-ax.plot(time_bicarb, pH_bicarb, 'ro', )
+ax.plot(time_bicarb, ANC_bicarb_open, 'ro', )
 
 #plot the linear regression as a black line
 #ax.plot(time_bicarb, slope * time_bicarb + intercept, 'k-', )
 
 # Add axis labels using the column labels from the dataframe
-#ax.set(xlabel=list(df_sodium_bicarb)[4])
 ax.set(xlabel='Dimensionless Hydraulic Residence Time')
-ax.set(ylabel=list(df_sodium_bicarb)[1])
-ax.legend(['Measured'])
+ax.set(ylabel='ANC (eq/L)')
+ax.legend(['Calculated as open system'])
 ax.grid(True)
+
 # Here I save the file to my local harddrive. You will need to change this to work on your computer.
 # We don't need the file type (png) here.
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Bicarbplot_ANC_Open_System')
 plt.show()
 
 ```
@@ -139,9 +149,16 @@ $$13.33 min = .2222 hours$$
 4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
 5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
 
+
+
 ###Constants
 
-
+#Questions
+What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off? How much NaHCO3 would need to be added?
+What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
+extent of mixing
+solubility of CaCO3 (find the solubility and compare with NaHCO3)
+density of CaCO3 slurry (find the density of CaCO3)
 
 
 #Conclusions
