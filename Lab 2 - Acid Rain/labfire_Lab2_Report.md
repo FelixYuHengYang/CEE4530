@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import stats
+from scipy.interpolate import make_interp_spline, BSpline
 from math import*
 
 #Variable Names
@@ -20,14 +21,15 @@ density = 997*u.g/u.L
 volume = (mass_combined-mass_tub)/density
 flow_rate = (75*10**-3*u.L)/(15*u.s)
 residence_time = (volume/flow_rate).magnitude
-residence_time
 ANC_in = -0.001*u.equivalent/u.L
 MW_sodium_bicarb = 84*u.g/u.mole
 mass_sodium_bicarb = 0.623*u.g
 ANC_0_sodium_bicarb = mass_sodium_bicarb/(MW_sodium_bicarb*volume)
+ANC_0_sodium_bicarb
 MW_calcium_carb = 100*u.g/u.mole
 mass_calcium_carb = 0.742*u.g
 ANC_0_calcium_carb = mass_calcium_carb/(MW_calcium_carb*volume)
+ANC_0_calcium_carb
 K_1 = 10**(-6.3)
 K_2 = 10**(-10.3)
 K_H = 10**(-1.5)*u.mol/(u.L*u.atm)
@@ -102,6 +104,15 @@ plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
 plt.show()
 
+#Smooth the model by using spline function
+xnew_figure3 = np.linspace(dimensionless_residence_time_1.min(),dimensionless_residence_time_1.max(),30) #30 is number of points between first and dim-less hydraulic residence time
+spl = make_interp_spline(dimensionless_residence_time_1, ANC_out_sodium_bicarb_closed, k=3)
+ANC_out_sodium_bicarb_closed_smooth = spl(xnew_figure3)
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Closed System (eq/L)')
+plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3_smoothed')
+plt.show()
 
 
 #Question 4
@@ -116,15 +127,24 @@ plt.ylabel('ANC Open System (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
 plt.show()
+#Smooth the model by using spline function
+xnew_figure4 = np.linspace(dimensionless_residence_time_1.min(),dimensionless_residence_time_1.max(),40) #40 is number of points between first and dim-less hydraulic residence time
 
-#Now plot the graph
-plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
-plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
+spl = make_interp_spline(dimensionless_residence_time_1, ANC_out_sodium_bicarb_open, k=3)
+ANC_out_sodium_bicarb_open_smooth = spl(xnew_figure4)
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Open System (eq/L)')
+plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4_smoothed')
+plt.show()
+
+#Now plot the graph with all three on same graph
+plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
+plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare_smooth')
 plt.show()
 
 #Calcium Carbonate
@@ -190,8 +210,15 @@ plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c')
 plt.show()
-
-
+#Smooth the model by using spline function
+xnew_figure8 = np.linspace(dimensionless_residence_time_2.min(),dimensionless_residence_time_2.max(),50) #50 is number of points between first and dim-less hydraulic residence time
+spl = make_interp_spline(dimensionless_residence_time_2, ANC_out_calcium_carb_closed, k=3)
+ANC_out_calcium_carb_closed_smooth = spl(xnew_figure8)
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Closed System (eq/L)')
+plt.plot(xnew_figure8,ANC_out_calcium_carb_closed_smooth,'c')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c_smoothed')
+plt.show()
 #Question 5d
 
 alpha_0_calcium_carb = 1/(1+(K_1/10**(-lakepH_2))+((K_1*K_2)/10**(-2*lakepH_2)))
@@ -206,13 +233,25 @@ plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_open,'y')
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d')
 plt.show()
 
+#Smooth the model by using spline function
+xnew_figure9=np.linspace(dimensionless_residence_time_2.min(),dimensionless_residence_time_2.max(),50) #50 is number of points between first and dim-less hydraulic residence time
+
+spl = make_interp_spline(dimensionless_residence_time_2, ANC_out_calcium_carb_open, k=3)
+ANC_out_calcium_carb_open_smooth = spl(xnew_figure9)
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC Open System (eq/L)')
+
+plt.plot(xnew_figure8,ANC_out_calcium_carb_open_smooth,'y')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d_smoothed')
+plt.show()
+
 #Now plot the graph
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb,'r')
-plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
-plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_open,'y')
+plt.plot(xnew_figure8,ANC_out_calcium_carb_closed_smooth,'c')
+plt.plot(xnew_figure9,ANC_out_calcium_carb_open_smooth,'y')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare_smooth')
 plt.show()
 
 
@@ -220,7 +259,7 @@ plt.show()
 ```
 
 #Introduction and Objectives
-In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate this sudden addition of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
+In the past, some regions of the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate sudden additions of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in Equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
@@ -246,10 +285,15 @@ The above five are the principal equations that the team is going to use to dete
 
 #Procedures
 
-The goal of this experiment was to determine the ANC change versus time while adding increasing amounts of acid rain in a lake which acted as a Continuously Mixed Flow Reactor (CMFR). The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, sample taking, second experiment, and general measurements.
+The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC could then be determined using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, sample taking, second experiment, and general measurements.
 
 ##Lake
-To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity was filled with deionized water up to 4 L. 623 mg of $NaHCO_3$ were added to bring the ANC of the lake to the value of 50 $\mu eq/L$ given in the lab manual. A magnetic stir bar was added to the lake and the tank was placed on a magnetic stirrer. Finally, 1 mL of bromocresol green indicator solution was added to the lake which theoretically should turn the color of the lake from transparent to blue and then eventually to yellow. The metal weir of the tank was set in an angle just above the water level so that the addition of acid rain would cause immediate overflow and thus satisfy the requirement for constant volume in a CMFR. The outflow of the lake was located in the bottom and connected via tubing to a drain on the workbench.
+To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity was filled with approximately 4L of deionized water. 623 mg of $NaHCO_3$ were added to bring the ANC of the lake to the value of 50 $\mu eq/L$ given in the lab manual. A magnetic stir bar was added to the lake and the tank was placed on a magnetic stirrer. Finally, 1 mL of bromocresol green indicator solution was added to the lake which changed the color of the lake from transparent to blue and then eventually to yellow as pH dropped. The metal weir of the tank was set in an angle just above the water level so that addition of acid rain would cause immediate overflow and thus satisfy the requirement for constant volume in a CMFR. The outflow of the lake was located in the bottom and connected via tubing to a drain on the workbench.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/lab_setup_labels.jpg" alt="PH vs Dimensionless Hydraulic Residence Time"/>
+</p>
+
 
 ##Addition of Acid Rain
 The acid rain solution was provided in an F-style jug. #18 tubing was used to move the acid from the jug to the peristaltic pump, which was set to 70.3 RPM, and then to the lake. Once the peristaltic pump was turned on, the acid entered the lake with a rate of 267 mL/min.
@@ -258,10 +302,10 @@ The acid rain solution was provided in an F-style jug. #18 tubing was used to mo
 A pH probe was first calibrated using the ProCoda software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoda.) The probe was placed away from the effluent and close to the center of the lake, keeping in mind to avoid the turbulence caused by the spinning stir bar. ProCoda thus creates a file with time points and respective pH values.
 
 ##Sample Taking
-Samples from the lake were taken at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time.
+Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time.
 
 ##Second Experiment
-For the second experiment, the substance contributing to the positive ANC of the lake was switched from $NaHCO_3$ to $CaCO_3$. The amount of $CaCO_3$ added was 742 mg (again to get the target 50 μeq/L initial ANC.) Steps 1-3 were repeated, but samples were not obtained for this experiment (step 4.)
+For the second experiment, the substance contributing to the positive ANC of the lake was changed from $NaHCO_3$ to $CaCO_3$. The amount of $CaCO_3$ added was 742 mg (again to get the target 50 μeq/L initial ANC.) Steps 1-3 were repeated, but samples were not obtained for this experiment (step 4.)
 
 ##General Measurements
 The effluent rate was measured by measuring the volume of effluent per 15 seconds. The volume of water was calculated by measuring the mass of the tank with and without the lake water, thus calculating the mass of water, and dividing by the theoretical density of water.
@@ -289,7 +333,7 @@ Table 1: Relevant Experimental Parameters
 |$ANC_0$ for $NaHCO_3$|0.00178|eq/L|
 |$CaCO_3$ Molecular Weight|100|g/mol|
 |$CaCO_3$ Mass|0.742|g|
-|$ANC_0$ for $CaCO_3$|0.00178|g/mol|
+|$ANC_0$ for $CaCO_3$|0.00178|eq/L|
 |$K_1$|$10^{-6.3}$|-|
 |$K_2$|$10^{-10.3}$|-|
 |$K_H$|$10^{-1.5}$|mol/(L*atm)|
@@ -297,7 +341,7 @@ Table 1: Relevant Experimental Parameters
 |$K_w$|$10^{-14}$|-|
 
 
-Figure 1 matches the theoretical expectations for the relationship between pH and hydraulic residence time, since the significant drop in pH (from approximately 5.5 to 4) occurs around the residence time of the system. This means that the lake had enough acid neutralizing capacity for one residence time, after which the ANC of the lake started depleting and the ANC of the incoming acid shifted the pH of the system down. Figure 2 also agrees with the expected relationship between ANC and residence time. At a ratio of time over residence time of 1, the ANC of the lake is almost zero, after which point it becomes negative as the acid rain keeps entering the system. The closed system approximation (Figure 3) matches the experimental results shown in Figure 2. This means that assuming that the amount of total carbon is equal to the carbon that we added to the system by the addition of $NaHCO_3$ is a good model for approximating the ANC level at various time points. Theoretically, this is explained by the fact that the lake did not have time to equilibrate with the atmosphere, since the experiment was run the moment the carbon was added and reaching equilibrium with atmospheric $CO_2$ would take very long. The volatile system modeled in Figure 4 is evidently underestimating the lake ANC levels in the beginning of the experiment although it matches the experimental ANC values after approximately 1 residence time. This is because after 1 residence time, both the volatile and the non-volatile systems assume a complete depletion of total carbon in the system. Finally, Figure 5 shows the experimental ANC levels as well as the two models in the same graph, which emphasizes the strong agreement of the closed system to the experimental values and the large deviation of the volatile system from the actual ANC levels in the lake.
+The set of graphs below for the closed and open systems of ANC (Figure 3,4 and 5) were smoothed out, but the graphs are still available in the code above the report. Figure 1 matches the theoretical expectations for the relationship between pH and hydraulic residence time, since the significant drop in pH (from approximately 5.5 to 4) occurs after a unit of the residence time of the system. This means that the lake had just enough acid neutralizing capacity for one residence time, after which the ANC of the lake started depleting and the ANC of the incoming acid lowered the pH of the system. Figure 2 also confirms the expected relationship between ANC and residence time. After one unit of hydraulic residence time, the ANC of the lake is almost zero, becoming negative as more acid rain enters the system. The closed system approximation (Figure 3) corresponds with the experimental results shown in Figure 2. This means that assuming that the amount of total carbon is equal to the carbon that we added to the system by the addition of $NaHCO_3$ is a good model for approximating the ANC level at various time points. Theoretically, this is due to the fact that the lake likely did not have time to equilibrate with the atmosphere, since the experiment was run the moment the carbon was added and reaching equilibrium with atmospheric $CO_2$ would take much longer than that given amount of time. The volatile system modeled in Figure 4 is evidently underestimating the lake ANC levels in the beginning of the experiment although it matches the experimental ANC values after approximately 1 residence time. This is because after 1 residence time, both the volatile and the non-volatile systems assume a complete depletion of total carbon in the system. Finally, Figure 5 shows the experimental ANC levels as well as the two models in the same graph, which emphasizes the strong relationship between the closed system to the experimental values and the large deviation of the volatile system from the actual ANC levels in the lake.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_1.png" alt="PH vs Dimensionless Hydraulic Residence Time"/>
@@ -312,7 +356,7 @@ Figure 1 matches the theoretical expectations for the relationship between pH an
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_3.png" alt="ANC Closed System vs Dimensionless Hydraulic Residence Time"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_3_smoothed.png" alt="ANC Closed System vs Dimensionless Hydraulic Residence Time"/>
 </p>
 <p align= "center"> Figure 3: ANC Closed System vs Dimensionless Hydraulic Residence Time
 
@@ -323,13 +367,13 @@ Figure 1 matches the theoretical expectations for the relationship between pH an
 <p align= "center"> Figure 4: ANC Open System vs Dimensionless Hydraulic Residence Time
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_Compare.png" alt="ANC for open, closed, and predicted ANC"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
 </p>
 
 <p align= "center"> Figure 5: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time. The red line demonstrates the experimental ANC values, the blue the closed system model and the yellow the open system model.
 
 
-Moving on to $CaCO_3$, the outcome of the experiment was different that expected. As demonstrated in Figure 6, the pH drop occurred immediately after the addition the acid rain to the system. This means that the lake had minimal acid neutralizing capacity at the beginning of the experiment, even though the correct amount of $CaCO_3$ was added for the lake to have $50μeq/L$ ANC after 1 residence time. This result is also apparent in Figure 8 which is modeling the closed system based on pH values, where the ANC levels drop as soon as the experiment starts. After observing the tank, it was determined that $CaCO_3$ did not dissolve as soon as it was added to water and stirred, but instead was deposited as a solid at the bottom and edges of the tank. This result in the wrong initial ANC concentration which is why the system had limited buffering capacity and its pH dropped as soon as the acid entered the tank. Therefore, since the experimental values of pH were not indicative of a real-world system, neither the closed system (Figure 8) nor the open system (Figure 9) matches the observed ANC levels (Figure 7). This can also be seen in Figure 10.
+Moving on to $CaCO_3$, the outcome of the experiment was different than expected. Like in the previous set of graphs the graphs for the closed and open systems of ANC were smoothed out, but the graphs are still available in the code above the report. As demonstrated in Figure 6, the pH drop occurred immediately after the addition the acid rain to the system. This means that the lake had minimal acid neutralizing capacity at the beginning of the experiment, even though the correct amount of $CaCO_3$ was intended to maintain at least $50μeq/L$ ANC after 1 residence time. This result is also apparent in Figure 8 which models the closed system based on pH values, where the ANC levels drop as soon as the experiment starts. Upon observation of the model lake, it was determined that $CaCO_3$ did not dissolve as soon as it was added to water and stirred, but instead was deposited as a solid at the bottom and edges of the tank. This resulted in the wrong initial ANC concentration which is why the system had limited buffering capacity and its pH dropped as soon as the acid entered the tank. Therefore, since the experimental values of pH were not indicative of a real-world system, neither the closed system (Figure 8) nor the open system (Figure 9) matches the observed ANC levels (Figure 7). This can also be seen in Figure 10.
 
 
 <p align="center">
@@ -344,18 +388,18 @@ Moving on to $CaCO_3$, the outcome of the experiment was different that expected
 <p align= "center"> Figure 7: Conservative ANC vs Dimensionless Hydraulic Residence Time
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5c.png" alt="ANC for open, closed, and predicted ANC"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5c_smoothed.png" alt="ANC for open, closed, and predicted ANC"/>
 </p>
 <p align= "center"> Figure 8: ANC Closed System vs Dimensionless Hydraulic Residence Time
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5d.png" alt="ANC for open, closed, and predicted ANC"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5d_smoothed.png" alt="ANC for open, closed, and predicted ANC"/>
 </p>
 <p align= "center"> Figure 9: ANC Open System vs Dimensionless Hydraulic Residence Time
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare.png" alt="ANC for open, closed, and predicted ANC"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
 </p>
 <p align= "center"> Figure 10: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time
 
