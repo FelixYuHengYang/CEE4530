@@ -20,6 +20,7 @@ density = 997*u.g/u.L
 volume = (mass_combined-mass_tub)/density
 flow_rate = (75*10**-3*u.L)/(15*u.s)
 residence_time = (volume/flow_rate).magnitude
+residence_time
 ANC_in = -0.001*u.equivalent/u.L
 MW_sodium_bicarb = 84*u.g/u.mole
 mass_sodium_bicarb = 0.623*u.g
@@ -80,13 +81,11 @@ ANC_out_sodium_bicarb = ANC_in*(1-e**(-dimensionless_residence_time_1))+ANC_0_so
 
 
 #Now plot the graph
-#fig, ax = plt.subplots()
-#ax.plot(dimensionless_residence_time,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('Conservative ANC (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
-plt.show()
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
+plt.show()
 
 #Question 3
 
@@ -100,8 +99,9 @@ ANC_out_sodium_bicarb_closed = C_t_closed_sodium_bicarb * (alpha_1_sodium_bicarb
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
-plt.show()
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
+plt.show()
+
 
 
 #Question 4
@@ -112,10 +112,8 @@ ANC_out_sodium_bicarb_open = C_t_open_sodium_bicarb * (alpha_1_sodium_bicarb + 2
 
 #Now plot the graph
 plt.xlabel('Dimensionless Hydraulic Residence Time')
-#plt.ylabel('ANC Open System (eq/L)')
-plt.ylabel('ANC (eq/L)')
+plt.ylabel('ANC Open System (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
-
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
 plt.show()
 
@@ -220,28 +218,24 @@ plt.show()
 
 
 ```
-1.854*u.mmole/u.L*100.0869*u.mg/u.mmol*4*u.L
-
-Full lab reports (+)
-Write the laboratory report as if the experiment were your idea. Imagine that you are working for a consulting firm or in a research laboratory and that you needed to do laboratory research to investigate options for areal world project. You can use the Lab Manual as an example of a well formatted WORD document. The Atom reports should have similar formatting with the required python code. Full laboratory reports should include the following sections:
 
 #Introduction and Objectives
-In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate acid rains. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by using the addition of ANC. This also provides the first opportunity to code pH, ANC equations, and reactors equations as shown below.  
+In the past, the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate this sudden addition of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
 
-Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
+Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in Equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
-$pH=-log{H^+}$ (1)
+$pH=-log{[H^+]}$ (1)
 
 $C_T=[H_2CO_3]+[HCO_3^-]+[CO_3^{-2}]$ (2)
 
 The carbonate system can be modeled as a "volatile" or "non-volatile" system. This depends on whether or not aqueous carbon dioxide is at equilibrium with atmospheric carbon dioxide. The equations for ANC are given for the volatile and non-volatile systems in (3) and (4) respectively.
 
 
-$ANC=\frac{P_{CO_{2} } K_{H} }{a_{0} } (\alpha _{1}+2\alpha _{2})+\frac{K_{w} }{\left[{H}^{+} \right]} \; -\left[{H}^{+} \right]+\left[{A}_{{org}}^{{-}} \right]$  (3)
+$ANC=\frac{P_{CO_{2} } K_{H} }{a_{0} } (\alpha _{1}+2\alpha _{2})+\frac{K_{w} }{\left[{H}^{+} \right]} \; -\left[{H}^{+} \right]$  (3)
 
 Where $C_T = \frac{P_{CO_2} K_H}{\alpha_0}$
 
-$ANC=C_T(\alpha_1+2\alpha_2)+\frac{K_w}{H+}-[H+]+\left[{A}_{{org}}^{{-}} \right]$                     (4)
+$ANC=C_T(\alpha_1+2\alpha_2)+\frac{K_w}{H+}-[H+]$                     (4)
 
 Where $\alpha_1$ is equal to $\frac{1}{\frac{[H^+]}{K_1} + 1 + \frac{K_2}{[H^+]}}$ and $\alpha_2$ is equal to $\frac{1}{\frac{[H^+]^2 }{K_1 K_2} +\frac{[H^+]}{K_2} + 1}$ and $K_1$  and $K_2$ are the first and second dissociation constants for carbonic acid. $K_w$ is the described in equation (5).
 
@@ -276,38 +270,113 @@ For detailed methods on procedures such as pH probe calibration, please refer to
 
 #Results and Discussion
 ##Data Analysis
-Present results in a clearly labeled format. Data analysis methods, equations, graphs, and tables should be presented in this section. The report text should refer to each equation, figure, and table. Include a table of relevant experimental parameters (e.g., measured flow rates, sample sizes, concentrations of reagents, etc.).
 
-Compare theoretical expectations with your results and discuss reasons for any observed deviations. If the results weren't as expected, suggest reasons why the laboratory results may have differed from theory and suggest improved techniques to obtain more accurate results or modifications to the theory to better describe the experimental conditions.
+The analysis of the data required certain parameters which are summarized in Table 1 below.
 
-Make sure that responses to specific questions and data analysis requested in the lab manual are included in this section. But don't answer the questions in a list format. Instead, include your answers as part of the narrative that is designed to meet your objectives.
+Table 1: Relevant Experimental Parameters
 
-1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
-2. Assuming that the lake can be modeled as a completely mixed flow reactor and that ANC is a conservative parameter, equation (25) can be used to calculate the expected ANC in the lake effluent as the experiment proceeds. Graph the expected ANC in the lake effluent versus the hydraulic residence time (t/θ) based on the completely mixed flow reactor equation with the plot labeled (in the legend) as conservative ANC.
+| Experimental Parameter | Value | Units |
+|:----------------------:|:-----:|:-----:|
+|Mass of Tub and Water|4645|g|
+|Mass of Tub|496|g|
+|Density of Water|997|g/L|
+|Volume of Lake|4.161|L|
+|Flow Rate|0.005|L/s|
+|Residence Time|832.3|s|
+|$ANC_{in}$|-0.001|eq/L|
+|$NaHCO_3$ Molecular Weight|84|g/mol|
+|$NaHCO_3$ Mass|0.623|g|
+|$ANC_0$ for $NaHCO_3$|0.00178|eq/L|
+|$CaCO_3$ Molecular Weight|100|g/mol|
+|$CaCO_3$ Mass|0.742|g|
+|$ANC_0$ for $CaCO_3$|0.00178|g/mol|
+|$K_1$|$10^{-6.3}$|-|
+|$K_2$|$10^{-10.3}$|-|
+|$K_H$|$10^{-1.5}$|mol/(L*atm)|
+|$P_{CO_2}$|$10^{-3.5}$|atm|
+|$K_w$|$10^{-14}$|-|
 
-$$.075L/15s=0.005L/s$$
-$$4L/0.005L/s=800s$$
-$$800s = 13.33min$$
-$$13.33 min = .2222 hours$$
+
+Figure 1 matches the theoretical expectations for the relationship between pH and hydraulic residence time, since the significant drop in pH (from approximately 5.5 to 4) occurs around the residence time of the system. This means that the lake had enough acid neutralizing capacity for one residence time, after which the ANC of the lake started depleting and the ANC of the incoming acid shifted the pH of the system down. Figure 2 also agrees with the expected relationship between ANC and residence time. At a ratio of time over residence time of 1, the ANC of the lake is almost zero, after which point it becomes negative as the acid rain keeps entering the system. The closed system approximation (Figure 3) matches the experimental results shown in Figure 2. This means that assuming that the amount of total carbon is equal to the carbon that we added to the system by the addition of $NaHCO_3$ is a good model for approximating the ANC level at various time points. Theoretically, this is explained by the fact that the lake did not have time to equilibrate with the atmosphere, since the experiment was run the moment the carbon was added and reaching equilibrium with atmospheric $CO_2$ would take very long. The volatile system modeled in Figure 4 is evidently underestimating the lake ANC levels in the beginning of the experiment although it matches the experimental ANC values after approximately 1 residence time. This is because after 1 residence time, both the volatile and the non-volatile systems assume a complete depletion of total carbon in the system. Finally, Figure 5 shows the experimental ANC levels as well as the two models in the same graph, which emphasizes the strong agreement of the closed system to the experimental values and the large deviation of the volatile system from the actual ANC levels in the lake.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_1.png" alt="PH vs Dimensionless Hydraulic Residence Time"/>
+</p>
+<p align= "center"> Figure 1: pH vs Dimensionless Hydraulic Residence Time
 
 
-3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
-4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
-5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_2.png" alt="Conservative ANC vs Dimensionless Hydraulic Residence Time"/>
+</p>
+<p align= "center"> Figure 2: Conservative ANC vs Dimensionless Hydraulic Residence Time
 
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_3.png" alt="ANC Closed System vs Dimensionless Hydraulic Residence Time"/>
+</p>
+<p align= "center"> Figure 3: ANC Closed System vs Dimensionless Hydraulic Residence Time
 
-###Constants
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_4.png" alt=" ANC Open Systemvs dimensionless hydraulic residence time"/>
+</p>
+<p align= "center"> Figure 4: ANC Open System vs Dimensionless Hydraulic Residence Time
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_Compare.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+
+<p align= "center"> Figure 5: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time. The red line demonstrates the experimental ANC values, the blue the closed system model and the yellow the open system model.
+
+
+Moving on to $CaCO_3$, the outcome of the experiment was different that expected. As demonstrated in Figure 6, the pH drop occurred immediately after the addition the acid rain to the system. This means that the lake had minimal acid neutralizing capacity at the beginning of the experiment, even though the correct amount of $CaCO_3$ was added for the lake to have $50μeq/L$ ANC after 1 residence time. This result is also apparent in Figure 8 which is modeling the closed system based on pH values, where the ANC levels drop as soon as the experiment starts. After observing the tank, it was determined that $CaCO_3$ did not dissolve as soon as it was added to water and stirred, but instead was deposited as a solid at the bottom and edges of the tank. This result in the wrong initial ANC concentration which is why the system had limited buffering capacity and its pH dropped as soon as the acid entered the tank. Therefore, since the experimental values of pH were not indicative of a real-world system, neither the closed system (Figure 8) nor the open system (Figure 9) matches the observed ANC levels (Figure 7). This can also be seen in Figure 10.
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5a.png" alt=">pH vs Dimensionless Hydraulic Residence Time"/>
+</p>
+<p align= "center"> Figure 6: pH vs Dimensionless Hydraulic Residence Time
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5b.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 7: Conservative ANC vs Dimensionless Hydraulic Residence Time
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5c.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 8: ANC Closed System vs Dimensionless Hydraulic Residence Time
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_5d.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 9: ANC Open System vs Dimensionless Hydraulic Residence Time
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 10: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time
+
+Labfire learned that the $CaCO_3$ does not dissolve as readily as sodium bicarbonate so by the time the team started adding added the lake did not have a sufficient level of ANC. Therefore the buffer capacity using compared  $CaCO_3$  to the buffer capacity sodium bicarbonate was reduced, causing a reduction of pH when even small amounts of acid were added. Therefore, the team cannot be certain which model fits the measured ANC values better. As a next step, one could repeat the experiment but make sure that the $CaCO_3$ is not present as a solid at the edges of the tank.
+
 
 #Questions
-What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off? How much NaHCO3 would need to be added?
-What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
+1. What do you think would happen if enough $NaHCO_3$ were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off? How much $NaHCO_3$ would need to be added?
+
+Based on our prelab, we calculated that we would need 6.73 g of  $NaHCO_3$ to be added to the lake to maintain ANC greater than $50μeq/L$ for 3 residence times. If the stirrer was turned off, then we would have to wait for diffusion to occur so that the $NaHCO_3$ is fully mixed which could take a very long time. Therefore, instead of a solution with a high $NaHCO_3$ concentration, we would have a solution with a large mass of $NaHCO_3$ that is not fully aqueous and settles as a solid on the bottom of the tank. This means that even though we would have added the correct amount of $NaHCO_3$ to keep the ANC levels at 50μeq/L for 3 residence times, in reality the ANC levels would drop because the system wouldn't have the required amount of dissolved carbon.   
+
+
+2. What are some of the complicating factors you might find in attempting to remediate a lake using $CaCO_3$? Below is a list of issues to consider.
 extent of mixing
-solubility of CaCO3 (find the solubility and compare with NaHCO3)
-density of CaCO3 slurry (find the density of CaCO3)
+solubility of $CaCO_3$ (find the solubility and compare with NaHCO3)
+density of $CaCO_3$ slurry (find the density of CaCO3)
+
+Some problems that may arise when using $CaC0_3$ might be due to limited time as the experiment has shown. If one needs to immediately raise ANC in a body of water, the solubility of $CaC0_3$ may be antithetical to such efforts as shown in Figure 6 where the pH immediately dropped below 4 even .2 units of dimensionless hydraulic residence time in, and did not resemble Figure 1 where the pH slowly approached 3. Solubility of $CaC0_3$ is 15 mg/L while solubility of $NaHCO_3$ is 9600mg/L, which is more than a 100 fold times larger.  
 
 
 #Conclusions
-The conclusions section should not include any new observation. It is the place to summarize the results in a few sentences. Make sure you connect your conclusions to your objectives for doing the research.
 
+In this experiment the team discovered that not all chemicals are equal in their effectiveness in remediating acid rain in water bodies. Although theoretically the effectiveness of $CaCO_3$ and $NaHCO_3$ should have been the same after one residence time, due to their difference in solubility the ANC level in the $CaCO_3$ case was not sufficient to mitigate the acidity of the solution coming into the lake. Practically speaking, if there were a case when a lake had to be immediately protected from incoming acid rain, it would be wise to use $NaHCO_3$ as opposed to $CaCO_3$, since it would dissolve more readily. In addition, based on the experiment with $NaHCO_3$ as the carbon source, it was determined that the model that better estimates the ANC levels at any point in the lake would be the closed system model.
 ```
