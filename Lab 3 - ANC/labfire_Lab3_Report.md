@@ -237,7 +237,7 @@ ax.plot(dimensionless_residence_time_1,lakepH_1,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('pH')
 
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_1')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_1')
 plt.show()
 
 #Question 2
@@ -248,7 +248,7 @@ ANC_out_sodium_bicarb = epa.CMFR(dimensionless_residence_time_1,ANC_0_sodium_bic
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('Conservative ANC (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_2')
 plt.show()
 
 #Question 3
@@ -262,7 +262,7 @@ ANC_out_sodium_bicarb_closed=epa.ANC_closed(lakepH_1,C_t_closed_sodium_bicarb)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3')
 plt.show()
 
 #Smooth the model by using spline function
@@ -272,7 +272,7 @@ ANC_out_sodium_bicarb_closed_smooth = spl(xnew_figure3)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3_smoothed')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3_smoothed')
 plt.show()
 
 
@@ -293,7 +293,7 @@ ANC_out_sodium_bicarb_open_smooth = spl(xnew_figure4)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Open System (eq/L)')
 plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4_smoothed')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4_smoothed')
 plt.show()
 
 #Now plot the graph with all three on same graph
@@ -302,7 +302,7 @@ plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare_smooth')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare_smooth')
 plt.show()
 
 #Calcium Carbonate
@@ -338,18 +338,18 @@ dimensionless_residence_time_2 = time_2 / residence_time
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('pH')
 plt.plot(dimensionless_residence_time_2,lakepH_2,'r')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5a')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5a')
 plt.show()
 
 
 #Question 5b
-ANC_out_calcium_carb=epa.CMFR(dimensionless_residence_time_2,ANC_0_calcium_carb,ANC_in)
+ANC_out_calcium_carb = epa.CMFR(dimensionless_residence_time_2,ANC_0_calcium_carb,ANC_in)
 
 #Now plot the graph
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('Conservative ANC (eq/L)')
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb,'r')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5b')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5b')
 plt.show()
 
 
@@ -364,7 +364,7 @@ ANC_out_calcium_carb_closed = epa.ANC_closed(lakepH_2,C_t_closed_calcium_carb)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c')
 plt.show()
 #Smooth the model by using spline function
 xnew_figure8 = np.linspace(dimensionless_residence_time_2.min(),dimensionless_residence_time_2.max(),50) #50 is number of points between first and dim-less hydraulic residence time
@@ -373,7 +373,7 @@ ANC_out_calcium_carb_closed_smooth = spl(xnew_figure8)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(xnew_figure8,ANC_out_calcium_carb_closed_smooth,'c')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c_smoothed')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c_smoothed')
 plt.show()
 
 #Question 5d
@@ -383,7 +383,7 @@ ANC_out_calcium_carb_open = epa.ANC_open(lakepH_2)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Open System (eq/L)')
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_open,'y')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d')
 plt.show()
 
 #Smooth the model by using spline function
@@ -395,7 +395,7 @@ plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Open System (eq/L)')
 
 plt.plot(xnew_figure8,ANC_out_calcium_carb_open_smooth,'y')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d_smoothed')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5d_smoothed')
 plt.show()
 
 #Now plot the graph
@@ -404,12 +404,11 @@ plt.plot(xnew_figure8,ANC_out_calcium_carb_closed_smooth,'c')
 plt.plot(xnew_figure9,ANC_out_calcium_carb_open_smooth,'y')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare_smooth')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare_smooth')
 plt.show()
 
 
 #ANC Lab
-#Question 1
 
 #File paths for the excel file containing the experimental measurements
 data_file_path_3 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/0_minute_sample.txt"
@@ -417,15 +416,16 @@ data_file_path_3 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/ma
 #Pandas dataframe with the data in the file
 df_0_minute_sample = pd.read_csv(data_file_path_3,delimiter='\t')
 
-#pH values
-samplepH=epa.column_of_data(data_file_path_3,6,1)
+# The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
+# The epa.Gran function assigns all of the outputs in one statement
+V_titrant_0, pH_0, V_Sample_0, Normality_Titrant_0, V_equivalent_0, ANC_0 = epa.Gran(data_file_path_3)
 
-#extract the corresponding time data and convert to seconds
-titrant_volume = epa.column_of_data(data_file_path_3,6,0)
+
+#Question 1
 
 #Now plot the graph
 fig, ax = plt.subplots()
-ax.plot(titrant_volume,samplepH,'r')
+ax.plot(V_titrant_0,pH_0,'r')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('pH')
 
@@ -435,44 +435,91 @@ plt.show()
 
 #Question 2
 
-# The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
-# The epa.Gran function assigns all of the outputs in one statement
-V_titrant, pH, V_Sample, Normality_Titrant, V_equivalent, ANC = epa.Gran(data_file_path_3)
-
 #Define the gran function.
 def F1(V_sample,V_titrant,pH):
   return (V_sample + V_titrant)/V_sample * epa.invpH(pH)
+
 #Create an array of the F1 values.
-F1_data = F1(V_Sample,V_titrant,pH)
+F1_data_0 = F1(V_Sample_0,V_titrant_0,pH_0)
 
 #By inspection I guess that there are 5 good data points in the linear region.
-N_good_points = 4
+N_good_points_0 = 4
 
 #use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
-slope, intercept, r_value, p_value, std_err = stats.linregress(V_titrant[-N_good_points:],F1_data[-N_good_points:])
+slope_0, intercept_0, r_value_0, p_value_0, std_err_0 = stats.linregress(V_titrant_0[-N_good_points_0:],F1_data_0[-N_good_points_0:])
 
 #reattach the correct units to the slope and intercept.
-intercept = intercept*u.mole/u.L
-slope = slope*(u.mole/u.L)/u.mL
-V_eq = -intercept/slope
-ANC_sample = V_eq*Normality_Titrant/V_Sample
-print('The r value for this curve fit is', ut.round_sf(r_value,5))
-print('The equivalent volume was', ut.round_sf(V_eq,2))
-print('The acid neutralizing capacity was',ut.round_sf(ANC_sample.to(u.meq/u.L),2))
+intercept_0 = intercept_0*u.mole/u.L
+slope_0 = slope_0*(u.mole/u.L)/u.mL
+V_eq_0 = -intercept_0/slope_0
+V_eq_0
+ANC_sample_0 = V_eq_0*Normality_Titrant_0/V_Sample_0
+ANC_sample_0
+print('The r value for this curve fit is', ut.round_sf(r_value_0,5))
+print('The equivalent volume was', ut.round_sf(V_eq_0,2))
+print('The acid neutralizing capacity was',ut.round_sf(ANC_sample_0.to(u.meq/u.L),2))
 
 #The equivalent volume agrees well with the value calculated by ProCoDA.
 #create an array of points to draw the linear regression line
-x=[V_eq.magnitude,V_titrant[-1].magnitude ]
-y=[0,(V_titrant[-1]*slope+intercept).magnitude]
+x=[V_eq_0.magnitude,V_titrant_0[-1].magnitude ]
+y=[0,(V_titrant_0[-1]*slope_0+intercept_0).magnitude]
+
 #Now plot the data and the linear regression
-plt.plot(V_titrant, F1_data,'o')
+plt.plot(V_titrant_0, F1_data_0,'o')
 plt.plot(x, y,'r')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('Gran function (mole/L)')
 plt.legend(['data'])
 
-#plt.savefig('Examples/images/Gran.png')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_2')
 plt.show()
+
+#Question 3
+
+#File Paths
+data_file_path_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/5_minute_sample.txt"
+
+data_file_path_5 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/10_minute_sample.txt"
+
+#Pandas dataframes with the data in the file
+df_5_minute_sample = pd.read_csv(data_file_path_4,delimiter='\t')
+
+df_10_minute_sample = pd.read_csv(data_file_path_5,delimiter='\t')
+
+#Gran Functions
+V_titrant_5, pH_5, V_Sample_5, Normality_Titrant_5, V_equivalent_5, ANC_5 = epa.Gran(data_file_path_4)
+
+V_titrant_10, pH_10, V_Sample_10, Normality_Titrant_10, V_equivalent_10, ANC_10 = epa.Gran(data_file_path_5)
+
+#Create an array of the F1 values.
+F1_data_5 = F1(V_Sample_5,V_titrant_5,pH_5)
+
+F1_data_10 = F1(V_Sample_10,V_titrant_10,pH_10)
+
+#By inspection I guess that there are 4 good data points in the linear region.
+N_good_points_5 = 3
+
+N_good_points_10 = 3
+
+#use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
+slope_5, intercept_5, r_value_5, p_value_5, std_err_5 = stats.linregress(V_titrant_5[-N_good_points_5:],F1_data_5[-N_good_points_5:])
+
+slope_10, intercept_10, r_value_10, p_value_10, std_err_10 = stats.linregress(V_titrant_10[-N_good_points_10:],F1_data_10[-N_good_points_10:])
+
+#reattach the correct units to the slope and intercept.
+intercept_5 = intercept_5*u.mole/u.L
+slope_5 = slope_5*(u.mole/u.L)/u.mL
+V_eq_5 = -intercept_5/slope_5
+V_eq_5
+ANC_sample_5 = V_eq_5*Normality_Titrant_5/V_Sample_5
+ANC_sample_5
+
+intercept_10 = intercept_10*u.mole/u.L
+slope_10 = slope_10*(u.mole/u.L)/u.mL
+V_eq_10 = -intercept_10/slope_10
+V_eq_10
+ANC_sample_10 = V_eq_10*Normality_Titrant_10/V_Sample_10
+ANC_sample_10
 
 
 ```
