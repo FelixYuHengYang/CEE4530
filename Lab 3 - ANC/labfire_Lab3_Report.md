@@ -184,6 +184,7 @@ In this experiment the team discovered that not all chemicals are equal in their
   from scipy.interpolate import make_interp_spline, BSpline
   from math import*
 
+#Acid Rain Lab
 #Variable Names
 mass_combined = 4645*u.g  
 mass_tub = 496*u.g
@@ -404,6 +405,73 @@ plt.plot(xnew_figure9,ANC_out_calcium_carb_open_smooth,'y')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_calcium_carb_Compare_smooth')
+plt.show()
+
+
+#ANC Lab
+#Question 1
+
+#File paths for the excel file containing the experimental measurements
+data_file_path_3 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/0_minute_sample.txt"
+
+#Pandas dataframe with the data in the file
+df_0_minute_sample = pd.read_csv(data_file_path_3,delimiter='\t')
+
+#pH values
+samplepH=epa.column_of_data(data_file_path_3,6,1)
+
+#extract the corresponding time data and convert to seconds
+titrant_volume = epa.column_of_data(data_file_path_3,6,0)
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(titrant_volume,samplepH,'r')
+plt.xlabel('Titrant Volume (mL)')
+plt.ylabel('pH')
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_1')
+plt.show()
+
+
+#Question 2
+
+# The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
+# The epa.Gran function assigns all of the outputs in one statement
+V_titrant, pH, V_Sample, Normality_Titrant, V_equivalent, ANC = epa.Gran(data_file_path_3)
+
+#Define the gran function.
+def F1(V_sample,V_titrant,pH):
+  return (V_sample + V_titrant)/V_sample * epa.invpH(pH)
+#Create an array of the F1 values.
+F1_data = F1(V_Sample,V_titrant,pH)
+
+#By inspection I guess that there are 5 good data points in the linear region.
+N_good_points = 4
+
+#use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
+slope, intercept, r_value, p_value, std_err = stats.linregress(V_titrant[-N_good_points:],F1_data[-N_good_points:])
+
+#reattach the correct units to the slope and intercept.
+intercept = intercept*u.mole/u.L
+slope = slope*(u.mole/u.L)/u.mL
+V_eq = -intercept/slope
+ANC_sample = V_eq*Normality_Titrant/V_Sample
+print('The r value for this curve fit is', ut.round_sf(r_value,5))
+print('The equivalent volume was', ut.round_sf(V_eq,2))
+print('The acid neutralizing capacity was',ut.round_sf(ANC_sample.to(u.meq/u.L),2))
+
+#The equivalent volume agrees well with the value calculated by ProCoDA.
+#create an array of points to draw the linear regression line
+x=[V_eq.magnitude,V_titrant[-1].magnitude ]
+y=[0,(V_titrant[-1]*slope+intercept).magnitude]
+#Now plot the data and the linear regression
+plt.plot(V_titrant, F1_data,'o')
+plt.plot(x, y,'r')
+plt.xlabel('Titrant Volume (mL)')
+plt.ylabel('Gran function (mole/L)')
+plt.legend(['data'])
+
+#plt.savefig('Examples/images/Gran.png')
 plt.show()
 
 
