@@ -1,7 +1,7 @@
 
 
 #Introduction and Objectives
-In the past, some regions of the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have acid neutralizing capacity (ANC) in their soils to mitigate sudden additions of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
+In the past, some regions of the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have enough acid neutralizing capacity (ANC) in their soils to mitigate sudden additions of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in Equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
@@ -21,6 +21,12 @@ $ANC=C_T(\alpha_1+2\alpha_2)+\frac{K_w}{H+}-[H+]$                     (4)
 Where $\alpha_1$ is equal to $\frac{1}{\frac{[H^+]}{K_1} + 1 + \frac{K_2}{[H^+]}}$ and $\alpha_2$ is equal to $\frac{1}{\frac{[H^+]^2 }{K_1 K_2} +\frac{[H^+]}{K_2} + 1}$ and $K_1$  and $K_2$ are the first and second dissociation constants for carbonic acid. $K_w$ is the described in equation (5).
 
 ${K_w} ={\left[H^+\right]} \left[{OH}^{{-}} \right]$ (5)
+
+Determination of ANC or alkalinity in an unknown solution can be achieved using titration. For the titration experiment, one first has to find the equivalence point, or the point in the titration one adds exactly an equivalent or stoichiometric amount of titrant. This volume is known as the "equivalent" volume or $V_e$ as shown in the equation below.
+
+$V_e=\frac{V_s*N_s}{N_t}$ (6)
+
+The other way to determine ANC is to use a Gran plot technique, that is used after the equivalence point has been attained, where initial ANC is 0. This works because further titration past the equivalence point will result in an increase in the amount of [H+] equivalent to the amount of [H+] added.
 
 The above five are the principal equations that the team is going to use to determine ANC with increasing amounts of acid rain entering the system.
 
@@ -176,6 +182,7 @@ In this experiment the team discovered that not all chemicals are equal in their
   from aguaclara.core.units  import unit_registry as u
   u.define('equivalent = mole = eq')
   import aguaclara.research.environmental_processes_analysis as epa
+  import aguaclara.core.utility as ut
   from scipy import optimize
   import numpy as np
   import matplotlib.pyplot as plt
@@ -285,6 +292,7 @@ plt.ylabel('ANC Open System (eq/L)')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_open,'y')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_4')
 plt.show()
+
 #Smooth the model by using spline function
 xnew_figure4 = np.linspace(dimensionless_residence_time_1.min(),dimensionless_residence_time_1.max(),40) #40 is number of points between first and dim-less hydraulic residence time
 
@@ -341,7 +349,6 @@ plt.plot(dimensionless_residence_time_2,lakepH_2,'r')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5a')
 plt.show()
 
-
 #Question 5b
 ANC_out_calcium_carb = epa.CMFR(dimensionless_residence_time_2,ANC_0_calcium_carb,ANC_in)
 
@@ -352,9 +359,7 @@ plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb,'r')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5b')
 plt.show()
 
-
 #Question 5c
-
 alpha_1_calcium_carb = epa.alpha1_carbonate(lakepH_2)
 alpha_2_calcium_carb = epa.alpha2_carbonate(lakepH_2)
 C_t_closed_calcium_carb = ANC_0_calcium_carb * e**(-dimensionless_residence_time_2)
@@ -366,6 +371,7 @@ plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(dimensionless_residence_time_2,ANC_out_calcium_carb_closed,'c')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_5c')
 plt.show()
+
 #Smooth the model by using spline function
 xnew_figure8 = np.linspace(dimensionless_residence_time_2.min(),dimensionless_residence_time_2.max(),50) #50 is number of points between first and dim-less hydraulic residence time
 spl = make_interp_spline(dimensionless_residence_time_2, ANC_out_calcium_carb_closed, k=3)
@@ -411,24 +417,34 @@ plt.show()
 #ANC Lab
 
 #File paths for the excel file containing the experimental measurements
-data_file_path_3 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/0_minute_sample.txt"
-
-#Pandas dataframe with the data in the file
-df_0_minute_sample = pd.read_csv(data_file_path_3,delimiter='\t')
+data_file_path_3 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/0_minute_sample.xls"
 
 # The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
 # The epa.Gran function assigns all of the outputs in one statement
+
 V_titrant_0, pH_0, V_Sample_0, Normality_Titrant_0, V_equivalent_0, ANC_0 = epa.Gran(data_file_path_3)
+
 
 
 #Question 1
 
+#pH Ranges
+Range_1=V_titrant_0[0:7]
+pH_range_1=pH_0[0:7]
+Range_2=V_titrant_0[6:9]
+pH_range_2=pH_0[6:9]
+Range_3=V_titrant_0[8:]
+pH_range_3=pH_0[8:]
+
 #Now plot the graph
 fig, ax = plt.subplots()
-ax.plot(V_titrant_0,pH_0,'r')
+plt.annotate('Equivalent Volume 1.73',xy=(1.73,2.8),xytext=(0.5,4),           arrowprops=dict(facecolor='black', shrink=0.001))
+ax.plot(Range_1,pH_range_1,'c', label='HCO3- + H+ --> H2CO3')
+ax.plot(Range_2,pH_range_2,'r')
+ax.plot(Range_3,pH_range_3,'y', label='Activity different than concentration')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('pH')
-
+ax.legend()
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_1')
 plt.show()
 
@@ -448,13 +464,13 @@ N_good_points_0 = 4
 #use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
 slope_0, intercept_0, r_value_0, p_value_0, std_err_0 = stats.linregress(V_titrant_0[-N_good_points_0:],F1_data_0[-N_good_points_0:])
 
+
 #reattach the correct units to the slope and intercept.
 intercept_0 = intercept_0*u.mole/u.L
 slope_0 = slope_0*(u.mole/u.L)/u.mL
 V_eq_0 = -intercept_0/slope_0
-V_eq_0
 ANC_sample_0 = V_eq_0*Normality_Titrant_0/V_Sample_0
-ANC_sample_0
+
 print('The r value for this curve fit is', ut.round_sf(r_value_0,5))
 print('The equivalent volume was', ut.round_sf(V_eq_0,2))
 print('The acid neutralizing capacity was',ut.round_sf(ANC_sample_0.to(u.meq/u.L),2))
@@ -474,17 +490,15 @@ plt.legend(['data'])
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_2')
 plt.show()
 
+V_equivalent_0 #ProCoDA Calculation
+V_eq_0 #Python Calculation
+
 #Question 3
 
 #File Paths
-data_file_path_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/5_minute_sample.txt"
+data_file_path_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/5_minute_sample.xls"
 
-data_file_path_5 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/10_minute_sample.txt"
-
-#Pandas dataframes with the data in the file
-df_5_minute_sample = pd.read_csv(data_file_path_4,delimiter='\t')
-
-df_10_minute_sample = pd.read_csv(data_file_path_5,delimiter='\t')
+data_file_path_5 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%203%20-%20ANC/10_minute_sample.xls"
 
 #Gran Functions
 V_titrant_5, pH_5, V_Sample_5, Normality_Titrant_5, V_equivalent_5, ANC_5 = epa.Gran(data_file_path_4)
@@ -510,16 +524,25 @@ slope_10, intercept_10, r_value_10, p_value_10, std_err_10 = stats.linregress(V_
 intercept_5 = intercept_5*u.mole/u.L
 slope_5 = slope_5*(u.mole/u.L)/u.mL
 V_eq_5 = -intercept_5/slope_5
-V_eq_5
 ANC_sample_5 = V_eq_5*Normality_Titrant_5/V_Sample_5
-ANC_sample_5
+
 
 intercept_10 = intercept_10*u.mole/u.L
 slope_10 = slope_10*(u.mole/u.L)/u.mL
 V_eq_10 = -intercept_10/slope_10
-V_eq_10
 ANC_sample_10 = V_eq_10*Normality_Titrant_10/V_Sample_10
-ANC_sample_10
 
+Time=[0,5*u.min,10*u.min/residence_time]
+#Graph with all ANCs
+plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
+plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
+plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
+plt.plot(0,ANC_sample_0,'ko')
+plt.plot(5*60/residence_time,ANC_sample_5,'ko')
+plt.plot(10*60/residence_time,ANC_sample_10,'ko')
+plt.xlabel('Dimensionless Hydraulic Residence Time')
+plt.ylabel('ANC (eq/L)')
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/ANC_Compare_smooth_Question 3')
+plt.show()
 
 ```
