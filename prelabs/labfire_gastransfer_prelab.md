@@ -64,16 +64,11 @@ def O2_sat(P_air, temp):
           u.mg/u.L*np.exp(1727 / temp.to(u.K).magnitude - 2.105))
 
 P_air = 101.3*u.kPa
-#temp = np.linspace(0,40)*u.degC
-temp=22*u.degC
+temp = np.linspace(0,40)*u.degC
 C_Oxygen = epa.O2_sat(P_air,temp)
-C_Oxygen
-Volume=750*u.mL
-Mass_Oxygen=C_Oxygen*Volume
 
-Mass_Oxygen=Mass_Oxygen.to(u.mg)
-Mass_Oxygen
-Mass_Sodium_Sulfite=Mass_Oxygen*7.875
-
-
-```
+fig, ax = plt.subplots()
+ax.plot(temp,C_Oxygen)
+ax.set(xlabel='Temperature (degrees Celsius)', ylabel='Oxygen concentration (mg/L)')
+fig.savefig('Gas_Transfer/Images/Oxygen_vs_T')
+plt.show()
