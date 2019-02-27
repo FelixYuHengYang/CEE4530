@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #**Lab Fire Gas Transfer Prelab**
 ###Eirini Sarri & Felix Yang
 Feburary 19th, 2018
@@ -36,7 +34,6 @@ Assuming that the OTE is constant as gas flow rate increases, in order to counte
 The dissolved oxygen probe measures the current that is proportional to the rate at which oxygen molecules are reacting with the electrons provided by the cathode to reduce oxygen to $H_2O$. If we let the probe operate for long periods of time, the voltage difference will drop to zero, preventing the conversion of $O_2$ to $H_2O$ and thus increasing the concentration of $O_2$ within the probe. This will lead to the generation of an equilibrium between the probe and the cell, thus preventing the transfer of oxygen into the probe and leading to a displayed oxygen concentration of zero.
 
 
->>>>>>> 9e96f13e4aae955c9457742157016c08885fb124
 ```python
 """ importing """
 import aguaclara.research.environmental_processes_analysis as epa
@@ -67,7 +64,6 @@ def O2_sat(P_air, temp):
           u.mg/u.L*np.exp(1727 / temp.to(u.K).magnitude - 2.105))
 
 P_air = 101.3*u.kPa
-<<<<<<< HEAD
 temp = np.linspace(0,40)*u.degC
 C_Oxygen = epa.O2_sat(P_air,temp)
 
@@ -76,18 +72,3 @@ ax.plot(temp,C_Oxygen)
 ax.set(xlabel='Temperature (degrees Celsius)', ylabel='Oxygen concentration (mg/L)')
 fig.savefig('Gas_Transfer/Images/Oxygen_vs_T')
 plt.show()
-=======
-#temp = np.linspace(0,40)*u.degC
-temp=22*u.degC
-C_Oxygen = epa.O2_sat(P_air,temp)
-C_Oxygen
-Volume=750*u.mL
-Mass_Oxygen=C_Oxygen*Volume
-
-Mass_Oxygen=Mass_Oxygen.to(u.mg)
-Mass_Oxygen
-Mass_Sodium_Sulfite=Mass_Oxygen*7.875
-
-
-```
->>>>>>> 9e96f13e4aae955c9457742157016c08885fb124
