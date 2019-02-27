@@ -26,14 +26,18 @@ Determination of ANC or alkalinity in an unknown solution can be achieved using 
 
 $V_e=\frac{V_s*N_s}{N_t}$ (6)
 
-The other way to determine ANC is to use a Gran plot technique, that is used after the equivalence point has been attained, where initial ANC is 0. This works because further titration past the equivalence point will result in an increase in the amount of [H+] equivalent to the amount of [H+] added.
+The other way to determine ANC is to use a Gran plot technique, that is used after the equivalence point has been attained, where initial ANC is 0. This works because further titration past the equivalence point will result in an increase in the amount of [H+] equivalent to the amount of [H+] added. In other words, the number of moles of [H+] added equals the number of moles [H+] in solution as described in the mass balance equation below.
 
-The above five are the principal equations that the team is going to use to determine ANC with increasing amounts of acid rain entering the system.
+$\left[H^{+} \right]=\frac{N_{t} \left(V_{t} -V_{e} \right)}{\left(V_{s} +V_{t} \right)}$ (7)
+
+The first Gram function is thus defined as equation 8 found below where $V_s$ and $V_t$ are volume of sample and volume of titrant, respectively. $F_1 = \frac{V_s +V_t }{V_s } {[H}^+ {]}$ (8)
+
+The above seven are the principal equations that the team is going to use to determine ANC with increasing amounts of acid rain entering the system.
 
 
 #Procedures
 
-The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC could then be determined using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, sample taking, second experiment, and general measurements.
+The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, sample taking, second experiment, and general measurements.
 
 ##Lake
 To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity was filled with approximately 4L of deionized water. 623 mg of $NaHCO_3$ were added to bring the ANC of the lake to the value of 50 $\mu eq/L$ given in the lab manual. A magnetic stir bar was added to the lake and the tank was placed on a magnetic stirrer. Finally, 1 mL of bromocresol green indicator solution was added to the lake which changed the color of the lake from transparent to blue and then eventually to yellow as pH dropped. The metal weir of the tank was set in an angle just above the water level so that addition of acid rain would cause immediate overflow and thus satisfy the requirement for constant volume in a CMFR. The outflow of the lake was located in the bottom and connected via tubing to a drain on the workbench.
@@ -41,13 +45,13 @@ To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/lab_setup_labels.jpg" alt="PH vs Dimensionless Hydraulic Residence Time"/>
 </p>
-<p align="center">Lab apparatus set-up</p>
+<p align="center">Picture 1: Lab apparatus set-up</p>
 
 ##Addition of Acid Rain
 The acid rain solution was provided in an F-style jug. #18 tubing was used to move the acid from the jug to the peristaltic pump, which was set to 70.3 RPM, and then to the lake. Once the peristaltic pump was turned on, the acid entered the lake with a rate of 267 mL/min.
 
 ##pH Measurement
-A pH probe was first calibrated using the ProCoda software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoda.) The probe was placed away from the effluent and close to the center of the lake, keeping in mind to avoid the turbulence caused by the spinning stir bar. ProCoda thus creates a file with time points and respective pH values.
+A pH probe was first calibrated using the ProCoDA software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoDA.) The probe was placed away from the effluent and close to the center of the lake, keeping in mind to avoid the turbulence caused by the spinning stir bar. ProCoDA thus creates a file with time points and respective pH values.
 
 ##Sample Taking
 Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time.
@@ -273,7 +277,7 @@ plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb_closed,'c')
 plt.show()
 
 #Smooth the model by using spline function
-xnew_figure3 = np.linspace(dimensionless_residence_time_1.min(),dimensionless_residence_time_1.max(),30) #30 is number of points between first and dim-less hydraulic residence time
+xnew_figure3 = np.linspace(dimensionless_residence_time_1.min(),dimensionless_residence_time_1.max(),28) #28 is number of points between first and dim-less hydraulic residence time
 spl = make_interp_spline(dimensionless_residence_time_1, ANC_out_sodium_bicarb_closed, k=3)
 ANC_out_sodium_bicarb_closed_smooth = spl(xnew_figure3)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
@@ -438,7 +442,7 @@ pH_range_3=pH_0[8:]
 
 #Now plot the graph
 fig, ax = plt.subplots()
-plt.annotate('Equivalent Volume 1.73',xy=(1.73,2.8),xytext=(0.5,4),           arrowprops=dict(facecolor='black', shrink=0.001))
+plt.annotate('Equivalent Volume: 1.73mL',xy=(1.73,2.8),xytext=(0.3,4),           arrowprops=dict(facecolor='black', shrink=0.001))
 ax.plot(Range_1,pH_range_1,'c', label='HCO3- + H+ --> H2CO3')
 ax.plot(Range_2,pH_range_2,'r')
 ax.plot(Range_3,pH_range_3,'y', label='Activity different than concentration')
@@ -532,7 +536,6 @@ slope_10 = slope_10*(u.mole/u.L)/u.mL
 V_eq_10 = -intercept_10/slope_10
 ANC_sample_10 = V_eq_10*Normality_Titrant_10/V_Sample_10
 
-Time=[0,5*u.min,10*u.min/residence_time]
 #Graph with all ANCs
 plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
 plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
@@ -545,4 +548,4 @@ plt.ylabel('ANC (eq/L)')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/ANC_Compare_smooth_Question 3')
 plt.show()
 
-```
+ ```
