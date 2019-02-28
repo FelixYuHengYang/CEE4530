@@ -158,7 +158,22 @@ Moving on to $CaCO_3$, the outcome of the experiment was different than expected
 
 Labfire learned that the $CaCO_3$ does not dissolve as readily as sodium bicarbonate so by the time the team started adding added the lake did not have a sufficient level of ANC. Therefore the buffer capacity using compared  $CaCO_3$  to the buffer capacity sodium bicarbonate was reduced, causing a reduction of pH when even small amounts of acid were added. Therefore, the team cannot be certain which model fits the measured ANC values better. As a next step, one could repeat the experiment but make sure that the $CaCO_3$ is not present as a solid at the edges of the tank.
 
-From the titration experiments, the team was able to determine the ANC of the lake at different time points, using the samples that were collected at time = 0, 5, 10, 15, and 20 minutes. Since the pH of the solution at time = 15 and time = 20 minutes was already less than 4 (pH at 15 = 3.79 and pH at 20 = 3.355), an approximation was used which states that $ANC = - [H+]$. The pH change over the volume of titrant added to solution was graphed in Figure 11. This graph shows that there are two areas where the solution has a strong enough buffer capacity: a region around a pH of 6.3 and a region around a pH of 3. The first region corresponds to the acid neutralizing capacity of the $HCO_{3}$ which uses up $H+$ by converting into $H_{2}CO_{3}$. The second region [INSERT REASON HERE]. From the Gran plot shown in Figure 12, the equivalent volume of titrant needed to overcome the ANC of the solution was calculated and then compared to the calculation made by ProCoDA. The answers were very similar, as ProCoDA calculated the equivalent volume to be 1.735 $\frac{meq}{L}$ whereas the calculation using linear extrapolation produced an equivalent volume of 1.766 $\frac{meq}{L}$. Finally, using the same method to determine the ANC of the lake at all the other time points, it was determined that the Gran plot method data was matching the conservative ANC data, as shown on Figure 13.  
+From the titration experiments, the team was able to determine the ANC of the lake at different time points, using the samples that were collected at time = 0, 5, 10, 15, and 20 minutes. Since the pH of the solution at time = 15 and time = 20 minutes was already less than 4 (pH at 15 = 3.79 and pH at 20 = 3.355), an approximation was used which states that $ANC = - [H+]$. The pH change over the volume of titrant added to solution was graphed in Figure 11. This graph shows that there are two areas where the solution has a strong enough buffer capacity: a region around a pH of 6.3 and a region around a pH of 3. The first region corresponds to the acid neutralizing capacity of the $HCO_{3}$ which uses up $H+$ by converting into $H_{2}CO_{3}$. The second region [INSERT REASON HERE]. From the Gran plot shown in Figure 12, the equivalent volume of titrant needed to overcome the ANC of the solution was calculated and then compared to the calculation made by ProCoDA. The answers were very similar, as ProCoDA calculated the equivalent volume to be 1.735 $\frac{meq}{L}$ whereas the calculation using linear extrapolation produced an equivalent volume of 1.766 $\frac{meq}{L}$. Finally, using the same method to determine the ANC of the lake at all the other time points, it was determined that the Gran plot method data was matching the conservative ANC data, as shown on Figure 13.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 11: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 12: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_calcium_carb_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
+</p>
+<p align= "center"> Figure 13: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time
 
 
 # Questions
@@ -454,7 +469,7 @@ ax.plot(Range_3,pH_range_3,'y', label='Activity different than concentration')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('pH')
 ax.legend()
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_1')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_1')
 plt.show()
 
 
@@ -496,7 +511,7 @@ plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('Gran function (mole/L)')
 plt.legend(['data'])
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_2')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/Question_2')
 plt.show()
 
 V_equivalent_0 #ProCoDA Calculation
@@ -552,7 +567,7 @@ plt.plot(15*60/residence_time,ANC_sample_15,'ko')
 plt.plot(20*60/residence_time,ANC_sample_20,'ko')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/ANC_Compare_smooth_Question 3')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/ANC_Compare_smooth_Question 3')
 plt.show()
 
  ```
