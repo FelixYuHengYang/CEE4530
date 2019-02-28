@@ -1,6 +1,4 @@
-
-
-#Introduction and Objectives
+# Introduction and Objectives
 In the past, some regions of the United States had serious air quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain is the acidification of lakes that do not have enough acid neutralizing capacity (ANC) in their soils to mitigate sudden additions of acidic solutions. Today, there is a huge problem with acid rain in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. This also provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below.  
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in Equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
@@ -12,7 +10,7 @@ $C_T=[H_2CO_3]+[HCO_3^-]+[CO_3^{-2}]$ (2)
 The carbonate system can be modeled as a "volatile" or "non-volatile" system. This depends on whether or not aqueous carbon dioxide is at equilibrium with atmospheric carbon dioxide. The equations for ANC are given for the volatile and non-volatile systems in (3) and (4) respectively.
 
 
-$ANC=\frac{P_{CO_{2} } K_{H} }{a_{0} } (\alpha _{1}+2\alpha _{2})+\frac{K_{w} }{\left[{H}^{+} \right]} \; -\left[{H}^{+} \right]$  (3)
+$ANC=\frac{P_{CO_{2} } K_{H} }{a_{0} } (\alpha_{1}+2\alpha_{2})+\frac{K_{w} }{\left[{H}^{+} \right]} \; -\left[{H}^{+} \right]$  (3)
 
 Where $C_T = \frac{P_{CO_2} K_H}{\alpha_0}$
 
@@ -35,11 +33,11 @@ The first Gram function is thus defined as equation 8 found below where $V_s$ an
 The above seven are the principal equations that the team is going to use to determine ANC with increasing amounts of acid rain entering the system.
 
 
-#Procedures
+# Procedures
 
 The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, titration, second experiment, and general measurements.
 
-##Lake
+## Lake
 To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity was filled with approximately 4L of deionized water. 623 mg of $NaHCO_3$ were added to bring the ANC of the lake to the value of 50 $\mu eq/L$ given in the lab manual. A magnetic stir bar was added to the lake and the tank was placed on a magnetic stirrer. Finally, 1 mL of bromocresol green indicator solution was added to the lake which changed the color of the lake from transparent to blue and then eventually to yellow as pH dropped. The metal weir of the tank was set in an angle just above the water level so that addition of acid rain would cause immediate overflow and thus satisfy the requirement for constant volume in a CMFR. The outflow of the lake was located in the bottom and connected via tubing to a drain on the workbench.
 
 <p align="center">
@@ -47,25 +45,25 @@ To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity
 </p>
 <p align="center">Picture 1: Lab apparatus set-up</p>
 
-##Addition of Acid Rain
+## Addition of Acid Rain
 The acid rain solution was provided in an F-style jug. #18 tubing was used to move the acid from the jug to the peristaltic pump, which was set to 70.3 RPM, and then to the lake. Once the peristaltic pump was turned on, the acid entered the lake with a rate of 267 mL/min.
 
-##pH Measurement
+## pH Measurement
 A pH probe was first calibrated using the ProCoDA software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoDA.) The probe was placed away from the effluent and close to the center of the lake, keeping in mind to avoid the turbulence caused by the spinning stir bar. ProCoDA thus creates a file with time points and respective pH values.
 
-##Titration
+## Titration
 Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time. Titration was performed for the 0, 5, and 10 minute samples because the 15 and 20 minute samples were already at pH lower that 4, meaning that the ANC could simply be calculated by the concentration of protons in the aqueous solution. 50mL of each sample were measured using a graduated cylinder and 0.05 N HCl was added in increments, with ProCoDA generating a Gran plot by measuring the change in pH with each successive HCl addition. By analyzing the data it was determined when the buffer capacity of the solution was over, and therefore the ANC was calculated.
 
-##Second Experiment
+## Second Experiment
 For the second experiment, the substance contributing to the positive ANC of the lake was changed from $NaHCO_3$ to $CaCO_3$. The amount of $CaCO_3$ added was 742 mg (again to get the target 50 μeq/L initial ANC.) Steps 1-3 were repeated, but samples were not obtained for this experiment (step 4.)
 
-##General Measurements
+## General Measurements
 The effluent rate was measured by measuring the volume of effluent per 15 seconds. The volume of water was calculated by measuring the mass of the tank with and without the lake water, thus calculating the mass of water, and dividing by the theoretical density of water.
 
 For detailed methods on procedures such as pH probe calibration, please refer to the Laboratory Manual.
 
-#Results and Discussion
-##Data Analysis
+# Results and Discussion
+## Data Analysis
 
 The analysis of the data required certain parameters which are summarized in Table 1 below.
 
@@ -163,7 +161,7 @@ Labfire learned that the $CaCO_3$ does not dissolve as readily as sodium bicarbo
 From the titration experiments, the team was able to determine the ANC of the lake at different time points, using the samples that were collected at time = 0, 5, 10, 15, and 20 minutes. Since the pH of the solution at time = 15 and time = 20 minutes was already less than 4 (pH at 15 = 3.79 and pH at 20 = 3.355), an approximation was used which states that $ANC = - [H+]$. The pH change over the volume of titrant added to solution was graphed in Figure 11. This graph shows that there are two areas where the solution has a strong enough buffer capacity: a region around a pH of 6.3 and a region around a pH of 3. The first region corresponds to the acid neutralizing capacity of the $HCO_{3}$ which uses up $H+$ by converting into $H_{2}CO_{3}$. The second region [INSERT REASON HERE]. From the Gran plot shown in Figure 12, the equivalent volume of titrant needed to overcome the ANC of the solution was calculated and then compared to the calculation made by ProCoDA. The answers were very similar, as ProCoDA calculated the equivalent volume to be 1.735 $\frac{meq}{L}$ whereas the calculation using linear extrapolation produced an equivalent volume of 1.766 $\frac{meq}{L}$. Finally, using the same method to determine the ANC of the lake at all the other time points, it was determined that the Gran plot method data was matching the conservative ANC data, as shown on Figure 13.  
 
 
-#Questions
+# Questions
 1. What do you think would happen if enough $NaHCO_3$ were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off? How much $NaHCO_3$ would need to be added?
 
 Based on our prelab, we calculated that we would need 6.73 g of  $NaHCO_3$ to be added to the lake to maintain ANC greater than $50μeq/L$ for 3 residence times. If the stirrer was turned off, then we would have to wait for diffusion to occur so that the $NaHCO_3$ is fully mixed which could take a very long time. Therefore, instead of a solution with a high $NaHCO_3$ concentration, we would have a solution with a large mass of $NaHCO_3$ that is not fully aqueous and settles as a solid on the bottom of the tank. This means that even though we would have added the correct amount of $NaHCO_3$ to keep the ANC levels at 50μeq/L for 3 residence times, in reality the ANC levels would drop because the system wouldn't have the required amount of dissolved carbon.   
@@ -177,15 +175,15 @@ density of $CaCO_3$ slurry (find the density of CaCO3)
 Some problems that may arise when using $CaCO_3$ might be due to limited time as the experiment has shown. If one needs to immediately raise ANC in a body of water, the solubility of $CaC0_3$ may be antithetical to such efforts as shown in Figure 6 where the pH immediately dropped below 4 even .2 units of dimensionless hydraulic residence time in, and did not resemble Figure 1 where the pH slowly approached 3. Solubility of $CaC0_3$ is 15 mg/L while solubility of $NaHCO_3$ is 9600mg/L, which is more than a 100 fold times larger.
 
 
-#Conclusions
+# Conclusions
 
 In this experiment the team discovered that not all chemicals are equal in their effectiveness in remediating acid rain in water bodies. Although theoretically the effectiveness of $CaCO_3$ and $NaHCO_3$ should have been the same after one residence time, due to their difference in solubility the ANC level in the $CaCO_3$ case was not sufficient to mitigate the acidity of the solution coming into the lake. Practically speaking, if there were a case when a lake had to be immediately protected from incoming acid rain, it would be wise to use $NaHCO_3$ as opposed to $CaCO_3$, since it would dissolve more readily. In addition, based on the experiment with $NaHCO_3$ as the carbon source, it was determined that the model that better estimates the ANC levels at any point in the lake would be the closed system model.
 
-#Suggestions
+# Suggestions
 The team would suggest not to use $CaCO_{3}$ as an alternative source of ANC in the lake because of the large difference in solubility between this compound and $NaHCO_{3}$. For $CaCO_{3}$ to behave as a good source of ANC, the system needs to be better stirred so that $CaCO_{3}$ dissolves completely. In addition, a second suggestion would be to include a few more points during the titration experiment after the equivalent volume is added, so as to obtain a more accurate equation for the linear relationship between $F1$ and volume of titrant added.
 
 
-#Python Code Appendix
+# Python Code Appendix
 
 ```python
   from aguaclara.core.units  import unit_registry as u
