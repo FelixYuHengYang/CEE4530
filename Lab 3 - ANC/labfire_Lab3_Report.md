@@ -37,7 +37,7 @@ The above seven are the principal equations that the team is going to use to det
 
 #Procedures
 
-The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, sample taking, second experiment, and general measurements.
+The goal of this experiment was to record the ANC change versus time by simulating the effects of acid rain on a lake. This was done by considering the lake as a Continuously Mixed Flow Reactor (CMFR), and measuring pH, which was then used to determine ANC using the equations described in the introduction. The methods for this experiment could be divided into six parts: lake, addition of acid rain, pH measurement, titration, second experiment, and general measurements.
 
 ##Lake
 To recreate the lake system (CMFR), a plastic tank of approximately 6 L capacity was filled with approximately 4L of deionized water. 623 mg of $NaHCO_3$ were added to bring the ANC of the lake to the value of 50 $\mu eq/L$ given in the lab manual. A magnetic stir bar was added to the lake and the tank was placed on a magnetic stirrer. Finally, 1 mL of bromocresol green indicator solution was added to the lake which changed the color of the lake from transparent to blue and then eventually to yellow as pH dropped. The metal weir of the tank was set in an angle just above the water level so that addition of acid rain would cause immediate overflow and thus satisfy the requirement for constant volume in a CMFR. The outflow of the lake was located in the bottom and connected via tubing to a drain on the workbench.
@@ -53,8 +53,8 @@ The acid rain solution was provided in an F-style jug. #18 tubing was used to mo
 ##pH Measurement
 A pH probe was first calibrated using the ProCoDA software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoDA.) The probe was placed away from the effluent and close to the center of the lake, keeping in mind to avoid the turbulence caused by the spinning stir bar. ProCoDA thus creates a file with time points and respective pH values.
 
-##Sample Taking
-Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time.
+##Titration
+Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time. Titration was performed for the 0, 5, and 10 minute samples because the 15 and 20 minute samples were already at pH lower that 4, meaning that the ANC could simply be calculated by the concentration of protons in the aqueous solution. 50mL of each sample were measured using a graduated cylinder and 0.05 N HCl was added in increments, with ProCoDA generating a Gran plot by measuring the change in pH with each successive HCl addition. By analyzing the data it was determined when the buffer capacity of the solution was over, and therefore the ANC was calculated.
 
 ##Second Experiment
 For the second experiment, the substance contributing to the positive ANC of the lake was changed from $NaHCO_3$ to $CaCO_3$. The amount of $CaCO_3$ added was 742 mg (again to get the target 50 μeq/L initial ANC.) Steps 1-3 were repeated, but samples were not obtained for this experiment (step 4.)
@@ -83,6 +83,8 @@ Table 1: Relevant Experimental Parameters
 |$NaHCO_3$ Molecular Weight|84|g/mol|
 |$NaHCO_3$ Mass|0.623|g|
 |$ANC_0$ for $NaHCO_3$|0.00178|eq/L|
+|ANC for $15$ minute sample|-0.000162|eq/L|
+|ANC for $20$ minute sample|-0.000442|eq/L|
 |$CaCO_3$ Molecular Weight|100|g/mol|
 |$CaCO_3$ Mass|0.742|g|
 |$ANC_0$ for $CaCO_3$|0.00178|eq/L|
@@ -91,7 +93,6 @@ Table 1: Relevant Experimental Parameters
 |$K_H$|$10^{-1.5}$|mol/(L*atm)|
 |$P_{CO_2}$|$10^{-3.5}$|atm|
 |$K_w$|$10^{-14}$|-|
-
 
 The set of graphs below for the closed and open systems of ANC (Figure 3,4 and 5) were smoothed out, but the graphs are still available in the code above the report. The function linspace creates new x dimensionless time intervals, typically between 30 and 50 points using the range of the original x values. Then it uses linear interpolation to create lines between the new points.
 
@@ -159,6 +160,8 @@ Moving on to $CaCO_3$, the outcome of the experiment was different than expected
 
 Labfire learned that the $CaCO_3$ does not dissolve as readily as sodium bicarbonate so by the time the team started adding added the lake did not have a sufficient level of ANC. Therefore the buffer capacity using compared  $CaCO_3$  to the buffer capacity sodium bicarbonate was reduced, causing a reduction of pH when even small amounts of acid were added. Therefore, the team cannot be certain which model fits the measured ANC values better. As a next step, one could repeat the experiment but make sure that the $CaCO_3$ is not present as a solid at the edges of the tank.
 
+From the titration experiments, the team was able to determine the ANC of the lake at different time points, using the samples that were collected at time = 0, 5, 10, 15, and 20 minutes. Since the pH of the solution at time = 15 and time = 20 minutes was already less than 4 (pH at 15 = 3.79 and pH at 20 = 3.355), an approximation was used which states that $ANC = - [H+]$. The pH change over the volume of titrant added to solution was graphed in Figure 11. This graph shows that there are two areas where the solution has a strong enough buffer capacity: a region around a pH of 6.3 and a region around a pH of 3. The first region corresponds to the acid neutralizing capacity of the $HCO_{3}$ which uses up $H+$ by converting into $H_{2}CO_{3}$. The second region [INSERT REASON HERE]. From the Gran plot shown in Figure 12, the equivalent volume of titrant needed to overcome the ANC of the solution was calculated and then compared to the calculation made by ProCoDA. The answers were very similar, as ProCoDA calculated the equivalent volume to be 1.735 $\frac{meq}{L}$ whereas the calculation using linear extrapolation produced an equivalent volume of 1.766 $\frac{meq}{L}$. Finally, using the same method to determine the ANC of the lake at all the other time points, it was determined that the Gran plot method data was matching the conservative ANC data, as shown on Figure 13.  
+
 
 #Questions
 1. What do you think would happen if enough $NaHCO_3$ were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off? How much $NaHCO_3$ would need to be added?
@@ -171,7 +174,7 @@ extent of mixing
 solubility of $CaCO_3$ (find the solubility and compare with NaHCO3)
 density of $CaCO_3$ slurry (find the density of CaCO3)
 
-Some problems that may arise when using $CaC0_3$ might be due to limited time as the experiment has shown. If one needs to immediately raise ANC in a body of water, the solubility of $CaC0_3$ may be antithetical to such efforts as shown in Figure 6 where the pH immediately dropped below 4 even .2 units of dimensionless hydraulic residence time in, and did not resemble Figure 1 where the pH slowly approached 3. Solubility of $CaC0_3$ is 15 mg/L while solubility of $NaHCO_3$ is 9600mg/L, which is more than a 100 fold times larger.  
+Some problems that may arise when using $CaCO_3$ might be due to limited time as the experiment has shown. If one needs to immediately raise ANC in a body of water, the solubility of $CaC0_3$ may be antithetical to such efforts as shown in Figure 6 where the pH immediately dropped below 4 even .2 units of dimensionless hydraulic residence time in, and did not resemble Figure 1 where the pH slowly approached 3. Solubility of $CaC0_3$ is 15 mg/L while solubility of $NaHCO_3$ is 9600mg/L, which is more than a 100 fold times larger.
 
 
 #Conclusions
@@ -179,6 +182,8 @@ Some problems that may arise when using $CaC0_3$ might be due to limited time as
 In this experiment the team discovered that not all chemicals are equal in their effectiveness in remediating acid rain in water bodies. Although theoretically the effectiveness of $CaCO_3$ and $NaHCO_3$ should have been the same after one residence time, due to their difference in solubility the ANC level in the $CaCO_3$ case was not sufficient to mitigate the acidity of the solution coming into the lake. Practically speaking, if there were a case when a lake had to be immediately protected from incoming acid rain, it would be wise to use $NaHCO_3$ as opposed to $CaCO_3$, since it would dissolve more readily. In addition, based on the experiment with $NaHCO_3$ as the carbon source, it was determined that the model that better estimates the ANC levels at any point in the lake would be the closed system model.
 
 #Suggestions
+The team would suggest not to use $CaCO_{3}$ as an alternative source of ANC in the lake because of the large difference in solubility between this compound and $NaHCO_{3}$. For $CaCO_{3}$ to behave as a good source of ANC, the system needs to be better stirred so that $CaCO_{3}$ dissolves completely. In addition, a second suggestion would be to include a few more points during the titration experiment after the equivalent volume is added, so as to obtain a more accurate equation for the linear relationship between $F1$ and volume of titrant added.
+
 
 #Python Code Appendix
 
@@ -210,6 +215,8 @@ ANC_0_sodium_bicarb = mass_sodium_bicarb/(MW_sodium_bicarb*volume)
 MW_calcium_carb = 100*u.g/u.mole
 mass_calcium_carb = 0.742*u.g
 ANC_0_calcium_carb = mass_calcium_carb/(MW_calcium_carb*volume)
+ANC_sample_15 = -10**(-3.79)*u.equivalent/u.L
+ANC_sample_20 = -10**(-3.355)*u.equivalent/u.L
 
 #Sodium Bicarbonate
 
@@ -543,6 +550,8 @@ plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
 plt.plot(0,ANC_sample_0,'ko')
 plt.plot(5*60/residence_time,ANC_sample_5,'ko')
 plt.plot(10*60/residence_time,ANC_sample_10,'ko')
+plt.plot(15*60/residence_time,ANC_sample_15,'ko')
+plt.plot(20*60/residence_time,ANC_sample_20,'ko')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 3 - ANC/images/ANC_Compare_smooth_Question 3')
