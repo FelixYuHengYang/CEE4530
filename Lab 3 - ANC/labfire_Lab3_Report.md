@@ -2,11 +2,11 @@ Felix Yang Eirini Sarri
 
 Lab Fire Group 5
 
-Felix Yang: 5 hours
+Felix Yang: 12 hours
 
-Eirini Sarri: 7 hours
+Eirini Sarri: 12 hours
 # Introduction and Objectives
-In the past, some regions of the United States had serious air and water quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain on water quality is the acidification of lakes that do not have enough acid neutralizing capacity (ANC) in their soils to mitigate sudden additions of acidic solutions. Today, the problem with acid rain is concentrated in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. The acid rain lab provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below. In the next lab (ANC lab), titration techniques and Gran plot analysis were used to back calculate the ANC levels of the lake at different time points, which were used to compare to measured and predicted ANC values found in the previous lab.
+In the past, some regions of the United States had serious air and water quality issues, especially with acid rain caused by the combustion of fossil fuels that produce sulfuric and nitric acid in the atmosphere. The biggest consequence of acid rain on water quality is the acidification of lakes that do not have enough acid neutralizing capacity (ANC) to mitigate sudden additions of acidic solutions. Today, the problem with acid rain is concentrated in Asian cities such as Beijing and New Delhi due to their rapid industrial growth. The team decided to do this experiment with the goal of learning a practical method of remediating the effects of acid rain on lakes by adding substances in the water which increase the levels of ANC. The acid rain lab provides the first opportunity to code pH, ANC equations, and reactor equations (CMFR) as shown below. In the next lab (ANC lab), titration techniques and Gran plot analysis were used to back calculate the ANC levels of the lake at different time points, which were used to compare to measured and predicted ANC values found in the previous lab.
 
 Acidity is principally measured using pH which measures the negative log of concentration of hydrogen ions as described in Equation 1. Healthy lakes are typically in the pH range of 6.5 to 8.5, controlling the pH via the carbonate system. This system has the following components: dissolved carbon dioxide, carbonic acid, bicarbonate, and carbonate. Equation 2 describes the molar concentration of the carbonate system but omits dissolved carbon dioxide because it exists at very low levels in aqueous systems.  
 
@@ -35,7 +35,9 @@ The other way to determine ANC is to use a Gran plot technique, that is used aft
 
 $\left[H^{+} \right]=\frac{N_{t} \left(V_{t} -V_{e} \right)}{\left(V_{s} +V_{t} \right)}$ (7)
 
-The first Gram function is thus defined as equation 8 found below where $V_s$ and $V_t$ are volume of sample and volume of titrant, respectively. $F_1 = \frac{V_s +V_t }{V_s } {[H}^+ {]}$ (8)
+The first Gram function is thus defined as equation 8 found below where $V_s$ and $V_t$ are volume of sample and volume of titrant, respectively.
+
+$F_1 = \frac{V_s +V_t }{V_s } {[H}^+ {]}$ (8)
 
 The above eight are the principal equations that the team is going to use to determine ANC with increasing amounts of acid rain entering the system.
 
@@ -59,7 +61,7 @@ The acid rain solution was provided in an F-style jug. #18 tubing was used to mo
 A pH probe was first calibrated using the ProCoDA software and then inserted into the lake to measure pH. The settings were adjusted so that the probe would log pH measurements every second (again manipulated using ProCoDA). The probe was placed away from the effluent and close to the center of the lake to avoid the turbulence caused by the spinning stir bar. ProCoDA then creates a file that measures pH values across time.
 
 ## Titration
-Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time. Titration was performed for the 0, 5, and 10 minute samples because the 15 and 20 minute samples were already at pH lower that 4, meaning that the ANC could simply be calculated by the concentration of protons in the aqueous solution. 50mL of each sample were measured using a graduated cylinder and 0.05 N HCl was added in increments, with ProCoDA generating a Gran plot by measuring the change in pH with each successive HCl addition. By analyzing the data it was determined when the buffer capacity of the solution was depleted; finally the ANC was calculated.
+Samples were taken from the lake at time 0, 5, 10, 15, and 20 minutes. For this step, labeled plastic beakers were dipped into the lake and approximately 100 mL of sample were removed each time. Titration was performed for the 0, 5, and 10 minute samples because the 15 and 20 minute samples were already at pH lower that 4, meaning that the ANC could simply be calculated by the concentration of protons in the aqueous solution. 50mL of each sample were measured using a graduated cylinder and 0.05 N HCl was added in increments, with ProCoDA generating a Gran plot by measuring the change in pH with each successive HCl addition. By analyzing the data it was determined when the buffer capacity of the solution was depleted; finally, the ANC was calculated.
 
 ## Second Experiment
 For the second experiment, the substance contributing to the positive ANC of the lake was changed from $NaHCO_3$ to $CaCO_3$. 742 mg of $CaCO_3$ was added (again to get the target 50 μeq/L initial ANC.) Steps 1-3 were repeated, but samples were not obtained for this experiment (step 4.)
@@ -116,7 +118,7 @@ Figure 1 matches the theoretical expectations for the relationship between pH an
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Question_3_smoothed.png" alt="ANC Closed System vs Dimensionless Hydraulic Residence Time"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Figure_3_smoothed.png" alt="ANC Closed System vs Dimensionless Hydraulic Residence Time"/>
 </p>
 <p align= "center"> Figure 3: ANC Closed System vs Dimensionless Hydraulic Residence Time
 
@@ -127,7 +129,7 @@ Figure 1 matches the theoretical expectations for the relationship between pH an
 <p align= "center"> Figure 4: ANC Open System vs Dimensionless Hydraulic Residence Time
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/ANC_Compare_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/images/Figure_5_smooth.png" alt="ANC for open, closed, and predicted ANC"/>
 </p>
 
 <p align= "center"> Figure 5: ANC for Open and Closed System, and conservative ANC vs Dimensionless Hydraulic Residence Time. The red line demonstrates the experimental ANC values, the blue the closed system model and the yellow the open system model.
@@ -199,7 +201,7 @@ Some problems that may arise when using $CaCO_3$ might be due to limited time as
 
 # Conclusions
 
-In this experiment the team discovered that not all chemicals are equal in their effectiveness in remediating acid rain in water bodies. Although theoretically the effectiveness of $CaCO_3$ and $NaHCO_3$ should have been the same after one residence time, due to their difference in solubility the ANC level in the $CaCO_3$ case was not sufficient to mitigate the acidity of the solution coming into the lake. Practically speaking, if there were a case when a lake had to be immediately protected from incoming acid rain, it would be wise to use $NaHCO_3$ as opposed to $CaCO_3$, since it would dissolve more readily. In addition, based on the experiment with $NaHCO_3$ as the carbon source, it was determined that the model that better estimates the ANC levels at any point in the lake would be the closed system model.
+In this experiment the team discovered that not all chemicals are equal in their effectiveness in remediating acid rain in water bodies. Although theoretically the effectiveness of $CaCO_3$ and $NaHCO_3$ should have been the same after one residence time, due to their difference in solubility the ANC level in the $CaCO_3$ case was not sufficient to mitigate the acidity of the solution coming into the lake. Practically speaking, if there were a case when a lake had to be immediately protected from incoming acid rain, it would be wise to use $NaHCO_3$ as opposed to $CaCO_3$, since it would dissolve more readily. In addition, based on the experiment with $NaHCO_3$ as the carbon source, it was determined that the model that better estimates the ANC levels at any point in the lake would be the closed system model. With the titration experiment, it was determined that the method of titration produces results that also match the conservative ANC and the closed-system ANC model.
 
 # Suggestions
 The team would suggest not to use $CaCO_{3}$ as an alternative source of ANC in the lake because of the large difference in solubility between this compound and $NaHCO_{3}$. For $CaCO_{3}$ to behave as a good source of ANC, the system needs to be better stirred so that $CaCO_{3}$ dissolves completely. In addition, a second suggestion would be to include a few more points during the titration experiment after the equivalent volume is added, so as to obtain a more accurate equation for the linear relationship between $F1$ and volume of titrant added.
@@ -310,7 +312,7 @@ ANC_out_sodium_bicarb_closed_smooth = spl(xnew_figure3)
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC Closed System (eq/L)')
 plt.plot(xnew_figure3,ANC_out_sodium_bicarb_closed_smooth,'c')
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Question_3_smoothed')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Figure_3_smoothed')
 plt.show()
 
 
@@ -341,7 +343,7 @@ plt.plot(xnew_figure4,ANC_out_sodium_bicarb_open_smooth,'y')
 plt.plot(dimensionless_residence_time_1,ANC_out_sodium_bicarb,'r')
 plt.xlabel('Dimensionless Hydraulic Residence Time')
 plt.ylabel('ANC (eq/L)')
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/ANC_Compare_smooth')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 2 - Acid Rain/images/Figure_5_smooth')
 plt.show()
 
 #Calcium Carbonate
