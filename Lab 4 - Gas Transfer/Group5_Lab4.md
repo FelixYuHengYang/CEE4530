@@ -9,7 +9,7 @@ Eirini Sarri:  4 hours
 # Question 1
 Eliminate the data from each data set when the dissolved oxygen concentration was less than 2 mg/L. This will ensure that all of the sulfite has reacted. Also remove the data when the dissolved oxygen concentration was greater than 6 mg/L to reduce the effect of measurement errors when the oxygen deficit is small.
 
-Found in code below.
+This step is found in code below.
 
 # Question 2
 Plot a representative subset of the data showing dissolved oxygen vs. time. Perhaps show 5 plots on one graph.
@@ -17,12 +17,12 @@ Plot a representative subset of the data showing dissolved oxygen vs. time. Perh
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_2_b.png" alt="Oxygen Concentration vs Time"/>
 </p>
-<p align="center">Figure 1: Oxygen Concentration vs Time for Flow Rates of $100$, $125$, $175$, $200$, and $225 \frac{\mumol}{s}$</p>
+<p align="center">Figure 1: Oxygen Concentration vs Time for Flow Rates of 100, 125, 175, 200, and 225 umol/s</p>
 
 # Question 3
-Calculate C⋆ based on the average water temperature, barometric pressure, and the equation from environmental processes analysis called O2_sat. C⋆=PO2e(1727T−2.105) where T is in Kelvin, PO2 is the partial pressure of oxygen in atmospheres, and C⋆ is in mg/L.
+Calculate $C_{sat}$ based on the average water temperature, barometric pressure, and the equation from environmental processes analysis called O2_sat. $C_{sat}=P_{O2}e^{\frac{1727}{T}−2.105}$ where T is in Kelvin, $P_{O2}$ is the partial pressure of oxygen in atmospheres, and $C_{sat}$ is in mg/L.
 
-Using the following variables, we get a C* value of $8.92 \frac{mg}{L}$.
+Using the following variables, we get a C_sat value of $8.92 \frac{mg}{L}$.
 
 Table 1: Variables Used to Determine The Saturated Oxygen Concentration
 
@@ -70,21 +70,22 @@ For the flow rate of $550 \frac{\mu mol}{s}$ there was insufficient data because
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/550_flow_b.png" alt="550_flow_b"/>
 </p>
-<p align="center">Figure 2: Dissolved Oxygen Concentration vs Time for Flow Rate of $550\frac{\mu mol}{s}$ </p>
+<p align="center">Figure 2: Dissolved Oxygen Concentration vs Time for Flow Rate of 550 umol/s$ </p>
 
 This shows that after the DO values less than $2 \frac{mg}{L}$ are removed, the rest of the data points cannot be linearly related, and therefore linear regression cannot be achieved and a slope (which is the value of $k_{v,l}$) cannot be determined.
 
 # Question 5
 Create a graph with a representative plot showing the model curve (as a smooth curve) and the data from one experiment. You will need to derive the equation for the concentration of oxygen as a function of time based on equation (103).
 
-The equation derived for the concentration of oxygen as a function of time is the following:
+The model as represented in the red line in the figure below is the concentration of oxygen as a function of time derived to be the following equation:
 
-$C = C_{sat} - (C_{sat} - C_{0})e^{-k_{v,l}\cdot t}$
+$C(t) = C_{sat} - (C_{sat} - C_{0})e^{-k_{v,l}\cdot t}$
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_5_500.png" alt="500_flow"/>
 </p>
-<p align="center">Figure 3: Model and Experimental Data vs Time for Flow Rate of $500\frac{\mu mol}{s}$ </p>
+<p align="center">Figure 3: Model and Experimental Data vs Time for Flow Rate of 500 umol/s</p>
+
 
 # Question 6
 Plot $k_{v,l}$ as a function of airflow rate ($\frac{\mu mol}{s}$).
@@ -92,10 +93,10 @@ Plot $k_{v,l}$ as a function of airflow rate ($\frac{\mu mol}{s}$).
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_6.png" alt="kvl vs flow rate"/>
 </p>
-<p align="center">Figure 4: $k_{v,l}$ vs Air Flow Rate </p>
+<p align="center">Figure 4: $kv,l vs Air Flow Rate </p>
 
 # Question 7
-Plot OTE as a function of airflow rate ($\frac{\mu mol}{s}$) with the oxygen deficit (C⋆−C) set at 6 $\frac{mg}{L}$.
+Plot OTE as a function of airflow rate ($\frac{\mu mol}{s}$) with the oxygen deficit $(C_{sat}−C)$ set at 6 $\frac{mg}{L}$.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_7.png" alt="OTE vs flow rate"/>
@@ -105,17 +106,28 @@ Plot OTE as a function of airflow rate ($\frac{\mu mol}{s}$) with the oxygen def
 # Question 8
 Comment on the oxygen transfer efficiency and the trend or trends that you observe.
 
+Oxygen Transfer Efficiency seems to be between 0.05% and 0.27%. The general trend shows that as airflow rate increases, OTE goes down in a linear fashion. However, it is significant to mention that the efficiencies that were calculated were very small, which is reasonable since, according to the textbook "the most efficient systems use membrane diffusers and achieve an OTE of approximately 10%" meaning that even a system that has been designed and implemented in real life for the purpose of reaeration also has a relatively small efficiency. OTE gets smaller with increasing flow rate because it is inversely proportional to Qair (Qair in the denominator of the OTE fraction equation).
+
 # Question 9
 Propose a change to the experimental apparatus that would increase the efficiency.
 
-Oxygen transfer is a remarkably inefficient process; only a small fraction of the oxygen carried by the rising bubbles diffuses into the activated sludge. The most efficient systems use membrane diffusers and achieve an OTE of approximately 10%.
+A change that might increase efficiency is a tank with larger depth, so that oxygen could have more time to travel to the surface, and therefore higher probability to reaereate the water before it is released into the atmosphere.
 
 #Conclusions
 Go through all the graphs and talk about them. Want relationship between Oxygen concentration and time for different air flows, model vs observed conclusion, kvl vs airflow, and OTE vs airflow.
+
+From Figure 1, it can be seen that for the first 5 flow rates oxygen concentration tends to go up as a function of time. This is because experiments were ran after the DO was depleted using cobalt with the exception of the red line representing the 200 $\mu mol/s$ flow rate, which was likely due to an error in the ProCoDA experiment start time.
+
+Figure 3 shows a sample graph of model and experimental data vs time for the flow rate of 500 $\mu mol/s$. The blue line representing the observed data is much higher than the red line representing the theoretical model. It is unclear why this is the case as it seemed more plausible to believe that the model would overpredict rather than underpredict. This is because factors such as the low depth of reactor, and low efficiency of the system delivering oxygen would have not been accounted for in the equation behind the model.
+
+Figure 4 shows an increase of $k_{v,l}$ with increasing airflow rate, even though large deviations can be observed (large variability of data.) This increase however is not significant enough to increase the OTE with increasing flow rates as seen in Figure 5, where OTE decreasing with increasing flow rate. This means that the effect of increasing $k_{v,l}$ (in the numerator of the OTE equation) is not as significant as the effect of increasing flow rate (in the denominator of the OTE equation) and therefore OTE decreases as flow rate increases.
+
 #Suggestions
--Possibly use a different DO sensor that isn't as sensitive to air bubbles
--Make height of reactor higher so that the oxygen can have time to oxygenate the water. (possibly why the model overestimates)
--membrane diffusers
+One suggestion that lab fire has for future experiments is possibly to use another dissolved oxygen probe that isn't as sensitive to air bubbles. Because the reactor was relatively small, the metal stirrer constantly created turbulence that sometimes sent air bubbles onto the membrane of the DO probe, which made the readings inaccurate. This could also be addressed by using bigger reactors, so that one can clamp the DO probe farther from the oxygen influent and the stirrer.
+
+Again touching on the size, the group believes that the height of the reactor could also be increased so that the oxygen coming into the reactor can have time to oxygenate the water. The low depth of water may have contributed to the inaccuracy of oxygen concentration that the theoretical models had predicted. However, it appears that the models are underpredicting despite the fact that the oxygen bubbles do not have a lot of depth to oxygenate the water.
+
+The last suggestion is possibly to use membrane diffusers to obtain high OTE values. However, this is likely not feasible in the lab as it is used in the industry, meaning it is likely too expensive for laboratory experiments like this one.
 
 # Appendix
 
