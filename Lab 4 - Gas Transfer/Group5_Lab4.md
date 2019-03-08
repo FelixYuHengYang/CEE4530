@@ -15,7 +15,7 @@ def aeration_data(DO_column, dirpath):
     """This function extracts the data from folder containing tab delimited files of aeration data. The file must be the original tab delimited file.
     All text strings below the header must be removed from these files.
     The file names must be the air flow rates with units of micromoles/s.
-    An example file name would be "300.xls" where 300 is the flowr ate in
+    An example file name would be "300.xls" where 300 is the flow rate in
     micromoles/s. The function opens a file dialog for the user to select
     the directory containing the data.
 
@@ -72,12 +72,15 @@ filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 
 
 # Plot the raw data
-
 for i in range(airflows.size):
+  plt.plot(time_data[i], DO_data[i],'-')
+
+for i in range(5):
   plt.plot(time_data[i], DO_data[i],'-')
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(airflows.magnitude)
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_2')
 plt.show()
 
 #delete data that is less than 2 or greater than 6 mg/L
@@ -140,3 +143,6 @@ for i in range(airflows.size):
   https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/925.xls
 
   https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/950.xls
+
+
+# Conclusions
