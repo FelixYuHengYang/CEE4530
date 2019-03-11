@@ -65,14 +65,14 @@ Table 2: $k_{v,l}$ For Each Flow Rate
 | 925 | 0.000709 |
 | 950 | 0.001629 |
 
-For the flow rate of $550 \frac{\mu mol}{s}$ there was insufficient data because the trend of dissolved oxygen over time was first decreasing and then increasing as shown in the Figure 2 below.
+Initially, the flow rate of $550 \frac{\mu mol}{s}$ had no $k_{vl}$ value because the trend of dissolved oxygen over time was first decreasing and then increasing as shown in the Figure 2 below.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/550_flow_b.png" alt="550_flow_b"/>
 </p>
 <p align="center">Figure 2: Dissolved Oxygen Concentration vs Time for Flow Rate of 550 umol/s$ </p>
 
-This shows that after the DO values less than $2 \frac{mg}{L}$ are removed, the rest of the data points cannot be linearly related, and therefore linear regression cannot be achieved and a slope (which is the value of $k_{v,l}$) cannot be determined.
+This shows that after the DO values less than $2 \frac{mg}{L}$ are removed, the rest of the data points cannot be linearly related, and therefore linear regression cannot be achieved and a slope (which is the value of $k_{v,l}$) cannot be determined. Thus, the first three values were removed so that the function that finds $k_{v,l}$ could function properly.
 
 # Question 5
 Create a graph with a representative plot showing the model curve (as a smooth curve) and the data from one experiment. You will need to derive the equation for the concentration of oxygen as a function of time based on equation (103).
@@ -82,7 +82,7 @@ The model as represented in the red line in the figure below is the concentratio
 $C(t) = C_{sat} - (C_{sat} - C_{0})e^{-k_{v,l}\cdot t}$
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_5_500.png" alt="500_flow"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_5_500_fixed.png" alt="500_flow"/>
 </p>
 <p align="center">Figure 3: Model and Experimental Data vs Time for Flow Rate of 500 umol/s</p>
 
@@ -91,7 +91,7 @@ $C(t) = C_{sat} - (C_{sat} - C_{0})e^{-k_{v,l}\cdot t}$
 Plot $k_{v,l}$ as a function of airflow rate ($\frac{\mu mol}{s}$).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_6.png" alt="kvl vs flow rate"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_6_fixed.png" alt="kvl vs flow rate"/>
 </p>
 <p align="center">Figure 4: $kv,l vs Air Flow Rate </p>
 
@@ -99,7 +99,7 @@ Plot $k_{v,l}$ as a function of airflow rate ($\frac{\mu mol}{s}$).
 Plot OTE as a function of airflow rate ($\frac{\mu mol}{s}$) with the oxygen deficit $(C_{sat}−C)$ set at 6 $\frac{mg}{L}$.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_7.png" alt="OTE vs flow rate"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Images/Question_7_fixed.png" alt="OTE vs flow rate"/>
 </p>
 <p align="center">Figure 5: OTE vs Air Flow Rate </p>
 
@@ -233,54 +233,41 @@ for i in range(airflows.size):
 
 
 range(airflows.size)
-for i in range(0,12):
-  slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[i],np.log((C_sat-DO_data[i])/(C_sat-DO_data[i][0]))/(C_sat-DO_data[i][0]))
+K_vl_array=(np.zeros(24))/u.s
+K_vl_array[1]
+for i in range(0,24):
+  slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[i],np.log((C_sat-DO_data[i])/(C_sat-DO_data[i][0])))
+  K_vl_array[i]=-slope/u.s
   print(-slope)
-for i in range(13,24):
-  slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[i],np.log((C_sat-DO_data[i])/(C_sat-DO_data[i][0]))/(C_sat-DO_data[i][0]))
-  print(-slope)
-
+K_vl_array
 P= 1*u.atm
 T_avg=295*u.degK
 C_sat=epa.O2_sat(P,T_avg)
 C_init_500=DO_data[10][0]
+airflows[10]
+#C_init_125=DO_data[1][0]
 
 #5 Plot C for flow rate 500 experiments
-C_model_500=C_sat-(C_sat-C_init)*(np.exp(-.001017/u.s*time_data[10]))
-C_model
+C_model_500=C_sat-(C_sat-C_init_500)*(np.exp(-K_vl_array[10]*(time_data[10]-time_data[10][0])))
+#C_model_125=C_sat-(C_sat-C_init_125)*(np.exp(-.000522/u.s*time_data[1]))
+C_model_500
+#C_model_125
 
 fig, ax = plt.subplots()
 ax.plot(time_data[10],C_model_500,'r',label='Model')
-ax.plot(time_data[10],DO_data[10],'b',label='Observed')
+ax.plot(time_data[10],DO_data[10],'bo',label='Observed')
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
 ax.legend()
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_5_500')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_5_500_fixed')
 plt.show()
 
-
-C_init_225=DO_data[4][0]
-C_init_225
-C_model_225=C_sat-(C_sat-C_init_225)*(np.exp(-0.0173/u.s*time_data[4]))
-C_model_225
-
-fig, ax = plt.subplots()
-ax.plot(time_data[4],C_model_225,'r',label='Model')
-ax.plot(time_data[4],DO_data[4],'b',label='Observed')
-plt.xlabel(r'$time (s)$')
-plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
-ax.legend()
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_5_225')
-plt.show()
 
 #Q6
-Airflow_array = [100,125,175,200,225,250,350,400,450,475,500,525,575,650,700,725,750,775,800,825,850,925,950]
-Kvl_array=[.000393,.000522,.000496,.000460,.000605,.000976,.000934,.001244,.001265,.001300,.001017,.001044,.000916,.001426,.001655,.001327,.001556,.001554,.001008,.000987,.001627,.000709,.001629]
-
-plt.plot(Airflow_array,Kvl_array,'r')
+plt.plot(airflows,K_vl_array,'r')
 plt.xlabel(r'$\mu mol/s $')
 plt.ylabel(r' $k_v,l\left ( \frac{1}{s} \right )$')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_6')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_6_fixed')
 plt.show()
 
 
@@ -291,65 +278,17 @@ f_O2 = 0.21
 V = 0.75*u.L
 R = 0.082057*(u.L*u.atm)/(u.degK*u.mole)
 
-nair = Airflow_array*u.mol*10**-6/u.s*f_O2
-naq = V*Kvl_array*u.s**-1*Oxygen_Deficit/MW_O2
+nair = airflows*u.mol*10**-6/u.s*f_O2
+naq = V*K_vl_array*u.s**-1*Oxygen_Deficit/MW_O2
 
 OTE = naq / nair
 OTE
 
-plt.plot(Airflow_array,OTE,'r')
+plt.plot(airflows,OTE,'r')
 plt.xlabel(r'$\mu mol/s $')
 plt.ylabel(r' $Oxygen Transfer Efficiency$')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_7')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_7_fixed')
 plt.show()
 
 
-```
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/100.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/125.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/175.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/200.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/225.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/250.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/350.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/400.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/450.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/475.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/500.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/525.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/550.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/575.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/650.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/700.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/725.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/750.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/775.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/800.xls
-
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/825.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/850.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/925.xls
-
-  https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%204%20-%20Gas%20Transfer/Aeration/950.xls
+`
