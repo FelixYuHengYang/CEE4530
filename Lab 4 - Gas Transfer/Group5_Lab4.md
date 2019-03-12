@@ -40,30 +40,30 @@ Table 2: $k_{v,l}$ For Each Flow Rate
 
 | Flow Rate [$\frac{\mu mol}{s}$] | $k_{v,l}$ [$\frac{1}{s}$] |
 |:--------:|:-----:|
-| 100 | 0.000393 |
-| 125 | 0.000522 |
-| 175 | 0.000496 |
-| 200 | 0.000460 |
-| 225 | 0.000605 |
-| 250 | 0.000976 |
-| 350 | 0.000934 |
-| 400 | 0.001244 |
-| 450 | 0.001265 |
-| 475 | 0.001300 |
-| 500 | 0.001017 |
-| 525 | 0.001044 |
-| 550 | [insufficient data in subset] |
-| 575 | 0.000916 |
-| 650 | 0.001426 |
-| 700 | 0.001655 |
-| 725 | 0.001327 |
-| 750 | 0.001556 |
-| 775 | 0.001554 |
-| 800 | 0.001008 |
-| 825 | 0.000987 |
-| 850 | 0.001627 |
-| 925 | 0.000709 |
-| 950 | 0.001629 |
+| 100 | 0.00271 |
+| 125 | 0.00363 |
+| 175 | 0.00345 |
+| 200 | 0.00318 |
+| 225 | 0.00418 |
+| 250 | 0.00667 |
+| 350 | 0.00642 |
+| 400 | 0.00847 |
+| 450 | 0.00899 |
+| 475 | 0.00899 |
+| 500 | 0.00711 |
+| 525 | 0.00735 |
+| 550 | 0.00557 |
+| 575 | 0.00643 |
+| 650 | 0.00972 |
+| 700 | 0.01136 |
+| 725 | 0.00902 |
+| 750 | 0.01078 |
+| 775 | 0.01074 |
+| 800 | 0.00704 |
+| 825 | 0.00691 |
+| 850 | 0.00993 |
+| 925 | 0.00492 |
+| 950 | 0.01136 |
 
 Initially, the flow rate of $550 \frac{\mu mol}{s}$ had no $k_{vl}$ value because the trend of dissolved oxygen over time was first decreasing and then increasing as shown in the Figure 2 below.
 
@@ -114,20 +114,19 @@ Propose a change to the experimental apparatus that would increase the efficienc
 A change that might increase efficiency is a tank with larger depth, so that oxygen could have more time to travel to the surface, and therefore higher probability to reaereate the water before it is released into the atmosphere.
 
 #Conclusions
-Go through all the graphs and talk about them. Want relationship between Oxygen concentration and time for different air flows, model vs observed conclusion, kvl vs airflow, and OTE vs airflow.
 
 From Figure 1, it can be seen that for the first 5 flow rates oxygen concentration tends to go up as a function of time. This is because experiments were ran after the DO was depleted using cobalt with the exception of the red line representing the 200 $\mu mol/s$ flow rate, which was likely due to an error in the ProCoDA experiment start time.
 
-Figure 3 shows a sample graph of model and experimental data vs time for the flow rate of 500 $\mu mol/s$. The blue line representing the observed data is much higher than the red line representing the theoretical model. It is unclear why this is the case as it seemed more plausible to believe that the model would overpredict rather than underpredict. This is because factors such as the low depth of reactor, and low efficiency of the system delivering oxygen would have not been accounted for in the equation behind the model.
+Figure 3 shows a sample graph of model and experimental data vs time for the flow rate of 500 $\mu mol/s$. The blue line representing the observed data is very close to the red line representing the theoretical model. This is despite factors such as the low depth of reactor, and low efficiency of the system delivering oxygen, which would have not been accounted for in the model equation.
 
-Figure 4 shows an increase of $k_{v,l}$ with increasing airflow rate, even though large deviations can be observed (large variability of data.) This increase however is not significant enough to increase the OTE with increasing flow rates as seen in Figure 5, where OTE decreasing with increasing flow rate. This means that the effect of increasing $k_{v,l}$ (in the numerator of the OTE equation) is not as significant as the effect of increasing flow rate (in the denominator of the OTE equation) and therefore OTE decreases as flow rate increases.
+Figure 4 shows an increase of $k_{v,l}$ with increasing airflow rate, even though large deviations can be observed (large variability of data.) This increase however is not significant enough to increase the OTE with increasing flow rates as seen in Figure 5, where OTE decreasing with increasing flow rate. This means that the effect of increasing $k_{v,l}$ (in the numerator of the OTE equation) is not as significant as the effect of increasing flow rate (in the denominator of the OTE equation) and therefore OTE decreases as flow rate increases. In other words, there is an inverse relationship between OTE and air flow rate.
 
 #Suggestions
-One suggestion that lab fire has for future experiments is possibly to use another dissolved oxygen probe that isn't as sensitive to air bubbles. Because the reactor was relatively small, the metal stirrer constantly created turbulence that sometimes sent air bubbles onto the membrane of the DO probe, which made the readings inaccurate. This could also be addressed by using bigger reactors, so that one can clamp the DO probe farther from the oxygen influent and the stirrer.
+One suggestion that lab fire has for future experiments is to use a dissolved oxygen probe that isn't as sensitive to air bubbles. Because the reactor was relatively small, the metal stirrer constantly created turbulence that sometimes sent air bubbles onto the membrane of the DO probe, which made the readings inaccurate. This could also be addressed by using bigger reactors, so that one can clamp the DO probe farther from the oxygen influent and the stirrer.
 
-Again touching on the size, the group believes that the height of the reactor could also be increased so that the oxygen coming into the reactor can have time to oxygenate the water. The low depth of water may have contributed to the inaccuracy of oxygen concentration that the theoretical models had predicted. However, it appears that the models are underpredicting despite the fact that the oxygen bubbles do not have a lot of depth to oxygenate the water.
+Again touching on the size, the group believes that the height of the reactor could also be increased so that the oxygen coming into the reactor can have time to oxygenate the water. However, the low depth did not seem to affect how accurate the models were in predicting DO concentration across time.
 
-The last suggestion is possibly to use membrane diffusers to obtain high OTE values. However, this is likely not feasible in the lab as it is used in the industry, meaning it is likely too expensive for laboratory experiments like this one.
+The last suggestion is possibly to use membrane diffusers to obtain higher OTE values. However, this is likely not feasible in the lab as it is used in the industry, meaning it is likely too expensive for laboratory experiments like this one.
 
 # Appendix
 
@@ -212,7 +211,7 @@ for i in range(5):
   plt.plot(time_data[i], DO_data[i],'-')
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
-plt.legend(airflows.magnitude)
+plt.legend(airflows)
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 4 - Gas Transfer/Images/Question_2_b')
 plt.show()
 
