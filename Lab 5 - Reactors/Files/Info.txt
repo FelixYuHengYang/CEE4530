@@ -1,0 +1,28 @@
+Dimensions of reactor: 30cm*15cm*6cm
+
+Experiment 1: CMFR called 30mg
+810 uL - Volume used in first experiment 
+490g - Mass of empty tank
+3213g - Tank with water + dye from first experiment
+0.5 mg/L at the end 
+
+Experiment 2: 3 baffle reactors (2 screens with 4 holes) called v4
+7000uL - Volume of dye for second experiment
+592g - Mass of empty tank for experiment 2
+3154g - Tank with water + dye from experiment 2
+2.04 mg/L at the end
+Hole dimater: 1cm
+
+Experiment 3: 5 baffle reactors (4 screens with 4 holes) - called v5
+5000uL - Volume of dye for second experiment
+590g - Mass of empty tank for experiment 2
+3154g - Tank with water + dye from experiment 2
+0.24 mg/L at the end
+Hole diameter: 1cm
+
+Experiment 4: 3 baffle reactors (2 screens with 4 smaller holes) called v6
+7000uL - Volume of dye for second experiment
+593g - Mass of empty tank for experiment 2
+3210 g - Tank with water + dye from experiment 2
+0.21 mg/L at the end
+Hole diameter: 0.4cm
