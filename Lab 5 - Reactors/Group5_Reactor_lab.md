@@ -56,7 +56,8 @@ Generally speaking, the CMFR model consistently fit the observed data better. Th
 
 
 4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
-5.
+t* values were .16, .31,.3 and .345 at F=0.1 for experiments 1-4, respectively. The difference between the first experiment and last 3 line up with initial expectations, but the negligible difference between the 2nd and 3rd t* values was not expected. 
+
 5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
 
 There was evidence that there were dead volumes and short circuiting in the experimental reactor. In the picture below there is dye that is still highly concentrated in the corner of the reactor. Short circuiting was also present as the baffles were only taped to hold it in place, which left a gap on the sides, allowing water to move directly down the sides of the baffles. A seal would have prevented this, but there were time and resource constraints.
@@ -69,7 +70,7 @@ There was evidence that there were dead volumes and short circuiting in the expe
 
 Group 5 would recommend that in a full scale chlorine contact tank one should have a conditions as close to an ideal PFR as possible. This can be achieved by having high length to width ratio of baffles, that resemble a maze. This would maximize the contact time that the chlorine has with the pathogen before the water is sent to the distribution system, and eventually in people's bodies.
 
-[After we figure out our t* values from #4 we can answer the second part of this]
+[After we figure out our t* values from #4 we can answer the second part of this. What about experiment _ made our t* larger than others? I have a hunch that it'll be baffle 2 cause it had the most baffles, but I may be wrong]
 
 # Conclusions
 
@@ -96,14 +97,15 @@ Group 5 would recommend that in a full scale chlorine contact tank one should ha
 #Reactor Characteristics Lab
 #Variable Names
 Volume_Tot=30*u.cm*15*u.cm*6*u.cm
-V_Dye_Exp_1=810*u.uL
+V_Dye_Exp_1=8100*u.uL
 V_Dye_Exp_2=7000*u.uL
 V_Dye_Exp_3=5000*u.uL
 V_Dye_Exp_4=7000*u.uL
-M_Dye_Exp_1 = V_Dye_Exp_1 * (1*u.mg/u.uL)
-M_Dye_Exp_2 = V_Dye_Exp_2 * (1*u.mg/u.uL)
-M_Dye_Exp_3 = V_Dye_Exp_3 * (1*u.mg/u.uL)
-M_Dye_Exp_4 = V_Dye_Exp_4 * (1*u.mg/u.uL)
+C_Dye=10*u.g/u.L
+M_Dye_Exp_1 = (V_Dye_Exp_1 * C_Dye).to(u.mg)
+M_Dye_Exp_2 = (V_Dye_Exp_2 * C_Dye).to(u.mg)
+M_Dye_Exp_3 = (V_Dye_Exp_3 * C_Dye).to(u.mg)
+M_Dye_Exp_4 = (V_Dye_Exp_4 * C_Dye).to(u.mg)
 M_Tank_1=490*u.g
 M_Tank_2=592*u.g
 M_Tank_3=590*u.g
@@ -256,7 +258,9 @@ plt.show()
 
 
 #Question 3
-E_EXP_1=conc_1*V_1/M_Dye_Exp_1
+#Exp1
+E_EXP_1=(conc_1*V_1/M_Dye_Exp_1).to(u.dimensionless)
+E_EXP_1
 fig, ax = plt.subplots()
 ax.plot(dimless_time_1,E_EXP_1,'c',label='E(t)')
 plt.xlabel('Dimensionless Residence Time')
@@ -265,18 +269,17 @@ ax.legend()
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_1_E')
 plt.show()
 
-E_EXP_2=conc_2*V_2/M_Dye_Exp_2
-E_EXP_3=conc_3*V_3/M_Dye_Exp_3
-E_EXP_4=conc_4*V_4/M_Dye_Exp_4
 
 #trapezoidal integration
 F_1=np.zeros(E_EXP_1.size)
 for i in range(E_EXP_1.size):
   F_1[i]=np.trapz(E_EXP_1[0:i],dimless_time_1[0:i])
-  #if F_1[i]<.1:
-    #print('Not at '+str(i))
-  #else:
-    #print('F is over .1 at '+ str(i))
+  if F_1[i]<.1:
+    print('F is not over .1 at '+str(dimless_time_1[i]))
+  else:
+    print('F is over .1 at '+ str(dimless_time_1[i]))
+
+t_star_1=.16    
 fig, ax = plt.subplots()
 ax.plot(dimless_time_1,F_1,'c',label='E(t)')
 plt.xlabel('Dimensionless Residence Time')
@@ -284,19 +287,92 @@ plt.ylabel('F(t)')
 ax.legend()
 plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_1_F')
 plt.show()
+
 ##Exp 2
+E_EXP_2=(conc_2*V_2/M_Dye_Exp_2).to(u.dimensionless)
+fig, ax = plt.subplots()
+ax.plot(dimless_time_2,E_EXP_2,'c',label='E_2(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('E(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_2_E')
+plt.show()
+
+dimless_time_2
+F_2=np.zeros(E_EXP_2.size)
 for i in range(E_EXP_2.size):
-  F_2[i]=np.trapz(E_EXP_2[0:i],time_2[0:i])
+  F_2[i]=np.trapz(E_EXP_2[0:i],dimless_time_2[0:i])
   if F_2[i]<.1:
-    print('Not at '+str(i))
+    print('F is not over .1 at '+str(dimless_time_2[i]))
   else:
-    print('F is over .1 at '+ str(i))
-    break
+    print('F is over .1 at '+ str(dimless_time_2[i]))
+t_star_2=.31
+
+fig, ax = plt.subplots()
+ax.plot(dimless_time_2,F_2,'c',label='F_2(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('F(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_2_F')
+plt.show()
+
+##Exp 3
+
+E_EXP_3=(conc_3*V_3/M_Dye_Exp_3).to(u.dimensionless)
+fig, ax = plt.subplots()
+ax.plot(dimless_time_3,E_EXP_3,'c',label='E_3(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('E_3(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_3_E')
+plt.show()
+
+dimless_time_3
+F_3=np.zeros(E_EXP_2.size)
+for i in range(E_EXP_2.size):
+  F_3[i]=np.trapz(E_EXP_3[0:i],dimless_time_3[0:i])
+  if F_3[i]<.1:
+    print('F is not over .1 at '+str(dimless_time_3[i]))
+  else:
+    print('F is over .1 at '+ str(dimless_time_3[i]))
+t_star_3=.3
+
+fig, ax = plt.subplots()
+ax.plot(dimless_time_3,F_3,'c',label='F_3(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('F(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_3_F')
+plt.show()
 
 
+##Exp 4
+E_EXP_4=(conc_4*V_4/M_Dye_Exp_4).to(u.dimensionless)
+fig, ax = plt.subplots()
+ax.plot(dimless_time_4,E_EXP_4,'c',label='E_4(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('E_4(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_4_E')
+plt.show()
 
+dimless_time_4
+F_4=np.zeros(E_EXP_4.size)
+for i in range(E_EXP_4.size):
+  F_3[i]=np.trapz(E_EXP_4[0:i],dimless_time_4[0:i])
+  if F_3[i]<.1:
+    print('F is not over .1 at '+str(dimless_time_4[i]))
+  else:
+    print('F is over .1 at '+ str(dimless_time_4[i]))
+t_star_4=.345
 
-
+fig, ax = plt.subplots()
+ax.plot(dimless_time_4,F_4,'c',label='F_4(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('F_4(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_4_F')
+plt.show()
 
 
 
