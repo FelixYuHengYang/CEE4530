@@ -27,11 +27,49 @@ The fourth experiment conducted used a reactor design which included two baffles
 # Results and Discussion
 
 1. Use multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Use epa.Solver_AD_Pe and epa.Solver_CMFR_N. These functions will minimize the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
+
+
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question%202%20Exp1.png" alt="550_flow_b"/>
+</p>
+<p align="center">Figure 1: Observed data for experiment 1 and models </p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question%202%20Exp2.png" alt="550_flow_b"/>
+</p>
+<p align="center">Figure 2: Observed data for experiment 2 and models</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question%202%20Exp3.png" alt="550_flow_b"/>
+</p>
+<p align="center">Figure 3: Observed data for experiment 3 and models </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question%202%20Exp4.png" alt="Figure 4: Observed data for experiment 4 and models"/>
+</p>
+
+<p align="center">Figure 4: Observed data for experiment 4 and models </p>
+
+Generally speaking, the CMFR model consistently fit the observed data better. This is because ______.
 3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
+
+
 4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
+5.
 5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
+
+There was evidence that there were dead volumes and short circuiting in the experimental reactor. In the picture below there is dye that is still highly concentrated in the corner of the reactor. Short circuiting was also present as the baffles were only taped to hold it in place, which left a gap on the sides, allowing water to move directly down the sides of the baffles. A seal would have prevented this, but there were time and resource constraints.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/deadvolume.jpg" alt="550_flow_b"/>
+</p>
+<p align="center">Dead volume in reactor</p>
 6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
+
+Group 5 would recommend that in a full scale chlorine contact tank one should have a conditions as close to an ideal PFR as possible. This can be achieved by having high length to width ratio of baffles, that resemble a maze. This would maximize the contact time that the chlorine has with the pathogen before the water is sent to the distribution system, and eventually in people's bodies.
+
+[After we figure out our t* values from #4 we can answer the second part of this]
 
 # Conclusions
 
@@ -108,12 +146,16 @@ start_exp_2=218
 start_exp_3=11
 start_exp_4=22
 time_1 = epa.column_of_time(link_exp_1,start_exp_1)
+dimless_time_1 = time_1/theta_guess_1.to(u.days)
 conc_1=epa.column_of_data(link_exp_1,start_exp_1,1)*u.mg/u.L
 time_2 = epa.column_of_time(link_exp_2,start_exp_2)
+dimless_time_2=time_2/theta_guess_2.to(u.days)
 conc_2 = epa.column_of_data(link_exp_2,start_exp_2,1)*u.mg/u.L
 time_3 =epa.column_of_time(link_exp_3,start_exp_3)
+dimless_time_3=time_3/theta_guess_3.to(u.days)
 conc_3 = epa.column_of_data(link_exp_3,start_exp_3,1)*u.mg/u.L
 time_4 =epa.column_of_time(link_exp_4,start_exp_4)
+dimless_time_4=time_4/theta_guess_4.to(u.days)
 conc_4 = epa.column_of_data(link_exp_4,start_exp_4,1)*u.mg/u.L
 
 #Now plot the graph
@@ -170,50 +212,91 @@ Model_CMFR_Exp4=C_bar_4_CMFR*E_4_CMFR
 
 #Plot data, AD,and CMFR models
 fig, ax = plt.subplots()
-ax.plot(time_1/theta_guess_1.to(u.days),Model_AD_Exp1,'c',label='AD model')
-ax.plot(time_1/theta_guess_1.to(u.days),Model_CMFR_Exp1,'y',label='CMFR model')
-ax.plot(time_1/theta_guess_1.to(u.days),conc_1,'ro',label='Observed')
+ax.plot(dimless_time_1,Model_AD_Exp1,'c',label='AD model')
+ax.plot(dimless_time_1,Model_CMFR_Exp1,'y',label='CMFR model')
+ax.plot(dimless_time_1,conc_1,'ro',label='Observed')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('Concentration (mg/L)')
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2a')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2 Exp1')
 plt.show()
 
 ##Exp2
 fig, ax = plt.subplots()
-ax.plot(time_2/theta_guess_2.to(u.days),Model_AD_Exp2,'c',label='AD model')
-ax.plot(time_2/theta_guess_2.to(u.days),Model_CMFR_Exp2,'y',label='CMFR model')
-ax.plot(time_2/theta_guess_2.to(u.days),conc_2,'ro',label='Observed')
+ax.plot(dimless_time_2,Model_AD_Exp2,'c',label='AD model')
+ax.plot(dimless_time_2,Model_CMFR_Exp2,'y',label='CMFR model')
+ax.plot(dimless_time_2,conc_2,'ro',label='Observed')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('Concentration (mg/L)')
 ax.legend()
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2a')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2 Exp2')
 plt.show()
 
 ##Exp3
 fig, ax = plt.subplots()
-ax.plot(time_3/theta_guess_3.to(u.days),Model_AD_Exp3,'c',label='AD model')
-ax.plot(time_3/theta_guess_3.to(u.days),Model_CMFR_Exp3,'y',label='CMFR model')
-ax.plot(time_3/theta_guess_3.to(u.days),conc_3,'ro',label='Observed')
+ax.plot(dimless_time_3,Model_AD_Exp3,'c',label='AD model')
+ax.plot(dimless_time_3,Model_CMFR_Exp3,'y',label='CMFR model')
+ax.plot(dimless_time_3,conc_3,'ro',label='Observed')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('Concentration (mg/L)')
 ax.legend()
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2a')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2 Exp3')
 plt.show()
 
 
 ##Exp4
 fig, ax = plt.subplots()
-ax.plot(time_4/theta_guess_4.to(u.days),Model_AD_Exp4,'c',label='AD model')
-ax.plot(time_4/theta_guess_4.to(u.days),Model_CMFR_Exp4,'y',label='CMFR model')
-ax.plot(time_4/theta_guess_4.to(u.days),conc_4,'ro',label='Observed')
+ax.plot(dimless_time_4,Model_AD_Exp4,'c',label='AD model')
+ax.plot(dimless_time_4,Model_CMFR_Exp4,'y',label='CMFR model')
+ax.plot(dimless_time_4,conc_4,'ro',label='Observed')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('Concentration (mg/L)')
 ax.legend()
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2a')
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2 Exp4')
 plt.show()
 
 
 #Question 3
+E_EXP_1=conc_1*V_1/M_Dye_Exp_1
+fig, ax = plt.subplots()
+ax.plot(dimless_time_1,E_EXP_1,'c',label='E(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('E(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_1_E')
+plt.show()
+
+E_EXP_2=conc_2*V_2/M_Dye_Exp_2
+E_EXP_3=conc_3*V_3/M_Dye_Exp_3
+E_EXP_4=conc_4*V_4/M_Dye_Exp_4
+
+#trapezoidal integration
+F_1=np.zeros(E_EXP_1.size)
+for i in range(E_EXP_1.size):
+  F_1[i]=np.trapz(E_EXP_1[0:i],dimless_time_1[0:i])
+  #if F_1[i]<.1:
+    #print('Not at '+str(i))
+  #else:
+    #print('F is over .1 at '+ str(i))
+fig, ax = plt.subplots()
+ax.plot(dimless_time_1,F_1,'c',label='E(t)')
+plt.xlabel('Dimensionless Residence Time')
+plt.ylabel('F(t)')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp_1_F')
+plt.show()
+##Exp 2
+for i in range(E_EXP_2.size):
+  F_2[i]=np.trapz(E_EXP_2[0:i],time_2[0:i])
+  if F_2[i]<.1:
+    print('Not at '+str(i))
+  else:
+    print('F is over .1 at '+ str(i))
+    break
+
+
+
+
+
 
 
 
