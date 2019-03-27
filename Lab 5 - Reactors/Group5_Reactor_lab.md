@@ -4,7 +4,7 @@ Lab Fire Group 5
 
 Felix Yang:  hours
 
-Eirini Sarri:  hours
+Eirini Sarri: 4 hours
 # Introduction and Objectives
 A reactor is a system with a defined boundary that can experience flow in and out. There are various types of reactors such as Continuously Mixed Flow Reactors (CMFR) and Plug Flow Reactors (PFR) and many natural and engineered systems can be modeled using reactor equations. The purpose of reactors is to maximize the time of contact between a solute (tracer, contaminant, etc) with a solvent (water).  The objective of this experiment was to investigate the effect of different configuration of a rector on the effective contact time of a red dye tracer and water.
 
@@ -28,10 +28,12 @@ The fourth experiment conducted used a reactor design which included two baffles
 
 1. Use multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Use epa.Solver_AD_Pe and epa.Solver_CMFR_N. These functions will minimize the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
 
+Found in code below.
 
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question%202%20Exp1.png" alt="550_flow_b"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/Question_2%20Exp_1.png" alt="550_flow_b"/>
 </p>
 <p align="center">Figure 1: Observed data for experiment 1 and models </p>
 
@@ -51,12 +53,15 @@ The fourth experiment conducted used a reactor design which included two baffles
 
 <p align="center">Figure 4: Observed data for experiment 4 and models </p>
 
-Generally speaking, the CMFR model consistently fit the observed data better. This is because ______.
-3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
+Generally speaking, the CMFR model consistently fit the observed data better. This is because as we increase the number of CMFR in series we get closer to simulating a PFR, meaning that no matter what the reactor design, we can approximate the concentration of red dye assuming the system is composed of many CMFRs in series. Also, the Peclet numbers from the model equations were very small, leading to a large predicted variability that was not found in the experimental data.
 
+3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications affect dispersion?
+
+As the number of baffles increased from 0 (Experiment 1 - CMFR) to 2 (Experiments 2 and 4) to 4 (Experiment 3), both N and Pe increased in value. This is the expected result, as a higher N and Pe value corresponds to a system more closely simulating a PFR, which can be achieved by adding multiple CMFRs in series. In addition to this observation, it was noted that the same number of baffles but different sized-holes had an effect on the N and Pe numbers. The smaller the holes on the baffle, the higher the Pe number, which is a reasonable result since putting "more obstacles" for the water to go through increases the contact time of the red dye with water, matching a PFR more closely. On the other hand, using the same rationale, we would expect a higher N value for experiment 4; however, the model guesses an N value of 1 which is not supported by this hypothesis.
 
 4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
-t* values were .16, .31,.3 and .345 at F=0.1 for experiments 1-4, respectively. The difference between the first experiment and last 3 line up with initial expectations, but the negligible difference between the 2nd and 3rd t* values was not expected. 
+
+t⋆ values were .16, .31,.3 and .345 at F=0.1 for experiments 1-4, respectively. The difference between the first experiment and last 3 line up with initial expectations, but the negligible difference between the 2nd and 3rd t⋆ values was not expected.
 
 5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
 
@@ -66,18 +71,19 @@ There was evidence that there were dead volumes and short circuiting in the expe
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%205%20-%20Reactors/images/deadvolume.jpg" alt="550_flow_b"/>
 </p>
 <p align="center">Dead volume in reactor</p>
+
 6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 
-Group 5 would recommend that in a full scale chlorine contact tank one should have a conditions as close to an ideal PFR as possible. This can be achieved by having high length to width ratio of baffles, that resemble a maze. This would maximize the contact time that the chlorine has with the pathogen before the water is sent to the distribution system, and eventually in people's bodies.
-
-[After we figure out our t* values from #4 we can answer the second part of this. What about experiment _ made our t* larger than others? I have a hunch that it'll be baffle 2 cause it had the most baffles, but I may be wrong]
+Group 5 would recommend that in a full scale chlorine contact tank one should have conditions as close to an ideal PFR as possible. This can be achieved by having high length to width ratio of baffles, that resemble a maze. This would maximize the contact time that the chlorine has with the pathogen before the water is sent to the distribution system, and eventually in people's bodies. Based on our the four experiments that were conducted, Group 5 would suggest a design more similar to Experiment 4, as Experiment 4 was the one with the highest t⋆ and therefore the highest contact time.
 
 # Conclusions
 
+In conclusion, the more complicated the reactor system, the more the behavior of the reactor matches that of a PFR. Comparing between increasing the number of baffles versus decreasing the size of holes, it was determined that a decrease in the size of holes was actually more effective in increasing contact time. However, larger differences were expected overall but were not observed. Between the Advective Dispersion and CMFR models, the CMFR model was the one that matched the experimental data more closely.
 
 
 # Suggestions
 
+As future steps or changes, the team would recommend conducting experiments with larger deviations, i.e. 3 CMFRs in series vs 9 CMFRs in series, so that differences become more noticeable. In addition, experimenting with water flow rate would be an interesting variation, to determine what factor affects contact time the most.
 
 
 # Python Code Appendix
@@ -174,41 +180,56 @@ theta_1_AD, C_bar_1_AD, Pe_1_AD = epa.Solver_AD_Pe(time_1,conc_1,theta_guess_1,C
 E_1_AD=epa.E_Advective_Dispersion((time_1/theta_guess_1).to_base_units(), Pe_1_AD)
 Model_AD_Exp1=C_bar_1_AD*E_1_AD
 
+Pe_1_AD
+
 #CMFR Model Experiment 1
 theta_1_CMFR, C_bar_1_CMFR, N_1_CMFR = epa.Solver_CMFR_N(time_1,conc_1,theta_guess_1,C_bar_guess_1)
 E_1_CMFR=epa.E_CMFR_N((time_1/theta_guess_1).to_base_units(), N_1_CMFR)
 Model_CMFR_Exp1=C_bar_1_CMFR*E_1_CMFR
+
+N_1_CMFR
 
 #AD Model Experiment 2
 theta_2_AD, C_bar_2_AD, Pe_2_AD = epa.Solver_AD_Pe(time_2,conc_2,theta_guess_2,C_bar_guess_2)
 E_2_AD=epa.E_Advective_Dispersion((time_2/theta_guess_2).to_base_units(), Pe_2_AD)
 Model_AD_Exp2=C_bar_2_AD*E_2_AD
 
+Pe_2_AD
+
 #CMFR Model Experiment 2
 theta_2_CMFR, C_bar_2_CMFR, N_2_CMFR = epa.Solver_CMFR_N(time_2,conc_2,theta_guess_2,C_bar_guess_2)
 E_2_CMFR=epa.E_CMFR_N((time_2/theta_guess_2).to_base_units(), N_2_CMFR)
 Model_CMFR_Exp2=C_bar_2_CMFR*E_2_CMFR
+
+N_2_CMFR
 
 #AD Model Experiment 3
 theta_3_AD, C_bar_3_AD, Pe_3_AD = epa.Solver_AD_Pe(time_3,conc_3,theta_guess_3,C_bar_guess_3)
 E_3_AD=epa.E_Advective_Dispersion((time_3/theta_guess_3).to_base_units(), Pe_3_AD)
 Model_AD_Exp3=C_bar_3_AD*E_3_AD
 
+Pe_3_AD
+
 #CMFR Model Experiment 3
 theta_3_CMFR, C_bar_3_CMFR, N_3_CMFR = epa.Solver_CMFR_N(time_3,conc_3,theta_guess_3,C_bar_guess_3)
 E_3_CMFR=epa.E_CMFR_N((time_3/theta_guess_3).to_base_units(), N_3_CMFR)
 Model_CMFR_Exp3=C_bar_3_CMFR*E_3_CMFR
+
+N_3_CMFR
 
 #AD Model Experiment 4
 theta_4_AD, C_bar_4_AD, Pe_4_AD = epa.Solver_AD_Pe(time_4,conc_4,theta_guess_4,C_bar_guess_4)
 E_4_AD=epa.E_Advective_Dispersion((time_4/theta_guess_4).to_base_units(), Pe_4_AD)
 Model_AD_Exp4=C_bar_4_AD*E_4_AD
 
+Pe_4_AD
+
 #CMFR Model Experiment 4
 theta_4_CMFR, C_bar_4_CMFR, N_4_CMFR = epa.Solver_CMFR_N(time_4,conc_4,theta_guess_4,C_bar_guess_4)
 E_4_CMFR=epa.E_CMFR_N((time_4/theta_guess_4).to_base_units(), N_4_CMFR)
 Model_CMFR_Exp4=C_bar_4_CMFR*E_4_CMFR
 
+N_4_CMFR
 
 #Question 2
 
@@ -219,7 +240,8 @@ ax.plot(dimless_time_1,Model_CMFR_Exp1,'y',label='CMFR model')
 ax.plot(dimless_time_1,conc_1,'ro',label='Observed')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('Concentration (mg/L)')
-plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question 2 Exp1')
+ax.legend()
+plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Question_2 Exp_1')
 plt.show()
 
 ##Exp2
@@ -281,7 +303,7 @@ for i in range(E_EXP_1.size):
 
 t_star_1=.16    
 fig, ax = plt.subplots()
-ax.plot(dimless_time_1,F_1,'c',label='E(t)')
+ax.plot(dimless_time_1,F_1,'c',label='F(t)')
 plt.xlabel('Dimensionless Residence Time')
 plt.ylabel('F(t)')
 ax.legend()
@@ -328,8 +350,8 @@ plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Lab 5 - Reactors/images/Exp
 plt.show()
 
 dimless_time_3
-F_3=np.zeros(E_EXP_2.size)
-for i in range(E_EXP_2.size):
+F_3=np.zeros(E_EXP_3.size)
+for i in range(E_EXP_3.size):
   F_3[i]=np.trapz(E_EXP_3[0:i],dimless_time_3[0:i])
   if F_3[i]<.1:
     print('F is not over .1 at '+str(dimless_time_3[i]))
@@ -359,8 +381,8 @@ plt.show()
 dimless_time_4
 F_4=np.zeros(E_EXP_4.size)
 for i in range(E_EXP_4.size):
-  F_3[i]=np.trapz(E_EXP_4[0:i],dimless_time_4[0:i])
-  if F_3[i]<.1:
+  F_4[i]=np.trapz(E_EXP_4[0:i],dimless_time_4[0:i])
+  if F_4[i]<.1:
     print('F is not over .1 at '+str(dimless_time_4[i]))
   else:
     print('F is over .1 at '+ str(dimless_time_4[i]))
