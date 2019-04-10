@@ -16,9 +16,9 @@ To measure time to failure, the team will be continuously measuring turbidity at
 ##Key design parameters
 1. Filter Heights: start from 20 cm and keep decreasing until we reach the mass transfer zone
 2. Coagulant Concentrations: $2 \frac{mg}{L}$, $1 \frac{mg}{L}$, $0 \frac{mg}{L}$
-3. Influent flow Rate: 100 RPM
+3. Influent flow Rate: 50 RPM
 4. Clay Concentration: 5 NTU
-5. Humic Acid Concentration: 10% of Clay concentration
+5. Humic Acid Concentration:
 
 
 ##Timeline of tasks/experiments
@@ -27,16 +27,16 @@ Table 1: Experiment Schedule
 
 | Date | Procedure |
 |:--------:|:-----:|
-| Friday, April 12 | Filter Height: 20 cm, Coagulant concentration: $2 \frac{mg}{L}$ |
-| Monday, April 15 |Filter Height: 20 cm, Coagulant concentration: $1 \frac{mg}{L}$ |
-| Wednesday, April 17 | Filter Height: 20 cm, Coagulant concentration: $0.2 \frac{mg}{L}$, other filter heights |
-| Friday, April 19 | other filter heights |
-| Monday, April 22 | other filter heights |
-| Wednesday, April 24 | other filter heights |
-| Friday, April 26 | other filter heights |
-| Monday, April 29 | other filter heights |
-| Wednesday, May 1 | other filter heights |
-| Friday, May 3 | other filter heights |
+| Friday, April 12 | Coagulant concentration: $2 \frac{mg}{L}$, Filter Height: 20 cm |
+| Monday, April 15 |Coagulant concentration: $2 \frac{mg}{L}$, Filter Height: 2 cm |
+| Wednesday, April 17 | Coagulant concentration: $2 \frac{mg}{L}$, Filter Height: depending on previous experiments |
+| Friday, April 19 | Coagulant concentration: $1 \frac{mg}{L}$, Filter Height: 20 cm |
+| Monday, April 22 | Coagulant concentration: $1 \frac{mg}{L}$, Filter Height: 2 cm |
+| Wednesday, April 24 | Coagulant concentration: $1 \frac{mg}{L}$, Filter Height: depending on previous experiments |
+| Friday, April 26 | Coagulant concentration: $0 \frac{mg}{L}$, Filter Height: 20 cm |
+| Monday, April 29 | Coagulant concentration: $0 \frac{mg}{L}$, Filter Height: 2 cm |
+| Wednesday, May 1 | Coagulant concentration: $0 \frac{mg}{L}$, Filter Height: depending on previous experiments |
+| Friday, May 3 | Final experiments, repeats, etc |
 | Monday, May 6 | Prepare report, ask questions |
 
 
@@ -92,19 +92,36 @@ Q_water
 
 C_Clay_Filter=(5*u.NTU).to(u.mg/u.L)
 C_Clay_Filter
-C_Clay_Stock = Q_Filter*C_Clay_Filter/Q_stock
+C_Clay_Stock = (Q_Filter*C_Clay_Filter/Q_stock_minute).to(u.mg/u.L)
 Volume_Stock_6hrs=(Q_stock_minute*60*u.min*6).to(u.L)
 Volume_Stock = 4*u.L
 Mass_Clay_Stock=C_Clay_Stock*Volume_Stock
+Mass_Clay_Stock
 
 Mass_HA_Stock = 0.1*Mass_Clay_Stock
 C_HA_Stock = Mass_HA_Stock/Volume_Stock
 
+#For PACl = 2mg/L
 C_PACl_Filter=2*u.mg/u.L ##This is variable
-C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock).to(u.mg/u.L)
+C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock_minute).to(u.mg/u.L)
 C_PACl_Stock
-Dilution_Factor=(70.28*u.mg/u.L)/C_PACl_Stock
+C_PACl_La =70.28*u.mg/u.mL
+
+Dilution_Factor=(C_PACl_La)/(C_PACl_Stock).to(u.mg/u.mL)
 Dilution_Factor
+##this is in a 4 L ucket
+V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_La)
+V_Conc
+
+#Duplicate the code above to get the 1 mg/L and 0 mg/L masses and volumes for the stock solutions
+
+C_PACl_Filter=1*u.mg/u.L ##This is variable
+C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock_minute).to(u.mg/u.L)
+C_PACl_Stock
+C_PACl_La =70.28*u.mg/u.mL
+
+V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_La)
+V_Conc
 
 
 ```
