@@ -3,7 +3,13 @@ Felix Yang
 Irene Sarri
 
 #Data Analysis
+1. Plot the breakthrough curves showing CC0 versus time.
+2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
+3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
+4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
+5. What did you learn from this analysis? How can you explain the results that you have obtained? What changes to the experimental method do you recommend for next year (or for a project)?
 #Conclusions
+
 #Suggestions
 
 
