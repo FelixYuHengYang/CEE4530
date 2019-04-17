@@ -89,11 +89,12 @@ RPM = (Q_Filter/(Fourteen_tubing+Eighteen_tubing)).to(u.turn/u.min)
 RPM
 Q_stock_minute = RPM*Fourteen_tubing
 Q_water = RPM*Eighteen_tubing
-Q_water
+Q_water*60*3*u.min
 
 C_Clay_Filter=(5*u.NTU).to(u.mg/u.L)
 C_Clay_Filter
 C_Clay_Stock = (Q_Filter*C_Clay_Filter/Q_stock_minute).to(u.mg/u.L)
+C_Clay_Stock
 Volume_Stock_6hrs=(Q_stock_minute*60*u.min*6).to(u.L)
 Volume_Stock = 4*u.L
 Mass_Clay_Stock=C_Clay_Stock*Volume_Stock
