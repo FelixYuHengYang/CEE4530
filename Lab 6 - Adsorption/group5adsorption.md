@@ -6,16 +6,21 @@ Irene Sarri
 1. Plot the breakthrough curves showing $\frac{C}{C_0}$ versus time.
 
 <p align="center">
-  <img src="link to graph here" alt="PH vs Dimensionless Hydraulic Residence Time"/>
+  <img src="link to graph here" alt="C/C_o versus time/>
 </p>
-<p align="center">Picture 1: C/C_o versus time </p>
+<p align="center">Figure 1. Tracer curves for sand columns at two different flow rates. It is likely that different setups had different amounts of tubing volume that influenced how long it took for the tracer to reach the detector.  </p>
+
+<p align="center">
+  <img src="link to graph here" alt="C/C_o versus time/>
+</p>
+<p align="center"> Figure 2. Tracer curves for columns with different masses of activated carbon. </p>
 
 2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
 
 <p align="center">
   <img src="link to graph here" alt="PH vs Dimensionless Hydraulic Residence Time"/>
 </p>
-<p align="center">Picture 1: C/C_o versus time </p>
+<p align="center">Figure 3: C/C_o versus time </p>
 
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
@@ -78,7 +83,7 @@ def adsorption_data(C_column, dirpath):
 
 
 C_column = 1
-  dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
+dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
 
 
 
@@ -96,8 +101,9 @@ Mass_carbon= ([metadata['carbon (g)'][i] for i in metadata.index])* u.g
 Tubing_HRT = Tubing_V/Flow_rate
 #to make things simple we are assuming that the porosity is the same for sand and for activated carbon. That is likely not true!
 porosity = 0.4
+v_a = 1 * u.mm/u.s
 C_0 = 50 * u.mg/u.L
-
+t_water = (Column_L*porosity/v_a).to(u.s)
 #estimate the HRT for all of the columns
 HRT = (porosity * Column_V/Flow_rate).to(u.s)
 
@@ -134,9 +140,6 @@ plt.legend(mylegend);
 plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 1b')
 plt.show()
 
-C_min=0*u.mg/u.L
-C_max=.5*u.mg/u.L
-
 idx=np.zeros(np.size(C_data),int)
 time=np.zeros(np.size(C_data),int)*u.s
 
@@ -144,7 +147,8 @@ for i in range(np.size(C_data)):
   idx[i] = (np.abs(C_data[i]-0.5*C_0)).argmin()
   time[i] = time_data[i][idx[i]]
 
-Dimless_time=time/HRT
+t_mtz=time
+t_mtz_dimless=time/HRT
 
 mylegend = []
 for i in range(np.size(filenames)):
@@ -158,15 +162,21 @@ plt.legend(mylegend);
 plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 2')
 plt.show()
 
+#Question 3
 
+R_adsorption = t_mtz/t_water
+R_adsorption
+#Question 4
+#We measured the bulk density in the lab
+Density_bulk_AC = 386 * u.kg/u.m**3
+V_carbon = (Mass_carbon/Density_bulk_AC).to(u.mL)
+
+
+density_sand = 2650 * u.kg/u.m**3
+M_sand = ((Column_V-V_carbon)*density_sand*(1-porosity)).to(u.g)
+
+q_0 = ((R_adsorption-1)*(C_0*porosity*Column_V)/(Mass_carbon+M_sand)).to(u.dimensionless)
+q_0
+
+#Negative q explained by uncertainty in tubing material
 ```
-
-The tracer curves for the columns without carbon is shown below.
-
- ![graph](https://github.com/monroews/CEE4530/raw/master/Examples/images/Sand_column.png)
-
-Figure 1. Tracer curves for sand columns at two different flow rates. It is likely that different setups had different amounts of tubing volume that influenced how long it took for the tracer to reach the detector.
-
- ![graph](https://github.com/monroews/CEE4530/raw/master/Examples/images/Activated_carbon.png)
-
- Figure 2. Tracer curves for columns with different masses of activated carbon.
