@@ -1,14 +1,15 @@
 #Group 5 - Lab Fire Final Project Proposal
+#Reducing Sand Filter Depth
 
 ##Intro/context – What is the problem? Why is it important?
-Current AguaClara technology utilizes enclosed stacked rapid sand filters (ESTaRS) which itself an innovation upon traditional rapid sand filters that saves floor space. It does so by placing several beds of sand on top of one another between inlet and outlet pipes. However, it is possible that even more space could be conserved by reducing the height of each bed of sand. It is important because a part of AguaClara's mission is to create the most affordable technology possible without compromising on the quality of the water that is produced. This research project seeks to discover if sand bed depths as low as 2 cm or lower are feasible options. Conclusions from these experiments would also have implications for the size of the mass transfer zone in the sand filtration process.
+Current AguaClara technology utilizes enclosed stacked rapid sand filters (ESTaRS), which is itself an   innovation upon traditional rapid sand filters that saves floor space. It does so by placing several beds of sand on top of one another between inlet and outlet pipes. However, it is possible that even more space could be conserved by reducing the height of each bed of sand. Conserving space and thus money is important because a part of AguaClara's mission is to create the most affordable technology possible without compromising on the quality of the water that is produced. This research project seeks to discover if sand bed depths as low as 2 cm or lower are feasible options. Conclusions from these experiments would also have implications for the size of the mass transfer zone in the sand filtration process.
 
 ##Objectives – What is the hypothesis? What will you do to test the hypothesis?
-ESTaRS currently uses 20 cm of sand for each bed, which is lower than the current industry standard of 50 cm to 75 cm. That reduced depth was arbitrarily chosen. Since there was no significant adverse effect of the function of the sand filters, it is likely that it could be reduced even further.
+ESTaRS currently uses 20 cm of sand for each bed, which is lower than the current industry standard of 50 cm to 75 cm. That reduced depth was arbitrarily chosen. Since there was no significant adverse effect of the function of the sand filters except for a reduction in time until backwash is needed, it is likely that it could be reduced even further.
 
 The hypothesis for this experiment is that lowering the sand filter depth will decrease the failure time of the system, until the depth matches that of the mass transfer zone, when the failure time will equal three minutes.
 
-Group 5 (Lab Fire) will test this hypothesis by running experiments, varying the depth of the sand filter bed and coagulant dose, and controlling for flow rate, and influent turbidity. Failure time is determined as the time at which the filter no longer produces water that is below 1 NTU.
+Group 5 (Lab Fire) will test this hypothesis by running experiments, varying the depth of the sand filter bed and coagulant dose, and controlling for flow rate, humic acid, and influent turbidity. Failure time is determined as the time at which the filter no longer produces water that is below 1 NTU.
 
 ##Experimental plan including – How will you measure it?
 To measure time to failure, the team will be continuously measuring turbidity at the effluent. Failure is defined as when 1 NTU effluent is reached. To compare the efficiency of each bed using different influent coagulant concentrations, the team members will compare the time it takes for each system to fail.
