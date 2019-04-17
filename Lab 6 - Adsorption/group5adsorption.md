@@ -3,8 +3,15 @@ Felix Yang
 Irene Sarri
 
 #Data Analysis
-1. Plot the breakthrough curves showing CC0 versus time.
+1. Plot the breakthrough curves showing $\frac{C}{C_0}$ versus time.
+<p align="center">
+  <img src="link to graph here" alt="PH vs Dimensionless Hydraulic Residence Time"/>
+</p>
+<p align="center">Picture 1: C/C_o versus time </p>
+
 2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
+
+
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
 5. What did you learn from this analysis? How can you explain the results that you have obtained? What changes to the experimental method do you recommend for next year (or for a project)?
@@ -66,12 +73,14 @@ def adsorption_data(C_column, dirpath):
 
 
 C_column = 1
-dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
+  dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
 
 
 
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)
 metadata
+C_data[0][0]
+time_data[0][0]
 Column_D = 1 * u.inch
 Column_A = pc.area_circle(Column_D)
 Column_L = 15.2 * u.cm
@@ -102,9 +111,9 @@ for i in range(np.size(filenames)):
 
 plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
-plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
+plt.ylabel(r'Normalized red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('Examples/images/Sand_column')
+#plt.savefig('Examples/images/Sand_column')
 plt.show()
 
 # create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
@@ -116,10 +125,40 @@ for i in range(np.size(filenames)):
 
 plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
-plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
+plt.ylabel(r'Normalized red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('Examples/images/Activated_carbon')
+#plt.savefig('Examples/images/Activated_carbon')
 plt.show()
+
+C_min=0*u.mg/u.L
+C_max=.5*u.mg/u.L
+C_data_dimless=C_data[0].to(u.dimensionless)
+numpy.size(C_data)
+range(C_data[0])
+idx=np.zeros(np.size(C_data),int)
+time=np.zeros(np.size(C_data),int)*u.s
+
+for i in range(np.size(C_data)):
+  idx[i] = (np.abs(C_data[i]-0.5*C_0)).argmin()
+  time[i] = time_data[i][idx[i]]
+
+Dimless_time=time/HRT
+Dimless_time
+Mass_carbon
+
+mylegend = []
+for i in range(np.size(filenames)):
+    plt.plot(Dimless_time[i],Mass_carbon[i],'o');
+    mylegend.append(str(metadata['flow (mL/s)'][i]) + ' mL/s')
+
+plt.xlabel(r'$\frac{t}{\theta}$');
+plt.xlim(right=500,left=0);
+plt.ylabel(r'Mass of Carbon $\left (g) \right )$');
+plt.legend(mylegend);
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 2')
+plt.show()
+
+
 ```
 
 The tracer curves for the columns without carbon is shown below.
