@@ -6,30 +6,84 @@ Irene Sarri
 1. Plot the breakthrough curves showing $\frac{C}{C_0}$ versus time.
 
 <p align="center">
-  <img src="link to graph here" alt="C/C_o versus time/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%206%20-%20Adsorption/Images/Question%201a.png" alt="C/C_o versus time/>
 </p>
 <p align="center">Figure 1. Tracer curves for sand columns at two different flow rates. It is likely that different setups had different amounts of tubing volume that influenced how long it took for the tracer to reach the detector.  </p>
 
 <p align="center">
-  <img src="link to graph here" alt="C/C_o versus time/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%206%20-%20Adsorption/Images/Question%201b.png" alt="C/C_o versus time/>
 </p>
 <p align="center"> Figure 2. Tracer curves for columns with different masses of activated carbon. </p>
 
 2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
 
 <p align="center">
-  <img src="link to graph here" alt="PH vs Dimensionless Hydraulic Residence Time"/>
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%206%20-%20Adsorption/Images/Question%202.png" alt="PH vs Dimensionless Hydraulic Residence Time"/>
 </p>
-<p align="center">Figure 3: C/C_o versus time </p>
+<p align="center">Figure 3: Time when effluent concentration was 50% of influent concentration vs mass of Carbon </p>
 
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
+
+Using the equation shown below $R_{ads}$ was determined. See python code appendix below for more detail.
+$q_0 = \left(R_{adsorption} - 1\right) \frac{C_0 \phi V_{column}}{M_{adsorbent}}$
+
+
+$R_{adsorption} = t_{mtz}/t_{water}$
+| Flow Rate($mL/s$) | Carbon (g) | $R_{ads}$ |
+|:-----------------:|:----------:|:---------:|
+|        0.5        |     0      |   4.01    |
+|        0.5        |     0      |   3.95    |
+|        2.6        |     0      |   0.64    |
+|        0.5        |     0      |   3.11    |
+|        0.5        |    0.5     |   3.27    |
+|        0.5        |   0.601    |   2.80    |
+|        0.5        |    1.66    |   9.03    |
+|       0.466       |     2      |   14.21   |
+|       0.466       |     4      |   1.81    |
+|        2.6        |    13.8    |   2.80    |
+|        0.5        |     15     |   61.35   |
+|        2.6        |   15.63    |   3.29    |
+|       0.467       |   29.34    |  467.68   |
+
+
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
+
+Using the equation shown below $q_0$ was determined. See python code appendix below for more detail.
+
+| Flow Rate($mL/s$) | Carbon (g) |  $q_{0}$  |
+|:-----------------:|:----------:|:---------:|
+|        0.5        |     0      | 3.79e-05  |
+|        0.5        |     0      | 3.71e-05  |
+|        2.6        |     0      | -4.51e-06 |
+|        0.5        |     0      | 2.65e-05  |
+|        0.5        |    0.5     | 2.90e-05  |
+|        0.5        |   0.601    | 2.29e-05  |
+|        0.5        |    1.66    | 1.05e-04  |
+|       0.466       |     2      | 1.75e-04  |
+|       0.466       |     4      |   1.13    |
+|        2.6        |    13.8    | 3.48e-04  |
+|        0.5        |     15     | 1.22e-03  |
+|        2.6        |   15.63    | 4.78e-05  |
+|       0.467       |   29.34    |   0.023   |
+
+
+
 5. What did you learn from this analysis? How can you explain the results that you have obtained? What changes to the experimental method do you recommend for next year (or for a project)?
+
+One thing that Group 5 learned from this analysis was that the addition of sand does nothing to remove red dye. This was something that Professor Monroe had already stated but it was not apparent that the effect would be so drastic as shown in the couple of experiments that were done with no GAC.
+
+The results obtained seem consistent with what was expected as the retardation factor and $q_0$ should increase as more carbon is added. Changes to the experimental method Group 5 recommends is to increase the range in which carbon is used, and to streamline the set-up process for all students to make sure all the equipment, specifically tubing size, is constant.
 #Conclusions
+In the charts shown in the answers to 3 and 4, it can be observed that for the experiments that had 0 g of activated carbon retardation factor and $q_0$ were very low. This is consistent with the idea that a material that effectively adsorbs to the adsorbate will have high $R_ads$. Since there was no activated carbon the first four values had very low $R_ads$ values while the highest values were found near the bottom of the chart.
+
+Higher amounts of carbon would also mean that there would be a higher capacity for the reactor to adsorb to adsorbate. When $q_0$ was found, the lowest values were found at the first four values where the experiments used 0 g of activated carbon. As Group 5 expected the amount of grams of carbon increases, the equilibrium density also increases. However, in both cases there were a couple of hiccups in the data such as in the 3rd value that 2.6 $mL/s$ and 0 g of carbon, which has R values of less than 1 and a negative $q_0$ value. Additionally the other two values that have flow rates of 2.6 $mL/s$ also seem inconsistent with the trends that were observed.
+
+This may be due to ... (IRENE)
 
 #Suggestions
+Group 5 suggests that in the future tubing size and flow rate be consistent because it is believed that the higher flow rates may cause problems experiments.
 
-
+# Python Code Appendix
 ```python
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
@@ -123,7 +177,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
 plt.ylabel(r'Normalized red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 1a')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 1a')
 plt.show()
 
 # create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
@@ -137,7 +191,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
 plt.ylabel(r'Normalized red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 1b')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 1b')
 plt.show()
 
 idx=np.zeros(np.size(C_data),int)
@@ -152,14 +206,14 @@ t_mtz_dimless=time/HRT
 
 mylegend = []
 for i in range(np.size(filenames)):
-    plt.plot(Dimless_time[i],Mass_carbon[i],'o');
+    plt.plot(t_mtz_dimless[i],Mass_carbon[i],'o');
     mylegend.append(str(metadata['flow (mL/s)'][i]) + ' mL/s')
 
 plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=500,left=0);
 plt.ylabel(r'Mass of Carbon $\left (g) \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 2')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Lab 6 - Adsorption/Images/Question 2')
 plt.show()
 
 #Question 3
