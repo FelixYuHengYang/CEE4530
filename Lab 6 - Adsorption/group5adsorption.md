@@ -73,15 +73,16 @@ Using the equation shown below $q_0$ was determined. See python code appendix be
 One thing that Group 5 learned from this analysis was that the addition of sand does nothing to remove red dye. This was something that Professor Monroe had already stated but it was not apparent that the effect would be so drastic as shown in the couple of experiments that were done with no GAC.
 
 The results obtained seem consistent with what was expected as the retardation factor and $q_0$ should increase as more carbon is added. Changes to the experimental method Group 5 recommends is to increase the range in which carbon is used, and to streamline the set-up process for all students to make sure all the equipment, specifically tubing size, is constant.
+
 #Conclusions
 In the charts shown in the answers to 3 and 4, it can be observed that for the experiments that had 0 g of activated carbon retardation factor and $q_0$ were very low. This is consistent with the idea that a material that effectively adsorbs to the adsorbate will have high $R_ads$. Since there was no activated carbon the first four values had very low $R_ads$ values while the highest values were found near the bottom of the chart.
 
 Higher amounts of carbon would also mean that there would be a higher capacity for the reactor to adsorb to adsorbate. When $q_0$ was found, the lowest values were found at the first four values where the experiments used 0 g of activated carbon. As Group 5 expected the amount of grams of carbon increases, the equilibrium density also increases. However, in both cases there were a couple of hiccups in the data such as in the 3rd value that 2.6 $mL/s$ and 0 g of carbon, which has R values of less than 1 and a negative $q_0$ value. Additionally the other two values that have flow rates of 2.6 $mL/s$ also seem inconsistent with the trends that were observed.
 
-This may be due to ... (IRENE)
+One of the $q_0$ values that was calculated came out negative, which is explained by the uncertainty in tubing volume. Each apparatus had a different tube length and therefore tube volume.
 
 #Suggestions
-Group 5 suggests that in the future tubing size and flow rate be consistent because it is believed that the higher flow rates may cause problems experiments.
+Group 5 suggests that in the future tubing size and flow rate be consistent because it is believed that the higher flow rates may cause problems experiments. If the tubing volume isn't consistent, it should at least be measured and taken into account for each experiment.
 
 # Python Code Appendix
 ```python
@@ -220,6 +221,7 @@ plt.show()
 
 R_adsorption = t_mtz/t_water
 R_adsorption
+
 #Question 4
 #We measured the bulk density in the lab
 Density_bulk_AC = 386 * u.kg/u.m**3
@@ -232,5 +234,4 @@ M_sand = ((Column_V-V_carbon)*density_sand*(1-porosity)).to(u.g)
 q_0 = ((R_adsorption-1)*(C_0*porosity*Column_V)/(Mass_carbon+M_sand)).to(u.dimensionless)
 q_0
 
-#Negative q explained by uncertainty in tubing material
 ```
