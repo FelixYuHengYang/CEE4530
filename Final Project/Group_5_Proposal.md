@@ -78,11 +78,25 @@ from pathlib import Path
 import pandas as pd
 
 Diameter_Column=.957*u.inch
-Area_Column=Diameter_Column**2*u.pi
+Porosity_Sand=0.4
+Length_Sand=20*u.cm
+Length_Water=10*u.cm
+Length_Column=Length_Sand+Length_Water
+Area_Column=Diameter_Column**2*u.pi/4
+Volume_Water=Length_Water*Area_Column
+Volume_Sand=Length_Sand*Area_Column*Porosity_Sand
+Volume_Reactor=Volume_Sand+Volume_Water
+HRT=Volume_Reactor.to(u.mL)/Q_Filter
+HRT
+
 Filtration_Velocity=1.8*u.mm/u.s
+Backwash_Velocity=11*u.mm/u.s
+Q_backwash=Area_Column*Backwash_Velocity
 Q_Filter=(Area_Column*Filtration_Velocity).to(u.mL/u.s)
 Q_Filter_hour=(Q_Filter*3600*u.s).to(u.L)
 Q_Filter_hour
+Q_Filter
+Q_backwash.to(u.ml/u.s)
 Fourteen_tubing = 0.21 *u.mL/u.revolution
 Eighteen_tubing = 3.8 *u.mL/u.revolution
 RPM = (Q_Filter/(Fourteen_tubing+Eighteen_tubing)).to(u.turn/u.min)
@@ -104,15 +118,15 @@ Mass_HA_Stock = 0.1*Mass_Clay_Stock
 C_HA_Stock = Mass_HA_Stock/Volume_Stock
 
 #For PACl = 2mg/L
-C_PACl_Filter=2*u.mg/u.L ##This is variable
+C_PACl_Filter=8*u.mg/u.L ##This is variable
 C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock_minute).to(u.mg/u.L)
 C_PACl_Stock
-C_PACl_La =70.28*u.mg/u.mL
+C_PACl_Lab =70.28*u.mg/u.mL
 
-Dilution_Factor=(C_PACl_La)/(C_PACl_Stock).to(u.mg/u.mL)
+Dilution_Factor=(C_PACl_Lab)/(C_PACl_Stock).to(u.mg/u.mL)
 Dilution_Factor
-##this is in a 4 L ucket
-V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_La)
+##this is in a 4 L bucket
+V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_Lab)
 V_Conc
 
 #Duplicate the code above to get the 1 mg/L and 0 mg/L masses and volumes for the stock solutions
@@ -120,10 +134,17 @@ V_Conc
 C_PACl_Filter=1*u.mg/u.L ##This is variable
 C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock_minute).to(u.mg/u.L)
 C_PACl_Stock
-C_PACl_La =70.28*u.mg/u.mL
+C_PACl_Lab =70.28*u.mg/u.mL
 
-V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_La)
+V_Conc=(C_PACl_Stock*Volume_Stock/C_PACl_Lab)
 V_Conc
-
-
+##flocculator residence time
+revolutions=12
+diameter_graduated_cylinder=6.5*u.cm   
+circum_graduated_cylinder=2*diameter_graduated_cylinder*u.pi
+length_flocculator=revolutions*circum_graduated_cylinder
+area_flocculator_tube=u.pi*4*u.mm**2/4
+Volume_Flocculator=(length_flocculator*area_flocculator_tube).to(u.L)
+HRT_Flocculator=Volume_Flocculator/Q_Filter
+HRT_Flocculator.to(u.s)
 ```
