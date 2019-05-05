@@ -37,6 +37,7 @@ import aguaclara.core.physchem as pc
 import aguaclara.core.utility as ut
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.interpolate import make_interp_spline, BSpline
 import collections
 import os
 from pathlib import Path
@@ -93,10 +94,10 @@ V_Conc
 
 #Analyzing data
 
-#20cm sand and 8 mg/L PAC as Al
+#20cm fine sand and 8 mg/L PAC as Al
 
 #File path for the tab delimited file containing the experimental measurements
-dfp_20_8 = "https://github.com/FelixYuHengYang/CEE4530/blob/master/Final%20Project/Data%20Files/20cm_sand_8mgperL_PAC_final.xls"
+dfp_20_8 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_8mgperL_PAC_final.txt"
 
 #Pandas dataframe with the data in the file
 df_20_8 = pd.read_csv(dfp_20_8,delimiter='\t')
@@ -105,16 +106,364 @@ df_20_8 = pd.read_csv(dfp_20_8,delimiter='\t')
 list(df_20_8)
 
 #Set the start index of the data file
-start_20_8=2
+start_20_8=1
 
 #The inlet turbidity data is in column 1
-column_inlet_20_8=1
+column_inlet_20_8=5
 
 #The outlet turbidity data is in column 1
-column_outlet_20_8=1
+column_outlet_20_8=4
+
+#Extracting the inlet data
+Inlet_20_8=epa.column_of_data(dfp_20_8,start_20_8,column_inlet_20_8)
+
+#Extracting the outlet data
+Outlet_20_8=epa.column_of_data(dfp_20_8,start_20_8,column_outlet_20_8)
+
+#Extracting the corresponding time data and convert to seconds
+Time_20_8 = epa.column_of_time(dfp_20_8,start_20_8).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_20_8,Inlet_20_8,'r',label='Inlet Turbidity')
+ax.plot(Time_20_8,Outlet_20_8,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_8_PAC')
+plt.show()
+
+#Failure plot
+fig, ax = plt.subplots()
+ax.plot(Time_20_8,Inlet_20_8,'r',label='Inlet Turbidity')
+ax.plot(Time_20_8,Outlet_20_8,'k', label='Outlet Turbidity')
+plt.axvline(x=260, label='Breakthrough Point')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_8_PAC_failure')
+plt.show()
 
 
+#20cm fine sand and 4 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_20_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_4mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_20_4 = pd.read_csv(dfp_20_4,delimiter='\t')
+
+#Column headers
+list(df_20_4)
+
+#Set the start index of the data file
+start_20_4=9
+
+#The inlet turbidity data is in column 1
+column_inlet_20_4=5
+
+#The outlet turbidity data is in column 1
+column_outlet_20_4=4
+
+#Extracting the inlet data
+Inlet_20_4=epa.column_of_data(dfp_20_4,start_20_4,column_inlet_20_4)
+
+#Extracting the outlet data
+Outlet_20_4=epa.column_of_data(dfp_20_4,start_20_4,column_outlet_20_4)
+
+#Extracting the corresponding time data and convert to seconds
+Time_20_4 = epa.column_of_time(dfp_20_4,start_20_4).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_20_4,Inlet_20_4,'r',label='Inlet Turbidity')
+ax.plot(Time_20_4,Outlet_20_4,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_4_PAC')
+plt.show()
+
+#Smooth the model by using spline function
+Smoothing_20_4 = np.linspace(Time_20_4.min(),Time_20_4.max(),100)
+spl_inlet_20_4 = make_interp_spline(Time_20_4, Inlet_20_4, k=3)
+Inlet_20_4_smooth = spl_inlet_20_4(Smoothing_20_4)
+
+spl_outlet_20_4 = make_interp_spline(Time_20_4, Outlet_20_4, k=3)
+Outlet_20_4_smooth = spl_outlet_20_4(Smoothing_20_4)
+
+#Failure plot
+fig, ax = plt.subplots()
+ax.plot(Smoothing_20_4,Inlet_20_4_smooth,'r',label='Inlet Turbidity')
+ax.plot(Smoothing_20_4,Outlet_20_4_smooth,'k', label='Outlet Turbidity')
+plt.axvline(x=860, label='Breakthrough Point')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_4_PAC_failure')
+plt.show()
+
+#20cm fine sand and 2 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_20_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_2mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_20_2 = pd.read_csv(dfp_20_2,delimiter='\t')
+
+#Column headers
+list(df_20_2)
+
+#Set the start index of the data file
+start_20_2=20
+
+#The inlet turbidity data is in column 1
+column_inlet_20_2=5
+
+#The outlet turbidity data is in column 1
+column_outlet_20_2=4
+
+#Extracting the inlet data
+Inlet_20_2=epa.column_of_data(dfp_20_2,start_20_2,column_inlet_20_2)
+
+#Extracting the outlet data
+Outlet_20_2=epa.column_of_data(dfp_20_2,start_20_2,column_outlet_20_2)
+
+#Extracting the corresponding time data and convert to seconds
+Time_20_2 = epa.column_of_time(dfp_20_2,start_20_2).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_20_2,Inlet_20_2,'r',label='Inlet Turbidity')
+ax.plot(Time_20_2,Outlet_20_2,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_2_PAC')
+plt.show()
+
+#20cm fine sand and 1 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_20_1 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_1mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_20_1 = pd.read_csv(dfp_20_1,delimiter='\t')
+
+#Column headers
+list(df_20_1)
+
+#Set the start index of the data file
+start_20_1=1
+
+#The inlet turbidity data is in column 1
+column_inlet_20_1=5
+
+#The outlet turbidity data is in column 1
+column_outlet_20_1=4
+
+#Extracting the inlet data
+Inlet_20_1=epa.column_of_data(dfp_20_1,start_20_1,column_inlet_20_1)
+
+#Extracting the outlet data
+Outlet_20_1=epa.column_of_data(dfp_20_1,start_20_1,column_outlet_20_1)
+
+#Extracting the corresponding time data and convert to seconds
+Time_20_1 = epa.column_of_time(dfp_20_1,start_20_1).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_20_1,Inlet_20_1,'r',label='Inlet Turbidity')
+ax.plot(Time_20_1,Outlet_20_1,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=8000,left=0);
+plt.ylim(bottom=0,top=8);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_1_PAC')
+plt.show()
+
+#15cm fine sand, 5 cm coarse sand and 8 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_15_5_8 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/15cm_sand_5cm_coarse_8mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_15_5_8 = pd.read_csv(dfp_15_5_8,delimiter='\t')
+
+#Column headers
+list(df_15_5_8)
+
+#Set the start index of the data file
+start_15_5_8=15
+
+#The inlet turbidity data is in column 1
+column_inlet_15_5_8=5
+
+#The outlet turbidity data is in column 1
+column_outlet_15_5_8=4
+
+#Extracting the inlet data
+Inlet_15_5_8=epa.column_of_data(dfp_15_5_8,start_15_5_8,column_inlet_15_5_8)
+
+#Extracting the outlet data
+Outlet_15_5_8=epa.column_of_data(dfp_15_5_8,start_15_5_8,column_outlet_15_5_8)
+
+#Extracting the corresponding time data and convert to seconds
+Time_15_5_8 = epa.column_of_time(dfp_15_5_8,start_15_5_8).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_15_5_8,Inlet_15_5_8,'r',label='Inlet Turbidity')
+ax.plot(Time_15_5_8,Outlet_15_5_8,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+#plt.xlim(right=8000,left=0);
+#plt.ylim(bottom=0,top=8);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC')
+plt.show()
 
 
+#15cm fine sand, 5 cm coarse sand and 4 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_15_5_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/15cm_sand_5cm_coarse_4mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_15_5_4 = pd.read_csv(dfp_15_5_4,delimiter='\t')
+
+#Column headers
+list(df_15_5_4)
+
+#Set the start index of the data file
+start_15_5_4=1
+
+#The inlet turbidity data is in column 1
+column_inlet_15_5_4=5
+
+#The outlet turbidity data is in column 1
+column_outlet_15_5_4=4
+
+#Extracting the inlet data
+Inlet_15_5_4=epa.column_of_data(dfp_15_5_4,start_15_5_4,column_inlet_15_5_4)
+
+#Extracting the outlet data
+Outlet_15_5_4=epa.column_of_data(dfp_15_5_4,start_15_5_4,column_outlet_15_5_4)
+
+#Extracting the corresponding time data and convert to seconds
+Time_15_5_4 = epa.column_of_time(dfp_15_5_4,start_15_5_4).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_15_5_4,Inlet_15_5_4,'r',label='Inlet Turbidity')
+ax.plot(Time_15_5_4,Outlet_15_5_4,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC')
+plt.show()
+
+#15cm fine sand, 5 cm coarse sand and 2 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_15_5_2 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/15cm_sand_5cm_coarse_2mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_15_5_2 = pd.read_csv(dfp_15_5_2,delimiter='\t')
+
+#Column headers
+list(df_15_5_2)
+
+#Set the start index of the data file
+start_15_5_2=1
+
+#The inlet turbidity data is in column 1
+column_inlet_15_5_2=5
+
+#The outlet turbidity data is in column 1
+column_outlet_15_5_2=4
+
+#Extracting the inlet data
+Inlet_15_5_2=epa.column_of_data(dfp_15_5_2,start_15_5_2,column_inlet_15_5_2)
+
+#Extracting the outlet data
+Outlet_15_5_2=epa.column_of_data(dfp_15_5_2,start_15_5_2,column_outlet_15_5_2)
+
+#Extracting the corresponding time data and convert to seconds
+Time_15_5_2 = epa.column_of_time(dfp_15_5_2,start_15_5_2).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_15_5_2,Inlet_15_5_2,'r',label='Inlet Turbidity')
+ax.plot(Time_15_5_2,Outlet_15_5_2,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=3000,left=0);
+plt.ylim(bottom=0,top=10);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
+plt.show()
+
+#15cm fine sand, 5 cm coarse sand and 1 mg/L PAC as Al
+
+#File path for the tab delimited file containing the experimental measurements
+dfp_15_5_1 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/15cm_sand_5cm_coarse_1mgperL_PAC_final.txt"
+
+#Pandas dataframe with the data in the file
+df_15_5_1 = pd.read_csv(dfp_15_5_1,delimiter='\t')
+
+#Column headers
+list(df_15_5_1)
+
+#Set the start index of the data file
+start_15_5_1=1
+
+#The inlet turbidity data is in column 1
+column_inlet_15_5_1=5
+
+#The outlet turbidity data is in column 1
+column_outlet_15_5_1=4
+
+#Extracting the inlet data
+Inlet_15_5_1=epa.column_of_data(dfp_15_5_1,start_15_5_1,column_inlet_15_5_1)
+
+#Extracting the outlet data
+Outlet_15_5_1=epa.column_of_data(dfp_15_5_1,start_15_5_1,column_outlet_15_5_1)
+
+#Extracting the corresponding time data and convert to seconds
+Time_15_5_1 = epa.column_of_time(dfp_15_5_1,start_15_5_1).to(u.s).magnitude
+
+#Now plot the graph
+fig, ax = plt.subplots()
+ax.plot(Time_15_5_1,Inlet_15_5_1,'r',label='Inlet Turbidity')
+ax.plot(Time_15_5_1,Outlet_15_5_1,'k', label='Outlet Turbidity')
+plt.xlabel('Time (s)')
+plt.ylabel('Turbidity (NTU)')
+ax.legend()
+plt.xlim(right=4000,left=0);
+plt.ylim(bottom=0,top=11);
+
+#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC')
+plt.show()
 
 ```
