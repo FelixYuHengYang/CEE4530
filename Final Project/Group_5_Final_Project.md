@@ -96,7 +96,7 @@ V_Conc
 #20cm sand and 8 mg/L PAC as Al
 
 #File path for the tab delimited file containing the experimental measurements
-dfp_20_8 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Lab%202%20-%20Acid%20Rain/Acid_Rain_Sodium_Bicarbonate_v3.txt"
+dfp_20_8 = ""
 
 
 
