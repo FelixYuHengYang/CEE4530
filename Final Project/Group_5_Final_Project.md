@@ -139,36 +139,36 @@ plt.show()
 #20cm sand and 4 mg/L PAC as Al
 
 #File path for the tab delimited file containing the experimental measurements
-dfp_20_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_8mgperL_PAC_final.txt"
+dfp_20_4 = "https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Data%20Files/20cm_sand_4mgperL_PAC_final.txt"
 
 #Pandas dataframe with the data in the file
-df_20_8 = pd.read_csv(dfp_20_8,delimiter='\t')
+df_20_4 = pd.read_csv(dfp_20_4,delimiter='\t')
 
 #Column headers
-list(df_20_8)
+list(df_20_4)
 
 #Set the start index of the data file
-start_20_8=1
+start_20_4=9
 
 #The inlet turbidity data is in column 1
-column_inlet_20_8=5
+column_inlet_20_4=5
 
 #The outlet turbidity data is in column 1
-column_outlet_20_8=4
+column_outlet_20_4=4
 
 #Extracting the inlet data
-Inlet_20_8=epa.column_of_data(dfp_20_8,start_20_8,column_inlet_20_8)
+Inlet_20_4=epa.column_of_data(dfp_20_4,start_20_4,column_inlet_20_4)
 
 #Extracting the outlet data
-Outlet_20_8=epa.column_of_data(dfp_20_8,start_20_8,column_outlet_20_8)
+Outlet_20_4=epa.column_of_data(dfp_20_4,start_20_4,column_outlet_20_4)
 
 #Extracting the corresponding time data and convert to seconds
-Time_20_8 = epa.column_of_time(dfp_20_8,start_20_8).to(u.s).magnitude
+Time_20_4 = epa.column_of_time(dfp_20_4,start_20_4).to(u.s).magnitude
 
 #Now plot the graph
 fig, ax = plt.subplots()
-ax.plot(Time_20_8,Inlet_20_8,'r',label='Inlet Turbidity')
-ax.plot(Time_20_8,Outlet_20_8,'k', label='Outlet Turbidity')
+ax.plot(Time_20_4,Inlet_20_4,'r',label='Inlet Turbidity')
+ax.plot(Time_20_4,Outlet_20_4,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
