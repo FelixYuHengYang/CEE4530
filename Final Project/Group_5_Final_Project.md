@@ -96,7 +96,24 @@ V_Conc
 #20cm sand and 8 mg/L PAC as Al
 
 #File path for the tab delimited file containing the experimental measurements
-dfp_20_8 = ""
+dfp_20_8 = "https://github.com/FelixYuHengYang/CEE4530/blob/master/Final%20Project/Data%20Files/20cm_sand_8mgperL_PAC_final.xls"
+
+#Pandas dataframe with the data in the file
+df_20_8 = pd.read_csv(dfp_20_8,delimiter='\t')
+
+#Column headers
+list(df_20_8)
+
+#Set the start index of the data file
+start_20_8=2
+
+#The inlet turbidity data is in column 1
+column_inlet_20_8=1
+
+#The outlet turbidity data is in column 1
+column_outlet_20_8=1
+
+
 
 
 
