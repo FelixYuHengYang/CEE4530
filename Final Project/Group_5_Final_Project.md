@@ -130,23 +130,31 @@ ax.plot(Time_20_8,Outlet_20_8,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
-plt.ylim(bottom=0,top=10);
+plt.xlim(right=2000,left=0);
+plt.ylim(bottom=0,top=15);
 
 plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC')
 plt.show()
 
+#Smooth the model by using spline function
+Smoothing_20_8 = np.linspace(Time_20_8.min(),Time_20_8.max(),100)
+spl_inlet_20_8 = make_interp_spline(Time_20_8, Inlet_20_8, k=3)
+Inlet_20_8_smooth = spl_inlet_20_8(Smoothing_20_8)
+
+spl_outlet_20_8 = make_interp_spline(Time_20_8, Outlet_20_8, k=3)
+Outlet_20_8_smooth = spl_outlet_20_8(Smoothing_20_8)
+
 #Failure plot
 fig, ax = plt.subplots()
-ax.plot(Time_20_8,Inlet_20_8,'r',label='Inlet Turbidity')
-ax.plot(Time_20_8,Outlet_20_8,'k', label='Outlet Turbidity')
-plt.axvline(x=60, label='Filtration Start').set_color("green")
-plt.axvline(x=260, label='Breakthrough Point')
+ax.plot(Smoothing_20_8,Inlet_20_8_smooth,'r',label='Inlet Turbidity')
+ax.plot(Smoothing_20_8,Outlet_20_8_smooth,'k', label='Outlet Turbidity')
+plt.axvline(x=200, label='Filtration Start').set_color("green")
+plt.axvline(x=240, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
-plt.ylim(bottom=0,top=10);
+plt.xlim(right=2000,left=0);
+plt.ylim(bottom=0,top=15);
 
 plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC_failure')
 plt.show()
@@ -188,10 +196,10 @@ ax.plot(Time_20_4,Outlet_20_4,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
+plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC')
 plt.show()
 
 #Smooth the model by using spline function
@@ -206,13 +214,15 @@ Outlet_20_4_smooth = spl_outlet_20_4(Smoothing_20_4)
 fig, ax = plt.subplots()
 ax.plot(Smoothing_20_4,Inlet_20_4_smooth,'r',label='Inlet Turbidity')
 ax.plot(Smoothing_20_4,Outlet_20_4_smooth,'k', label='Outlet Turbidity')
+plt.axvline(x=90, label='Filtration Start').set_color("green")
+plt.axvline(x=300, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
+plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_failure')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_failure')
 plt.show()
 
 #20cm fine sand and 2 mg/L PAC as Al
@@ -227,7 +237,7 @@ df_20_2 = pd.read_csv(dfp_20_2,delimiter='\t')
 list(df_20_2)
 
 #Set the start index of the data file
-start_20_2=20
+start_20_2=1
 
 #The inlet turbidity data is in column 1
 column_inlet_20_2=5
@@ -251,10 +261,10 @@ ax.plot(Time_20_2,Outlet_20_2,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
+plt.xlim(right=1500,left=0);
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
 plt.show()
 
 #Smooth the model by using spline function
@@ -269,15 +279,15 @@ Outlet_20_2_smooth = spl_outlet_20_2(Smoothing_20_2)
 fig, ax = plt.subplots()
 ax.plot(Smoothing_20_2,Inlet_20_2_smooth,'r',label='Inlet Turbidity')
 ax.plot(Smoothing_20_2,Outlet_20_2_smooth,'k', label='Outlet Turbidity')
-plt.axvline(x=150, label='Filtration Start').set_color("green")
-plt.axvline(x=350, label='Breakthrough Point')
+plt.axvline(x=70, label='Filtration Start').set_color("green")
+plt.axvline(x=280, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=4000,left=0);
+plt.xlim(right=1500,left=0);
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_failure')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_failure')
 plt.show()
 
 #20cm fine sand and 1 mg/L PAC as Al
@@ -313,37 +323,17 @@ Time_20_1 = epa.column_of_time(dfp_20_1,start_20_1).to(u.s).magnitude
 fig, ax = plt.subplots()
 ax.plot(Time_20_1,Inlet_20_1,'r',label='Inlet Turbidity')
 ax.plot(Time_20_1,Outlet_20_1,'k', label='Outlet Turbidity')
+plt.axvline(x=100, label='Filtration Start').set_color("green")
+plt.axvline(x=820, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=8);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_1_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC_failure')
 plt.show()
 
-#Smooth the model by using spline function
-Smoothing_20_1 = np.linspace(Time_20_1.min(),Time_20_1.max(),300)
-spl_inlet_20_1 = make_interp_spline(Time_20_1, Inlet_20_1, k=3)
-Inlet_20_1_smooth = spl_inlet_20_1(Smoothing_20_1)
-
-spl_outlet_20_1 = make_interp_spline(Time_20_1, Outlet_20_1, k=3)
-Outlet_20_1_smooth = spl_outlet_20_2(Smoothing_20_1)
-
-#Failure plot
-fig, ax = plt.subplots()
-ax.plot(Smoothing_20_1,Inlet_20_1_smooth,'r',label='Inlet Turbidity')
-ax.plot(Smoothing_20_1,Outlet_20_1_smooth,'k', label='Outlet Turbidity')
-plt.axvline(x=150, label='Filtration Start').set_color("green")
-plt.axvline(x=350, label='Breakthrough Point')
-plt.xlabel('Time (s)')
-plt.ylabel('Turbidity (NTU)')
-ax.legend()
-plt.xlim(right=8000,left=0);
-plt.ylim(bottom=0,top=10);
-
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_1_PAC_failure')
-plt.show()
 
 #15cm fine sand, 5 cm coarse sand and 8 mg/L PAC as Al
 
