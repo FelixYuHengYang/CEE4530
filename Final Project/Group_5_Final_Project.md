@@ -1,4 +1,4 @@
-#Group 5 - Lab Fire Final Project
+#Group 5 - Final Project
 ##A Study of Sand Filtration
 
 ##Introduction
@@ -70,7 +70,7 @@ Mass_HA_Stock = 0.1*Mass_Clay_Stock
 C_HA_Stock = Mass_HA_Stock/Volume_Stock
 
 #For PACl = 2mg/L
-C_PACl_Filter=2*u.mg/u.L ##This is variable
+C_PACl_Filter=4*u.mg/u.L ##This is variable
 C_PACl_Stock = (Q_Filter*C_PACl_Filter/Q_stock_minute).to(u.mg/u.L)
 C_PACl_Stock
 C_PACl_La =70.28*u.mg/u.mL
@@ -462,6 +462,8 @@ Outlet_15_5_4_smooth = spl_outlet_15_5_4(Smoothing_15_5_4)
 fig, ax = plt.subplots()
 ax.plot(Smoothing_15_5_4,Inlet_15_5_4_smooth,'r',label='Inlet Turbidity')
 ax.plot(Smoothing_15_5_4,Outlet_15_5_4_smooth,'k', label='Outlet Turbidity')
+plt.axvline(x=380, label='Filtration Start').set_color("green")
+plt.axvline(x=680, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
@@ -505,14 +507,14 @@ ax.plot(Time_15_5_2,Outlet_15_5_2,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-plt.xlim(right=3000,left=0);
+plt.xlim(right=1800,left=0);
 plt.ylim(bottom=0,top=10);
 
 #plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
 plt.show()
 
 #Smooth the model by using spline function
-Smoothing_15_5_2 = np.linspace(Time_15_5_2.min(),Time_15_5_2.max(),500)
+Smoothing_15_5_2 = np.linspace(Time_15_5_2.min(),Time_15_5_2.max(),100)
 spl_inlet_15_5_2 = make_interp_spline(Time_15_5_2, Inlet_15_5_2, k=3)
 Inlet_15_5_2_smooth = spl_inlet_15_5_2(Smoothing_15_5_2)
 
@@ -523,6 +525,8 @@ Outlet_15_5_2_smooth = spl_outlet_15_5_2(Smoothing_15_5_2)
 fig, ax = plt.subplots()
 ax.plot(Smoothing_15_5_2,Inlet_15_5_2_smooth,'r',label='Inlet Turbidity')
 ax.plot(Smoothing_15_5_2,Outlet_15_5_2_smooth,'k', label='Outlet Turbidity')
+plt.axvline(x=150, label='Filtration Start').set_color("green")
+plt.axvline(x=500, label='Breakthrough Point')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
