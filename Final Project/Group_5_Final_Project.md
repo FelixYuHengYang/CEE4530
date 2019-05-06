@@ -262,7 +262,7 @@ plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.xlim(right=1500,left=0);
-plt.ylim(bottom=0,top=10);
+plt.ylim(bottom=0,top=15);
 
 #plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
 plt.show()
@@ -285,7 +285,7 @@ plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.xlim(right=1500,left=0);
-plt.ylim(bottom=0,top=10);
+plt.ylim(bottom=0,top=15);
 
 #plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_failure')
 plt.show()
