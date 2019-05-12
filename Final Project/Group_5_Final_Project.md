@@ -9,7 +9,9 @@ There are many relevant equations to our research, but because of the scope of t
 ##Objectives
 ESTaRS currently uses 20 cm of sand for each bed, which is lower than the current industry standard of 50 cm to 75 cm. That reduced depth was arbitrarily chosen. Since there was no significant adverse effect of the function of the sand filters except for a reduction in time until backwash is needed, it is likely that other combinations of sand types and depths could provide more effective filtration in the system.
 
-The hypothesis for this experiment is that lowering the sand filter depth will decrease the failure time of the system, until the depth matches that of the mass transfer zone, when the failure time will equal three minutes.  
+The hypothesis for this experiment is that lowering the sand filter depth will decrease breakthrough time of the system, until the depth matches that of the mass transfer zone, when the failure time will equal three minutes. The second hypothesis is that higher coagulant doses will correlate with decreased breakthrough times.
+
+The reasoning behind the first hypothesis is that the decreased bed depth would decrease the amount of space flocs have to collect in the sand bed. This decreased space means that the filter bed would fail faster(decreasing the breakthrough time) as it recieves the same amount of flow, but with reduced capacity to filter the flow. For the second hypothesis, it is believed that the higher coagulant doses would create larger flocs than would have been possible lower coauglant doses.
 
 Group 5 (Lab Fire) will test this hypothesis by running experiments, varying the depth of the sand filter bed and coagulant dose, and controlling for flow rate, humic acid, and influent turbidity. Failure time is determined as the time at which the filter no longer produces water that is below 1 NTU. Another set of experiments will be ran with different sand grain sizes, while keeping the sand depth constant. It is unsure what the effect of the having heterogenous mixture of sand will be on filtration performance.
 
@@ -102,6 +104,7 @@ This is the procedure for conducting experiments.
 4. Run forward filtration. Keep in mind that tubing size for the water line is bigger, so the rate at which water is depleted is much faster than the rate at which the solution in the reactor is depleted. For example, the back tube in Figure 2 is connected to a (CAPACITY) gerrycan below the lab apparatus had to be filled approximately ever hour.
 ##Results and Discussion
 ##Conclusions
+The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It is unclear the exact reasons why the switch from homogenous sand mixture to a heterogenous sand mixture increased breakthrough time, while decreasing effluent turbidity. The comparison between experiments ran on the two homogenous sand bed depths showed that, in general, the breakthrough time also increased but for 2 mg/L coagulant dosing, the
 ##Suggestions/Comments
 The experiment ran into a lot of issues at every step of the way. Initially, experiments could not be ran because of problems with connecting two turbidimeters to one computer. This was not resolved for 2 weeks, delaying progress for a substantial period of time. Once this was resolved, many other issues came up that are detailed below.
 
