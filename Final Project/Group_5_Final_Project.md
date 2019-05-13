@@ -19,7 +19,7 @@ Group 5 will test this hypothesis by running experiments to measure breakthrough
 The methods will be divided into experimental apparatus, pump, stock solution, sand column, and ProCoDA.
 
 ###Experimental apparatus
-The primary goal of the experiment was to measure breakthrough time while changing parameters of the experiment. This meant that ProCoDA had to have two turbidimeters as inputs, one at the influent and one at the effluent. Before entering the influent turbidimeter, the stock tank, containing coagulant, humic acid, and clay, and a tap water source, was pumped in the flocculator where it mixed. Then, after going through the input turbidimeter, it entered through the top of the sand column, exiting out the bottom, and into the effluent turbidimeter, and finally into the drain.
+The primary goal of the experiment was to measure breakthrough time while changing parameters of the experiment. This meant that ProCoDA had to have two turbidimeters as inputs, one at the influent and one at the effluent. Before entering the influent turbidimeter, the stock tank, containing coagulant, humic acid, and clay, and a tap water source, was pumped in the flocculator where it mixed. Then, after going through the input turbidimeter, it entered through the top of the sand column, exiting out the bottom, and into the effluent turbidimeter, and finally into the drain. This can be better visualized in the two figures below.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/Diagram_of_setup.png" alt="PH vs Dimensionless Hydraulic Residence Time"/>
@@ -32,17 +32,17 @@ The primary goal of the experiment was to measure breakthrough time while changi
 <p align="center">Figure 2: Lab apparatus set-up</p>
 
 ####Pump
-Pump speed had to be determined before calculating stock solution concentrations because that would determine how much solution we would need. Pump speed also determines upflow and backwash velocity, so it was essential to calculate this first. Because Group 5 wanted to simulate plant conditions, standard upflow velocity (1.8 mm/s) for the sand column was utilized. This came out to 3.34 $mL/s$ for the variable that represented plant flow rate, $Q_{Filter}$, which corresponds to 50 RPM on the pump.
+Pump speed had to be determined before calculating stock solution concentrations because that would determine how much solution would be need. Pump speed also determines upflow and backwash velocity, so it was essential to calculate this first. Because Group 5 wanted to simulate plant conditions, standard upflow velocity (1.8 mm/s) for the sand column was utilized. This came out to 3.34 $mL/s$ for the variable that represented plant flow rate, $Q_{Filter}$, which corresponds to 50 RPM on the pump.
 
-During backwash, a different pump rate than regular filtration had to be utilized. 80 RPM fluidized the bed for the homogenous sand mixture, while 50 RPM fluidized the bed for the heterogenous mixture. This lower speed for the latter was because the experiment required that the two layers of sand not mix, and a lower speed would decrease the chance that there would be mixing. Below is a picture of the pump setup, which combines the flow of water and liquid from our reactor before entering the flocculator. Calculations for determining pump seed can be found in the python appendix after the report.
+During backwash, a different pump rate than regular filtration had to be utilized. 80 RPM fluidized the bed for the homogenous sand mixture, while 50 RPM fluidized the bed for the heterogenous mixture. This lower speed for the latter was used because the experiment required that the two layers of sand not mix, and a lower speed would decrease the chance that there would be mixing. Below is a picture of the pump setup, which combines the flow of water and liquid from our reactor before entering the flocculator. Calculations for determining pump speed can be found in the python appendix after the report.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/pump.jpg" alt="PH vs Dimensionless Hydraulic Residence Time"/>
 </p>
-<p align="center">Figure 3: Microflex pump </p>
+<p align="center">Figure 3: Microflex pump in the off state</p>
 
 ####Stock solution
-The stock tank contained a 4L solution of polyaluminum chloride, humic acid, clay, and water for dilution. All stock solutions had the same amount of clay and humic acid, as to keep influent turbidity consistent at 5 NTU, while varying the coagulant dose from 1 mg/L to 8 mg/L of PACl. Below is a sample calculation for a 8 mg/L coagulant stock solution. See appendix for the rest of the calculations.
+The stock tank contained a 4L solution of polyaluminum chloride, humic acid, clay, and water for dilution. All stock solutions had the same amount of clay and humic acid, as to keep influent turbidity consistent at 5 NTU, but varied in the coagulant dose from 1 mg/L to 8 mg/L of PACl. Below is a sample calculation for a 8 mg/L coagulant stock solution. See appendix for the rest of the calculations.
 
 The conversion from clay to turbid water was used to determine the mass of clay needed. This conversion factor is 1.47 mg/L of clay for every NTU of turbidity.
 
@@ -83,7 +83,7 @@ Between the pump and the influent turbidimeter was a flocculator to encourage co
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/flocculator.jpg" alt="PH vs Dimensionless Hydraulic Residence Time"/>
 </p>
-<p align="center">Figure 4: Flocculator with tee that combines flow on the left side </p>
+<p align="center">Figure 4: Flocculator with tee that combines the flow on the left side </p>
 
 ####Sand Column
 Three sets of experiments were ran, two with homogenous sand grain size, and one with two sand grain sizes. The first two had sand bed depths of 20 cm and 15 cm. The heterogenous mixture had 15 cm of fine grain sand, and 5 cm of coarse grain sand.
@@ -93,7 +93,7 @@ The sand bed depths were measured from the bottom of the PVC tube, which was fab
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/column.jpg" alt=""/>
 </p>
-<p align="center">Figure 5: Flocculator with tee that combines flow on the left side </p>
+<p align="center">Figure 5: 20 cm sand filter column </p>
 
 ####ProCoDA
 ProCoDA software was used to automate experiments, and monitor the turbidity of the influent and effluent solutions. The methods file can be found in the Github repository. Below is a screenshot of the software in the rules and outputs tab.
@@ -116,12 +116,60 @@ ProCoDA software was used to automate experiments, and monitor the turbidity of 
 
 ##Results and Discussion
 
-From each experiment, a graph which displayed inlet and outlet turbidity versus time was generated. The graphs are shown below.
+From each experiment, a graph which displayed inlet and outlet turbidity versus time was generated. Since the influent turbidity was not consistently at 5 NTU, often times increasing or decreasing throughout the course of an experiment, the results were normalized so that breakthrough time was relative to the influent concentration of the experiment. Therefore the breakthrough time is the range of time when effluent concentration was below 30% of the influent concentration. The normalized graphs are shown below, except for Figure 5 as an example. See python code and github for graphs that are not normalized.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_1_PAC.png" alt=""/>
+</p>
+<p align="center">Figure 5: Results for 20 cm sand filter column experiments </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/20_sand_8_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 6: Normalized results for 20 cm sand filter column with 8 mg/L of coagulant</p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/20_sand_4_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 7: Normalized results for 20 cm sand filter column with 4 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/20_sand_2_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 8: Normalized results for 20 cm sand filter column with 2 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/20_sand_1_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 9: Normalized results for 20 cm sand filter column with 1 mg/L of coagulant </p>
+
+The graphs above show the results for the experiments ran for 20 cm homogenous sand bed. The breakthrough times in seconds are as follows: 170, 380, 25, 1280.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_5_coarse_8_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 10: Normalized results for 15 cm fine sand and 5 cm coarse sand with 8 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_5_coarse_4_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 11: Normalized results for 15 cm fine sand and 5 cm coarse sand with 4 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_5_coarse_2_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 12: Normalized results for 15 cm fine sand and 5 cm coarse sand with 2 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_5_coarse_1_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 13: Normalized results for 15 cm fine sand and 5 cm coarse sand with 8 mg/L of coagulant </p>
+
+The graphs above  show the results for the experiments ran for 15 and 5 cm hetereogenous sand bed. The breakthrough times in seconds are as follows: 165, 335, 295, 65.
+https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_8_PAC_percent.png
+The graphs above  show the results for the experiments ran for 15 cm homogenous sand bed. The breakthrough times in seconds are as follows: 75, 360, 80, 350.
 ##Conclusions
-The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It is unclear the exact reasons why the switch from homogenous sand mixture to a heterogenous sand mixture increased breakthrough time, while decreasing effluent turbidity. The comparison between experiments ran on the two homogenous sand bed depths showed that, in general, the breakthrough time also increased but for 2 mg/L coagulant dosing, the
+The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It is unclear the exact reasons why the switch from homogenous sand mixture to a heterogenous sand mixture increased breakthrough time, while decreasing effluent turbidity. The comparison between experiments ran on the two homogenous sand bed depths showed that, in general, the breakthrough time also increased as the coagulant dose decreased, but the trends were not convincing. For both experiments, the 2 mg/L coagulant dose yielded the shortest breakthrough time in the 20 cm sand bed depth experiment (25 seconds), and the second shortest breakthrough time in the 15 cm sand bed depth experiment (80 seconds) which is inconsistent with the initial hypothesis.
 ##Suggestions/Comments
 The experiment ran into a lot of issues at every step of the way. Initially, experiments could not be ran because of problems with connecting two turbidimeters to one computer. This was not resolved for 2 weeks, delaying progress for a substantial period of time. Once this was resolved, many other issues came up that are detailed below.
 
@@ -171,6 +219,7 @@ import collections
 import os
 from pathlib import Path
 import pandas as pd
+from textwrap import wrap
 
 ##Flow calculations
 Diameter_Column=.957*u.inch
@@ -257,7 +306,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=15);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC')
 plt.show()
 
 
@@ -273,7 +322,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC_percent')
 plt.show()
 
 
@@ -282,7 +331,7 @@ Outlet_Percent_20_8_New_Size = len(Outlet_Percent_20_8_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_20_8 = ((Outlet_Percent_20_8_New_Size)*5)*(u.s)
+Breakthrough_Time_20_8 = ((Outlet_Percent_20_8_New_Size)*5)
 Breakthrough_Time_20_8
 
 #20cm fine sand and 4 mg/L PAC as Al
@@ -324,7 +373,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC')
 plt.show()
 
 Outlet_Percent_20_4 = np.divide(Outlet_20_4,Inlet_20_4)*100
@@ -339,7 +388,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=100);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_percent')
 plt.show()
 
 
@@ -348,7 +397,7 @@ Outlet_Percent_20_4_New_Size = len(Outlet_Percent_20_4_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_20_4 = ((Outlet_Percent_20_4_New_Size)*5)*(u.s)
+Breakthrough_Time_20_4 = ((Outlet_Percent_20_4_New_Size)*5)
 Breakthrough_Time_20_4
 
 #20cm fine sand and 2 mg/L PAC as Al
@@ -390,7 +439,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
 plt.show()
 
 Outlet_Percent_20_2 = np.divide(Outlet_20_2,Inlet_20_2)*100
@@ -405,7 +454,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_percent')
 plt.show()
 
 
@@ -414,7 +463,7 @@ Outlet_Percent_20_2_New_Size = len(Outlet_Percent_20_2_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_20_2 = ((Outlet_Percent_20_2_New_Size)*5)*(u.s)
+Breakthrough_Time_20_2 = ((Outlet_Percent_20_2_New_Size)*5)
 Breakthrough_Time_20_2
 
 #20cm fine sand and 1 mg/L PAC as Al
@@ -456,7 +505,7 @@ ax.legend()
 plt.xlim(right=8000,left=0);
 plt.ylim(bottom=0,top=8);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC')
 plt.show()
 
 Outlet_Percent_20_1 = np.divide(Outlet_20_1,Inlet_20_1)*100
@@ -471,7 +520,7 @@ ax.legend()
 plt.xlim(right=8000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC_percent')
 plt.show()
 
 
@@ -480,7 +529,7 @@ Outlet_Percent_20_1_New_Size = len(Outlet_Percent_20_1_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_20_1 = ((Outlet_Percent_20_1_New_Size)*5)*(u.s)
+Breakthrough_Time_20_1 = ((Outlet_Percent_20_1_New_Size)*5)
 Breakthrough_Time_20_1
 
 #15cm fine sand, 5 cm coarse sand and 8 mg/L PAC as Al
@@ -522,7 +571,7 @@ ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=25);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC')
 plt.show()
 
 Outlet_Percent_15_5_8 = np.divide(Outlet_15_5_8,Inlet_15_5_8)*100
@@ -537,7 +586,7 @@ ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC_percent')
 plt.show()
 
 
@@ -546,7 +595,7 @@ Outlet_Percent_15_5_8_New_Size = len(Outlet_Percent_15_5_8_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_5_8 = ((Outlet_Percent_15_5_8_New_Size)*5)*(u.s)
+Breakthrough_Time_15_5_8 = ((Outlet_Percent_15_5_8_New_Size)*5)
 Breakthrough_Time_15_5_8
 
 #15cm fine sand, 5 cm coarse sand and 4 mg/L PAC as Al
@@ -586,7 +635,7 @@ plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC')
 plt.show()
 
 Outlet_Percent_15_5_4 = np.divide(Outlet_15_5_4,Inlet_15_5_4)*100
@@ -601,7 +650,7 @@ ax.legend()
 plt.xlim(right=3000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC_percent')
 plt.show()
 
 
@@ -610,7 +659,7 @@ Outlet_Percent_15_5_4_New_Size = len(Outlet_Percent_15_5_4_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_5_4 = ((Outlet_Percent_15_5_4_New_Size)*5)*(u.s)
+Breakthrough_Time_15_5_4 = ((Outlet_Percent_15_5_4_New_Size)*5)
 Breakthrough_Time_15_5_4
 
 #15cm fine sand, 5 cm coarse sand and 2 mg/L PAC as Al
@@ -652,7 +701,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=20);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
 plt.show()
 
 Outlet_Percent_15_5_2 = np.divide(Outlet_15_5_2,Inlet_15_5_2)*100
@@ -667,7 +716,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC_percent')
 plt.show()
 
 
@@ -676,7 +725,7 @@ Outlet_Percent_15_5_2_New_Size = len(Outlet_Percent_15_5_2_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_5_2 = ((Outlet_Percent_15_5_2_New_Size)*5)*(u.s)
+Breakthrough_Time_15_5_2 = ((Outlet_Percent_15_5_2_New_Size)*5)
 Breakthrough_Time_15_5_2
 
 #15cm fine sand, 5 cm coarse sand and 1 mg/L PAC as Al
@@ -718,7 +767,7 @@ ax.legend()
 plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=11);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC')
 plt.show()
 
 Outlet_Percent_15_5_1 = np.divide(Outlet_15_5_1,Inlet_15_5_1)*100
@@ -733,7 +782,7 @@ ax.legend()
 plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC_percent')
 plt.show()
 
 
@@ -742,7 +791,7 @@ Outlet_Percent_15_5_1_New_Size = len(Outlet_Percent_15_5_1_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_5_1 = ((Outlet_Percent_15_5_1_New_Size)*5)*(u.s)
+Breakthrough_Time_15_5_1 = ((Outlet_Percent_15_5_1_New_Size)*5)
 Breakthrough_Time_15_5_1
 
 #15cm fine sand and 8 mg/L PAC as Al
@@ -783,7 +832,7 @@ plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC')
 plt.show()
 
 
@@ -799,7 +848,7 @@ ax.legend()
 plt.xlim(right=1000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC_percent')
 plt.show()
 
 
@@ -808,7 +857,7 @@ Outlet_Percent_15_8_New_Size = len(Outlet_Percent_15_8_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_8 = ((Outlet_Percent_15_8_New_Size)*5)*(u.s)
+Breakthrough_Time_15_8 = ((Outlet_Percent_15_8_New_Size)*5)
 Breakthrough_Time_15_8
 
 #15cm fine sand and 4 mg/L PAC as Al
@@ -849,7 +898,7 @@ plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC')
 plt.show()
 
 Outlet_Percent_15_4 = np.divide(Outlet_15_4,Inlet_15_4)*100
@@ -864,7 +913,7 @@ ax.legend()
 plt.xlim(right=1000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC_percent')
 plt.show()
 
 
@@ -873,7 +922,7 @@ Outlet_Percent_15_4_New_Size = len(Outlet_Percent_15_4_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_4 = ((Outlet_Percent_15_4_New_Size)*5)*(u.s)
+Breakthrough_Time_15_4 = ((Outlet_Percent_15_4_New_Size)*5)
 Breakthrough_Time_15_4
 
 #15cm fine sand and 2 mg/L PAC as Al
@@ -914,7 +963,7 @@ plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC')
 plt.show()
 
 Outlet_Percent_15_2 = np.divide(Outlet_15_2,Inlet_15_2)*100
@@ -930,7 +979,7 @@ ax.legend()
 plt.xlim(right=300,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC_percent')
 plt.show()
 
 
@@ -939,7 +988,7 @@ Outlet_Percent_15_2_New_Size = len(Outlet_Percent_15_2_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_2 = ((Outlet_Percent_15_2_New_Size)*5)*(u.s)
+Breakthrough_Time_15_2 = ((Outlet_Percent_15_2_New_Size)*5)
 Breakthrough_Time_15_2
 
 #15cm fine sand and 1 mg/L PAC as Al
@@ -981,7 +1030,7 @@ ax.legend()
 plt.xlim(left=0,right=7000);
 plt.ylim(bottom=0,top=10);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC')
 plt.show()
 
 Outlet_Percent_15_1 = np.divide(Outlet_15_1,Inlet_15_1)*100
@@ -996,7 +1045,7 @@ ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=200);
 
-plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC_percent')
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC_percent')
 plt.show()
 
 
@@ -1005,24 +1054,63 @@ Outlet_Percent_15_1_New_Size = len(Outlet_Percent_15_1_New)
 
 #Since measurements were taken every 5 seconds:
 
-Breakthrough_Time_15_1 = ((Outlet_Percent_15_1_New_Size)*5)*(u.s)
+Breakthrough_Time_15_1 = ((Outlet_Percent_15_1_New_Size)*5)
 Breakthrough_Time_15_1
 
 #Now plot the graph of breakthrough times vs sand size
 
-Breakthrough_Times = [Breakthrough_Time_20_8, Breakthrough_Time_20_4, Breakthrough_Time_20_2, Breakthrough_Time_20_1, Breakthrough_Time_15_5_8, Breakthrough_Time_15_5_4, Breakthrough_Time_15_5_2, Breakthrough_Time_15_5_1, Breakthrough_Time_15_8, Breakthrough_Time_15_4, Breakthrough_Time_15_2, Breakthrough_Time_15_1]
+Breakthrough_Times_8 = [Breakthrough_Time_20_8, Breakthrough_Time_15_5_8, Breakthrough_Time_15_8]
+
+Breakthrough_Times_4 = [Breakthrough_Time_20_4, Breakthrough_Time_15_5_4, Breakthrough_Time_15_4]
+
+Breakthrough_Times_2 = [Breakthrough_Time_20_2, Breakthrough_Time_15_5_2, Breakthrough_Time_15_2]
+
+Breakthrough_Times_1 = [Breakthrough_Time_20_1, Breakthrough_Time_15_5_1, Breakthrough_Time_15_1]
+
+Sand_Sizes = [20, 17.5, 15]
+
 
 fig, ax = plt.subplots()
-ax.plot(Time_15_1,Outlet_Percent_15_1,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
-plt.xlabel('Time (s)')
-plt.ylabel('Percent Turbidity (%)')
+ax.plot(Sand_Sizes,Breakthrough_Times_8,'ro', label='PAC = 8mg/L')
+ax.plot(Sand_Sizes,Breakthrough_Times_4,'co', label='PAC = 4mg/L')
+ax.plot(Sand_Sizes,Breakthrough_Times_2,'ko', label='PAC = 2mg/L')
+ax.plot(Sand_Sizes,Breakthrough_Times_1,'mo', label='PAC = 1mg/L')
+plt.xlabel('Sand Sizes (cm)')
+plt.ylabel('Breakthrough Time (s)')
 ax.legend()
-plt.xlim(right=5000,left=0);
-plt.ylim(bottom=0,top=200);
+plt.xlim(right=10,left=25);
+plt.ylim(bottom=0,top=1500);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC_percent')
+x_ticks_labels = ['20cm fine','15cm fine  5cm coarse','5cm fine']
+x_ticks_labels = [ '\n'.join(wrap(l, 10)) for l in x_ticks_labels ]
+
+# Set number of ticks for x-axis
+ax.set_xticks(Sand_Sizes)
+# Set ticks labels for x-axis
+ax.set_xticklabels(x_ticks_labels, rotation='horizontal', fontsize=10)
+
+
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Sand Size')
 plt.show()
 
+Breakthrough_Times_20 = [Breakthrough_Time_20_8, Breakthrough_Time_20_4, Breakthrough_Time_20_2, Breakthrough_Time_20_1]
 
+Breakthrough_Times_15_5 = [Breakthrough_Time_15_5_8, Breakthrough_Time_15_5_4, Breakthrough_Time_15_5_2, Breakthrough_Time_15_5_1]
+
+Breakthrough_Times_15 = [Breakthrough_Time_15_8, Breakthrough_Time_15_4, Breakthrough_Time_15_2, Breakthrough_Time_15_1]
+
+Coagulant = [8, 4, 2, 1]
+
+fig, ax = plt.subplots()
+ax.plot(Coagulant,Breakthrough_Times_20,'ro', label='Sand: 20cm fine')
+ax.plot(Coagulant,Breakthrough_Times_15_5,'co', label='Sand: 15cm fine, 5cm coarse')
+ax.plot(Coagulant,Breakthrough_Times_15,'ko', label='Sand: 15cm fine')
+plt.xlabel('Coagulant (mg/L)')
+plt.ylabel('Breakthrough Time (s)')
+ax.legend()
+plt.xlim(right=0,left=10);
+plt.ylim(bottom=0,top=500);
+
+#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Coagulant Dosage')
+plt.show()
 ```
