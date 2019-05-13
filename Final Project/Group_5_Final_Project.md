@@ -13,7 +13,7 @@ The hypothesis for this experiment is that lowering the sand filter depth will d
 
 The reasoning behind the first hypothesis is that the decreased bed depth would decrease the amount of space flocs have to collect in the sand bed. This decreased space means that the filter bed would fail faster (decreasing the breakthrough time) as it receives the same amount of flow with a reduced capacity to filter the flow. For the second hypothesis, it is believed that the higher coagulant doses would create larger flocs than would have been possible lower coagulant doses.
 
-Group 5 will test this hypothesis by running experiments to measure breakthrough time, varying the depth of the sand filter bed and coagulant dose while controlling for flow rate, clay humic acid, and influent turbidity. Breakthrough time is determined as the time at which the effluent turbidity is no longer constant but instead starts rising. Another set of experiments was run with different sand grain sizes, while keeping the sand depth constant.
+Group 5 will test this hypothesis by running experiments to measure breakthrough time, varying the depth of the sand filter bed and coagulant dose while controlling for flow rate, clay humic acid, and influent turbidity. Breakthrough time is defined as the time at which the effluent turbidity is no longer lower than 30% of the influent turbidity. Another set of experiments was run with different sand grain sizes, while keeping the sand depth constant.
 
 ##Methods
 The methods will be divided into experimental apparatus, pump, stock solution, sand column, and ProCoDA.
@@ -189,6 +189,8 @@ The graphs above  show the results for the experiments ran for 15 and 5 cm heter
 
 The graphs above  show the results for the experiments ran for 15 cm homogenous sand bed. The breakthrough times in seconds are as follows: 75, 360, 80, 350.
 
+The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It was expected that increasing the coagulant dosage and decreasing bed depth would result in a decreased breakthrough time. In addition, adding a layer of coarser sand should have increased the breakthrough time according to our hypothesis. However, this experiment did not verify the hypotheses mentioned above as there were no discernible trends (Figures 17 and 18). For both experiments, the 2 mg/L coagulant dose yielded the shortest breakthrough time in the 20 cm sand bed depth experiment (25 seconds), and the second shortest breakthrough time in the 15 cm sand bed depth experiment (80 seconds) which is inconsistent with the initial hypothesis. We believe that this is due to experimental errors and inconsistencies in the experimental procedure, which are outlined below.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/Breakthrough%20vs%20Sand%20Size.png"" alt=""/>
 </p>
@@ -200,7 +202,8 @@ The graphs above  show the results for the experiments ran for 15 cm homogenous 
 <p align="center">Figure 18: Breakthrough time as a function of coagulant dose</p>
 
 ##Conclusions
-The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It is unclear the exact reasons why the switch from homogenous sand mixture to a heterogenous sand mixture increased breakthrough time, while decreasing effluent turbidity. The comparison between experiments ran on the two homogenous sand bed depths showed that, in general, the breakthrough time also increased as the coagulant dose decreased, but the trends were not convincing. For both experiments, the 2 mg/L coagulant dose yielded the shortest breakthrough time in the 20 cm sand bed depth experiment (25 seconds), and the second shortest breakthrough time in the 15 cm sand bed depth experiment (80 seconds) which is inconsistent with the initial hypothesis.
+
+This experiment was conducted to investigate the effect of sand bed media, depths, and coagulant dosage on sand filtration. The purpose of the experiment was to determine which experimental setup would filter water contaminated with clay and humic acid more effectively. To quantify this objective, effective filtration was characterized as an effluent concentration that is below 30% of the influent concentration. This limit was arbitrarily set and could have been 20% or 40% of the influent NTU, but at 20% breakthrough times for some coagulant doses were zero seconds which would not have yielded any meaningful results. As stated in the objectives, breakthrough time is defined as the time at which the effluent turbidity is no longer lower than 30% of the influent turbidity. The hypotheses we had formed were that increasing the coagulant dosage and decreasing bed depth would result in a decreased breakthrough time, whereas adding a layer of coarser sand should have increased the breakthrough time. Even though we conducted various combinations of sand bed depths, media, and coagulant dosages, as well as multiple runs of each combination, clear trends were not discernable. We hypothesize that this is due to experimental errors and inconsistencies in procedure that are discussed below. Overall, it was a very interesting experiment and if there were more time in the semester we would conduct additional experiments as well as repeat the ones already conducted with a more standard procedure.
 
 ##Suggestions/Comments
 The experiment ran into a lot of issues at every step of the way. Initially, experiments could not be ran because of problems with connecting two turbidimeters to one computer. This was not resolved for 2 weeks, delaying progress for a substantial period of time. Once this was resolved, many other issues came up that are detailed below.
@@ -208,26 +211,25 @@ The experiment ran into a lot of issues at every step of the way. Initially, exp
 * Influent NTU
   * Often was not consistently at 5 NTU despite all reactor solutions containing the same amount of clay and humic acid.
   * Often consistently decreased in NTU or increased in NTU as the experiment went on.
+  * This could be because of inefficient mixing in the reactor, in which case a solution would be to monitor the mixing process until the solution looks very well mixed.
 * Backwash procedure was not standardized
   * Backwash operation was ran until effluent was less than 1 NTU, but this was not always followed, which may have caused some consistency issues in experiments.
   * Turbidimeter glass was found to have sand grains in them after backwashing, but this was discovered late in the semester. This likely caused inaccurate turbidity measurements.
 * Inner diameter of sand column
-  * Inner diameter was measured in-house (0.957"), but appears to be different in manufacturer models(1.049"). This likely means that the rpm calculated for the experiments was not right.
-* Choppy data
-  * Data smoothing had to be employed because some experiments had very choppy data.
+  * Inner diameter was measured in-house (0.957"), but appears to be different in manufacturer models(1.049"). This likely means that the RPM calculated for the experiments was not right.
 * Sand mixing
-  * During backwash for heterogenous sand layers, the layers often mixed which was not ideal as they were supposed to be separate.
-  *
+  * Even though a slower rate (50 PRM) for backwash was used to clean the heterogenous sand mixture, the different sand layers were not easily distinguishable after backwash
+
 ##Resources needed to conduct experiments
 Tubing: #18 tubing for water influent, #14 tubing for stock solution influent
-Filter Column: 1 inch Diameter Schedule 80 Clear PVC Pipe 12"
+Filter Column: 30 cm length 1 inch Diameter Schedule 80 Clear PVC Pipe
 Pump: 1
 Valves: 5   
 Turbidimeters: 2
-Sand: To be determined as experiments are conducted
-Clay: To be determined as experiments are conducted
-Humic Acid: To be determined as experiments are conducted
-PACl: To be determined as experiments are conducted
+Sand: depending on the condition tested in each experiment
+Clay: 561.4 mg of clay per experiment run
+Humic Acid: 56 mg of humic acid per experiment run
+PACl: 16303 microliters of 70.28 mg/L of PACl
 
 
 ##References/Bibliography
@@ -296,6 +298,8 @@ V_Conc_8mL_Coag=u.uL*8695
 V_Conc_4mL_Coag=u.uL*4347
 V_Conc_2mL_Coag=u.uL*2174
 V_Conc_1mL_Coag=u.uL*1087
+V_Per_Sand_Depth=(8695+4347+2174+1087)*u.uL
+V_Per_Sand_Depth
 
 #Analyzing data
 
@@ -999,7 +1003,6 @@ plt.ylim(bottom=0,top=10);
 plt.show()
 
 Outlet_Percent_15_2 = np.divide(Outlet_15_2,Inlet_15_2)*100
-Outlet_Percent_15_2
 
 #Now plot the graph
 fig, ax = plt.subplots()
@@ -1107,13 +1110,12 @@ ax.plot(Sand_Sizes,Breakthrough_Times_8,'ro', label='PAC = 8mg/L')
 ax.plot(Sand_Sizes,Breakthrough_Times_4,'co', label='PAC = 4mg/L')
 ax.plot(Sand_Sizes,Breakthrough_Times_2,'ko', label='PAC = 2mg/L')
 ax.plot(Sand_Sizes,Breakthrough_Times_1,'mo', label='PAC = 1mg/L')
-plt.xlabel('Sand Sizes (cm)')
 plt.ylabel('Breakthrough Time (s)')
 ax.legend()
 plt.xlim(right=10,left=25);
 plt.ylim(bottom=0,top=1500);
 
-x_ticks_labels = ['20cm fine','15cm fine  5cm coarse','5cm fine']
+x_ticks_labels = ['20cm fine','15cm fine  5cm coarse','15cm fine']
 x_ticks_labels = [ '\n'.join(wrap(l, 10)) for l in x_ticks_labels ]
 
 # Set number of ticks for x-axis
