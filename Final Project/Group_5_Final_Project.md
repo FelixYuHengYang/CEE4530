@@ -2,18 +2,18 @@
 ##A Study of Sand Filtration
 
 ##Introduction
-Current AguaClara technology utilizes enclosed stacked rapid sand filters (ESTaRS), which is itself an innovation upon traditional rapid sand filters that saves floor space. It does so by placing several beds of sand on top of one another between inlet and outlet pipes. However, it is possible that even more space could be conserved by reducing the height of each bed of sand. Conserving space and thus money is important because a part of AguaClara's mission is to create the most affordable technology possible without compromising on the quality of the water that is produced. This research project seeks to discover the effect of different sand media, filter bed depth, and coagulant dosage on wastewater filtration.
+Current AguaClara technology utilizes enclosed stacked rapid sand filters (ESTaRS), which is itself an innovation upon traditional rapid sand filters that was developed to save floor space. It does so by placing several beds of sand on top of one another between inlet and outlet pipes. However, it is possible that space could be further conserved by reducing the height of each bed of sand. Conserving space and thus money is important to AguaClara's because it's philosophy is to create the most affordable technology possible without compromising on the quality of the water that is treated. This research project seeks to discover the effect of different sand media, filter bed depth, and coagulant dosage on wastewater filtration.
 
-There are many relevant equations to our research, but because of the scope of the project, equations such as those that predict head-loss in the experimental apparatus, backwash velocity required to fluidize the sand bed, and others were not included. Instead, standard upflow velocities of AguaClara plants were used, to mimic plant conditions as closely as possible.
+There are many relevant equations to our research, but because of the scope of the project, equations such as those that predict head-loss in the experimental apparatus, backwash velocity required to fluidize the sand bed, and others were not utilized and thus not  included. Instead, standard upflow velocities of AguaClara plants were used, to mimic plant conditions as closely as possible.
 
 ##Objectives
 ESTaRS currently uses 20 cm of sand for each bed, which is lower than the current industry standard of 50 cm to 75 cm. That reduced depth was arbitrarily chosen. Since there was no significant adverse effect of the function of the sand filters except for a reduction in time until backwash is needed, it is likely that other combinations of sand types and depths could provide more effective filtration in the system.
 
 The hypothesis for this experiment is that lowering the sand filter depth will decrease breakthrough time of the system. The second hypothesis is that higher coagulant doses will correlate with decreased breakthrough times.
 
-The reasoning behind the first hypothesis is that the decreased bed depth would decrease the amount of space flocs have to collect in the sand bed. This decreased space means that the filter bed would fail faster(decreasing the breakthrough time) as it receives the same amount of flow, but with reduced capacity to filter the flow. For the second hypothesis, it is believed that the higher coagulant doses would create larger flocs than would have been possible lower coagulant doses.
+The reasoning behind the first hypothesis is that the decreased bed depth would decrease the amount of space flocs have to collect in the sand bed. This decreased space means that the filter bed would fail faster (decreasing the breakthrough time) as it receives the same amount of flow with a reduced capacity to filter the flow. For the second hypothesis, it is believed that the higher coagulant doses would create larger flocs than would have been possible lower coagulant doses.
 
-Group 5 will test this hypothesis by running experiments, varying the depth of the sand filter bed and coagulant dose, and controlling for flow rate, humic acid, and influent turbidity. Failure time is determined as the time at which the effluent turbidity is no longer constant but instead starts rising. Another set of experiments was run with different sand grain sizes, while keeping the sand depth constant.
+Group 5 will test this hypothesis by running experiments to measure breakthrough time, varying the depth of the sand filter bed and coagulant dose while controlling for flow rate, clay humic acid, and influent turbidity. Breakthrough time is determined as the time at which the effluent turbidity is no longer constant but instead starts rising. Another set of experiments was run with different sand grain sizes, while keeping the sand depth constant.
 
 ##Methods
 The methods will be divided into experimental apparatus, pump, stock solution, sand column, and ProCoDA.
@@ -257,7 +257,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=15);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC')
 plt.show()
 
 
@@ -273,7 +273,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_8_PAC_percent')
 plt.show()
 
 
@@ -324,7 +324,7 @@ ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_4_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC')
 plt.show()
 
 Outlet_Percent_20_4 = np.divide(Outlet_20_4,Inlet_20_4)*100
@@ -332,14 +332,14 @@ Outlet_Percent_20_4 = np.divide(Outlet_20_4,Inlet_20_4)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_20_4,Outlet_Percent_20_4,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=2000,left=0);
 plt.ylim(bottom=0,top=100);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_4_PAC_percent')
 plt.show()
 
 
@@ -390,7 +390,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_2_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC')
 plt.show()
 
 Outlet_Percent_20_2 = np.divide(Outlet_20_2,Inlet_20_2)*100
@@ -398,14 +398,14 @@ Outlet_Percent_20_2 = np.divide(Outlet_20_2,Inlet_20_2)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_20_2,Outlet_Percent_20_2,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_2_PAC_percent')
 plt.show()
 
 
@@ -456,7 +456,7 @@ ax.legend()
 plt.xlim(right=8000,left=0);
 plt.ylim(bottom=0,top=8);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/20_sand_1_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC')
 plt.show()
 
 Outlet_Percent_20_1 = np.divide(Outlet_20_1,Inlet_20_1)*100
@@ -464,14 +464,14 @@ Outlet_Percent_20_1 = np.divide(Outlet_20_1,Inlet_20_1)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_20_1,Outlet_Percent_20_1,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=8000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/20_sand_1_PAC_percent')
 plt.show()
 
 
@@ -522,7 +522,7 @@ ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=25);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC')
 plt.show()
 
 Outlet_Percent_15_5_8 = np.divide(Outlet_15_5_8,Inlet_15_5_8)*100
@@ -530,14 +530,14 @@ Outlet_Percent_15_5_8 = np.divide(Outlet_15_5_8,Inlet_15_5_8)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_5_8,Outlet_Percent_15_5_8,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_8_PAC_percent')
 plt.show()
 
 
@@ -586,7 +586,7 @@ plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC')
 plt.show()
 
 Outlet_Percent_15_5_4 = np.divide(Outlet_15_5_4,Inlet_15_5_4)*100
@@ -594,14 +594,14 @@ Outlet_Percent_15_5_4 = np.divide(Outlet_15_5_4,Inlet_15_5_4)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_5_4,Outlet_Percent_15_5_4,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=3000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_4_PAC_percent')
 plt.show()
 
 
@@ -652,7 +652,7 @@ ax.legend()
 plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=20);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC')
 plt.show()
 
 Outlet_Percent_15_5_2 = np.divide(Outlet_15_5_2,Inlet_15_5_2)*100
@@ -660,14 +660,14 @@ Outlet_Percent_15_5_2 = np.divide(Outlet_15_5_2,Inlet_15_5_2)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_5_2,Outlet_Percent_15_5_2,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
-plt.xlim(right=3000,left=0);
+plt.xlim(right=2500,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_2_PAC_percent')
 plt.show()
 
 
@@ -718,7 +718,7 @@ ax.legend()
 plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=11);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC')
 plt.show()
 
 Outlet_Percent_15_5_1 = np.divide(Outlet_15_5_1,Inlet_15_5_1)*100
@@ -726,14 +726,14 @@ Outlet_Percent_15_5_1 = np.divide(Outlet_15_5_1,Inlet_15_5_1)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_5_1,Outlet_Percent_15_5_1,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_5_coarse_1_PAC_percent')
 plt.show()
 
 
@@ -781,10 +781,9 @@ ax.plot(Time_15_8,Outlet_15_8,'k', label='Outlet Turbidity')
 plt.xlabel('Time (s)')
 plt.ylabel('Turbidity (NTU)')
 ax.legend()
-#plt.xlim(right=4000,left=0);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_8_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC')
 plt.show()
 
 
@@ -793,14 +792,14 @@ Outlet_Percent_15_8 = np.divide(Outlet_15_8,Inlet_15_8)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_8,Outlet_Percent_15_8,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=1000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_8_PAC_percent')
 plt.show()
 
 
@@ -850,7 +849,7 @@ plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_4_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC')
 plt.show()
 
 Outlet_Percent_15_4 = np.divide(Outlet_15_4,Inlet_15_4)*100
@@ -858,14 +857,14 @@ Outlet_Percent_15_4 = np.divide(Outlet_15_4,Inlet_15_4)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_4,Outlet_Percent_15_4,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=1000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_4_PAC_percent')
 plt.show()
 
 
@@ -915,7 +914,7 @@ plt.ylabel('Turbidity (NTU)')
 ax.legend()
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_2_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC')
 plt.show()
 
 Outlet_Percent_15_2 = np.divide(Outlet_15_2,Inlet_15_2)*100
@@ -924,14 +923,14 @@ Outlet_Percent_15_2
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_2,Outlet_Percent_15_2,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=300,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_2_PAC_percent')
 plt.show()
 
 
@@ -982,7 +981,7 @@ ax.legend()
 plt.xlim(left=0,right=7000);
 plt.ylim(bottom=0,top=10);
 
-#plt.savefig('C:/Users/Felix/Documents/Github/CEE4530/Final Project/Images/15_sand_1_PAC')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC')
 plt.show()
 
 Outlet_Percent_15_1 = np.divide(Outlet_15_1,Inlet_15_1)*100
@@ -990,14 +989,14 @@ Outlet_Percent_15_1 = np.divide(Outlet_15_1,Inlet_15_1)*100
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(Time_15_1,Outlet_Percent_15_1,'r', label='Percent of Inlet Turbidity in Effluent')
-plt.axhline(y=20, label='Breakthrough Threshold')
+plt.axhline(y=30, label='Breakthrough Threshold')
 plt.xlabel('Time (s)')
 plt.ylabel('Percent Turbidity (%)')
 ax.legend()
 plt.xlim(right=5000,left=0);
 plt.ylim(bottom=0,top=200);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC_percent')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/15_sand_1_PAC_percent')
 plt.show()
 
 
