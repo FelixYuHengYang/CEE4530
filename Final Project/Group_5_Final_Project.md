@@ -116,7 +116,7 @@ ProCoDA software was used to automate experiments, and monitor the turbidity of 
 
 ##Results and Discussion
 
-From each experiment, a graph which displayed inlet and outlet turbidity versus time was generated. Since the influent turbidity was not consistently at 5 NTU, often times increasing or decreasing throughout the course of an experiment, the results were normalized so that breakthrough time was relative to the influent concentration of the experiment. Therefore the breakthrough time is the range of time when effluent concentration was below 30% of the influent concentration. The normalized graphs are shown below, except for Figure 5 as an example. See python code and github for graphs that are not normalized.
+From each experiment, a graph which displayed inlet and outlet turbidity versus time was generated. Since the influent turbidity was not consistently at 5 NTU, often times increasing or decreasing throughout the course of an experiment, the results were normalized so that breakthrough time was relative to the influent concentration of the experiment. Therefore the breakthrough time is the range of time when effluent concentration was below 30% of the influent concentration. The normalized graphs are shown below, except for Figure 5 as an example. See python code and GitHub for graphs that are not normalized.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_1_PAC.png" alt=""/>
@@ -166,10 +166,42 @@ The graphs above show the results for the experiments ran for 20 cm homogenous s
 <p align="center">Figure 13: Normalized results for 15 cm fine sand and 5 cm coarse sand with 8 mg/L of coagulant </p>
 
 The graphs above  show the results for the experiments ran for 15 and 5 cm hetereogenous sand bed. The breakthrough times in seconds are as follows: 165, 335, 295, 65.
-https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_8_PAC_percent.png
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_8_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 13: Normalized results for 15 cm fine sand with 8 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_4_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 14: Normalized results for 15 cm fine sand with 4 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_2_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 15: Normalized results for 15 cm fine sand with 2 mg/L of coagulant </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/15_sand_1_PAC_percent.png"" alt=""/>
+</p>
+<p align="center">Figure 16: Normalized results for 15 cm fine sand with 1 mg/L of coagulant </p>
+
 The graphs above  show the results for the experiments ran for 15 cm homogenous sand bed. The breakthrough times in seconds are as follows: 75, 360, 80, 350.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/Breakthrough%20vs%20Sand%20Size.png"" alt=""/>
+</p>
+<p align="center">Figure 17: Breakthrough time as a function of sand bed depths </p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FelixYuHengYang/CEE4530/master/Final%20Project/Images/Breakthrough%20vs%20Coagulant%20Dosage.png"" alt=""/>
+</p>
+<p align="center">Figure 18: Breakthrough time as a function of coagulant dose</p>
+
 ##Conclusions
 The experiments showed that there is still a lot of knowledge about sand filtration that is lacking. It is unclear the exact reasons why the switch from homogenous sand mixture to a heterogenous sand mixture increased breakthrough time, while decreasing effluent turbidity. The comparison between experiments ran on the two homogenous sand bed depths showed that, in general, the breakthrough time also increased as the coagulant dose decreased, but the trends were not convincing. For both experiments, the 2 mg/L coagulant dose yielded the shortest breakthrough time in the 20 cm sand bed depth experiment (25 seconds), and the second shortest breakthrough time in the 15 cm sand bed depth experiment (80 seconds) which is inconsistent with the initial hypothesis.
+
 ##Suggestions/Comments
 The experiment ran into a lot of issues at every step of the way. Initially, experiments could not be ran because of problems with connecting two turbidimeters to one computer. This was not resolved for 2 weeks, delaying progress for a substantial period of time. Once this was resolved, many other issues came up that are detailed below.
 
@@ -1090,7 +1122,7 @@ ax.set_xticks(Sand_Sizes)
 ax.set_xticklabels(x_ticks_labels, rotation='horizontal', fontsize=10)
 
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Sand Size')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Sand Size')
 plt.show()
 
 Breakthrough_Times_20 = [Breakthrough_Time_20_8, Breakthrough_Time_20_4, Breakthrough_Time_20_2, Breakthrough_Time_20_1]
@@ -1111,6 +1143,6 @@ ax.legend()
 plt.xlim(right=0,left=10);
 plt.ylim(bottom=0,top=500);
 
-#plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Coagulant Dosage')
+plt.savefig('C:/Users/Eirini Sarri/github/CEE4530/Final Project/Images/Breakthrough vs Coagulant Dosage')
 plt.show()
 ```
